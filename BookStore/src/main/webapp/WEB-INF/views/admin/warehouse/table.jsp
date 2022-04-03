@@ -58,7 +58,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <a href="/admin/product/insert" class="nav-link" title="Sửa">
+                                <a href="/admin/warehouse/insert" class="nav-link" title="Thêm Mới">
                                     <div class="btn btn-primary">
                                         Thêm Mới
                                     </div>
@@ -69,31 +69,21 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th style="width: 40px">Mã SP</th>
-                                        <th style="width: 150px">Tên SP</th>
-                                        <th style="width: 200px">Hình Ảnh</th>
-                                        <th>Thông Tin</th>
-                                        <th style="width: 100px">Mô tả</th>
-                                        <th style="width: 50px">Giá</th>
-                                        <th style="width: 50px">Giá KM</th>
-                                        <th style="width: 60px">Thể Loại</th>
-                                        <th style="width: 60px">Tác Giả</th>
+                                        <th style="width: 40px">Mã Kho</th>
+                                        <th>Tên SP</th>
+                                        <th>Số Lượng</th>
+                                        <th>Ghi Chú</th>
                                     </tr>
                                     </thead>
                                     <c:forEach var="item" items="${item}">
                                     <tbody>
                                     <tr>
                                         <td>${item.id}</td>
-                                        <td>${item.name}</td>
-                                        <td>${item.image}</td>
-                                        <td>${item.info}</td>
-                                        <td>${item.descriptions}</td>
-                                        <td><fmt:formatNumber value="${item.price}" type="currency" ></fmt:formatNumber></td>
-                                        <td><fmt:formatNumber value="${item.salePrice}" type="currency" ></fmt:formatNumber></td>
-                                        <td>${item.categoryName}</td>
-                                        <td>${item.author}</td>
+                                        <td>${item.productName}</td>
+                                        <td>${item.amount}</td>
+                                        <td>${item.note}</td>
                                         <td style="width: 110px">
-                                            <c:url var="edit" value="/admin/product/edit">
+                                            <c:url var="edit" value="/admin/warehouse/edit">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
                                             <a href="${edit}" class="nav-link" title="Sửa">
@@ -110,16 +100,6 @@
                                     </tr>
                                     </c:forEach>
                                 </table>
-                                <div class="container">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination" id="pagination"></ul>
-                                        <input type="hidden" value="" id="page" name="page">
-                                        <input type="hidden" value="" id="maxPageItem" name="maxPageItem">
-                                        <input type="hidden" value="" id="sortName" name="sortName">
-                                        <input type="hidden" value="" id="sortBy" name="sortBy">
-                                        <input type="hidden" value="list" id="type" name="type">
-                                    </nav>
-                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -165,27 +145,20 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    var totalPage = ${model.totalPage}; //tong so trang
-    var currentPage = ${model.page};     //trang hien tai
-    var visiblePages = ${model.maxPageItem};
-    var sortName= '${model.sortName}';
-    var sortBy= '${model.sortBy}';
-    var limit =10;
     $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPage,
-            visiblePages: 10,        //tong so item tren 1 page
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-                if (currentPage!= page){
-                    $('#maxPageItem').val(limit);
-                    $('#page').val(page);
-                    $('#sortName').val(sortName);
-                    $('#sortBy').val(sortBy);
-                    $('#formSubmit').submit();
-                }
-            }
-        })
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
 </script>
 </body>

@@ -5,19 +5,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name ="roles")
+@Table(name ="role")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
-
-    @Column(nullable = false, unique = true)
+    private Long id;
     private String name;
-    @Column
-    private String description;
-
-    @ManyToMany(mappedBy = "rolesUser")
-    private Set<User> userSet = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -35,19 +28,4 @@ public class Role {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<User> getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
-    }
 }

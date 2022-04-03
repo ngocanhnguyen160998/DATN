@@ -31,4 +31,22 @@ public class HomeController {
 
         return new ModelAndView("web/services");
     }
+
+    @RequestMapping("/wishlist")
+    public ModelAndView wishlist(){
+
+        return new ModelAndView("web/wishlist");
+    }
+
+    @RequestMapping("/account")
+    public ModelAndView account(){
+
+        return new ModelAndView("web/account");
+    }
+
+    @RequestMapping("/checkout")
+    public ModelAndView checkout(){
+
+        return new ModelAndView("web/checkout");
+    }
 }

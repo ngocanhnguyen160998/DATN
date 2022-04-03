@@ -8,8 +8,7 @@
     <title>Product</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<c:url value="/template/admin/plugins/fontawesome-free/css/all.min.css" />">
     <!-- Theme style -->
@@ -31,7 +30,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sửa Sản Phẩm</h1>
+                        <h1>Validation</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -55,45 +54,25 @@
                             <form id="quickForm">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Mã SP</label>
-                                        <input class="form-control" value="${item.id}" disabled>
+                                        <label>Mã Kho</label>
+                                        <input class="form-control">
                                     </div>
                                     <div class="form-group">
                                         <label>Tên SP</label>
-                                        <input class="form-control" value="${item.name}">
+                                        <input class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Hình Ảnh</label>
-                                        <input class="form-control" value="${item.image}">
+                                        <label>Số Lượng</label>
+                                        <input class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label>Thông tin</label>
-                                        <input class="form-control" value="${item.info}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Mô tả</label>
-                                        <input class="form-control" value="${item.descriptions}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Giá</label>
-                                        <input class="form-control" value="${item.price}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Giá KM</label>
-                                        <input class="form-control" value="${item.salePrice}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Thể Loại</label>
-                                        <input class="form-control" value="${item.categoryId}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tác Giả</label>
-                                        <input class="form-control" value="${item.author}">
+                                        <label>Ghi Chú</label>
+                                        <input class="form-control">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary">Thêm Mới</button>
                                 </div>
                             </form>
                         </div>
@@ -135,7 +114,7 @@
     $(function () {
         $.validator.setDefaults({
             submitHandler: function () {
-                alert("Form successful submitted!");
+                alert( "Form successful submitted!" );
             }
         });
         $('#quickForm').validate({

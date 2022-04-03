@@ -31,7 +31,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sửa Sản Phẩm</h1>
+                        <h1>Thêm Sản Phẩm</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -56,44 +56,50 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label>Mã SP</label>
-                                        <input class="form-control" value="${item.id}" disabled>
+                                        <input class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Tên SP</label>
-                                        <input class="form-control" value="${item.name}">
+                                        <input class="form-control" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Hình Ảnh</label>
-                                        <input class="form-control" value="${item.image}">
+                                        <input class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Thông tin</label>
-                                        <input class="form-control" value="${item.info}">
+                                        <input class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Mô tả</label>
-                                        <input class="form-control" value="${item.descriptions}">
+                                        <input class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Giá</label>
-                                        <input class="form-control" value="${item.price}">
+                                        <input class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Giá KM</label>
-                                        <input class="form-control" value="${item.salePrice}">
+                                        <input class="form-control" >
                                     </div>
                                     <div class="form-group">
                                         <label>Thể Loại</label>
-                                        <input class="form-control" value="${item.categoryId}">
+                                        <select class="form-control" name="category" id="category">
+                                            <option value="" selected disabled hidden>Chọn thể loại</option>
+                                            <c:forEach var="item" items="${item}">
+                                                <option value="${item.id}">${item.name}</option>
+                                            </c:forEach>
+
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label>Tác Giả</label>
-                                        <input class="form-control" value="${item.author}">
+                                        <input class="form-control">
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary">Thêm Mới</button>
                                 </div>
                             </form>
                         </div>
