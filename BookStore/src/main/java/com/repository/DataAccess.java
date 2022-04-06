@@ -1,5 +1,6 @@
 package com.repository;
 
+import com.dto.OrderDTO;
 import com.dto.ProductDTO;
 import com.dto.WarehouseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class DataAccess {
     public List<ProductDTO> getListProductDTO() {
         List<ProductDTO> lst = null;
         try {
-            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id";
+            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY ID ASC";
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new ProductDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
@@ -69,4 +70,26 @@ public class DataAccess {
         }
         return lst;
     }
+//
+//    public ProductDTO findProductById(Long id) {
+//        ProductDTO lst = null;
+//        try {
+//            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id";
+//            lst = jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> new ProductDTO(
+//                            rs.getLong("id"),
+//                            rs.getString("name"),
+//                            rs.getString("image"),
+//                            rs.getString("info"),
+//                            rs.getString("descriptions"),
+//                            rs.getLong("price"),
+//                            rs.getLong("sale_price"),
+//                            rs.getString("c.name"),
+//                            rs.getString("author")
+//                    )
+//            );
+//        } catch (Exception ex) {
+//            ex.getMessage();
+//        }
+//        return lst;
+//    }
 }

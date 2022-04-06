@@ -52,50 +52,56 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form id="quickForm">
+                            <form:form id="formSubmit" action="/admin/product/edit" modelAttribute="product" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Mã SP</label>
-                                        <input class="form-control" value="${item.id}" disabled>
+                                        <form:label path="id">Mã SP</form:label>
+                                        <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên SP</label>
-                                        <input class="form-control" value="${item.name}">
+                                        <form:label path="name">Tên SP</form:label>
+                                        <form:input path="name" class="form-control" value="${item.name}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Hình Ảnh</label>
-                                        <input class="form-control" value="${item.image}">
+                                        <form:label path="image">Hình Ảnh</form:label>
+                                        <form:input path="image" class="form-control" value="${item.image}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Thông tin</label>
-                                        <input class="form-control" value="${item.info}">
+                                        <form:label path="info">Thông tin</form:label>
+                                        <form:input path="info" class="form-control" value="${item.info}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Mô tả</label>
-                                        <input class="form-control" value="${item.descriptions}">
+                                        <form:label path="descriptions">Mô tả</form:label>
+                                        <form:input path="descriptions" class="form-control" value="${item.descriptions}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá</label>
-                                        <input class="form-control" value="${item.price}">
+                                        <form:label path="price">Giá</form:label>
+                                        <form:input path="price" class="form-control" value="${item.price}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá KM</label>
-                                        <input class="form-control" value="${item.salePrice}">
+                                        <form:label path="salePrice">Giá KM</form:label>
+                                        <form:input path="salePrice" class="form-control" value="${item.salePrice}" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Thể Loại</label>
-                                        <input class="form-control" value="${item.categoryId}">
+                                        <form:label path="categoryId">Thể Loại</form:label>
+                                        <form:select path="categoryId" class="form-control" name="category" id="category">
+                                            <option value="${chooseCategory.id}" label="${chooseCategory.name}" selected disabled hidden></option>
+                                            <c:forEach var="categoryItem" items="${categoryItem}">
+                                                <option value="${categoryItem.id}">${categoryItem.name}</option>
+                                            </c:forEach>
+
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tác Giả</label>
-                                        <input class="form-control" value="${item.author}">
+                                        <form:label path="author">Tác Giả</form:label>
+                                        <form:input path="author" class="form-control" value="${item.author}" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                         <!-- /.card -->
                     </div>
@@ -176,6 +182,32 @@
             }
         });
     });
+
+    $('#btnUpdate').click(function (e) {
+        e.preventDefault();
+        var data = {};
+        var formData = $('#formSubmit').serializeArray();
+        $.each(formData, function (i, v) {
+            data["" + v.name + ""] = v.value;
+        });
+        updateProduct(data);
+    });
+
+    function updateProduct(data) {
+        $.ajax({
+            url: '${APIurl}',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            <%--success: function (result) {--%>
+            <%--    window.location.href = "admin-table-product?type=list&page=1&maxPageItem=10&sortName=null&sortBy=null";--%>
+            <%--},--%>
+            <%--error: function (error) {--%>
+            <%--    window.location.href = "${Userurl}?type=list&maxPageItem=2&page=1&message=error_system";--%>
+            <%--}--%>
+        });
+    }
 </script>
 </body>
 </html>

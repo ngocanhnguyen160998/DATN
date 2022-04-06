@@ -52,56 +52,52 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form id="quickForm">
+                            <form:form id="formSubmit" action="/admin/product/insert" modelAttribute="product" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Mã SP</label>
-                                        <input class="form-control" required>
+                                        <form:label path="name">Tên SP</form:label>
+                                        <form:input path="name" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên SP</label>
-                                        <input class="form-control" required>
+                                        <form:label path="image">Hình Ảnh</form:label>
+                                        <form:input path="image" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Hình Ảnh</label>
-                                        <input class="form-control" >
+                                        <form:label path="info">Thông tin</form:label>
+                                        <form:input path="info" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Thông tin</label>
-                                        <input class="form-control" >
+                                        <form:label path="descriptions">Mô tả</form:label>
+                                        <form:input path="descriptions" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Mô tả</label>
-                                        <input class="form-control" >
+                                        <form:label path="price">Giá</form:label>
+                                        <form:input path="price" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá</label>
-                                        <input class="form-control" >
+                                        <form:label path="salePrice">Giá KM</form:label>
+                                        <form:input path="salePrice" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Giá KM</label>
-                                        <input class="form-control" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Thể Loại</label>
-                                        <select class="form-control" name="category" id="category">
-                                            <option value="" selected disabled hidden>Chọn thể loại</option>
+                                        <form:label path="categoryId">Thể Loại</form:label>
+                                        <form:select path="categoryId" class="form-control" name="category" id="category">
+                                            <option selected disabled hidden>-- Chọn thể loại --</option>
                                             <c:forEach var="item" items="${item}">
                                                 <option value="${item.id}">${item.name}</option>
                                             </c:forEach>
 
-                                        </select>
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tác Giả</label>
-                                        <input class="form-control">
+                                        <form:label path="author">Tác Giả</form:label>
+                                        <form:input path="author" class="form-control" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Thêm Mới</button>
+                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                         <!-- /.card -->
                     </div>

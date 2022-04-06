@@ -20,7 +20,7 @@ public class Product {
     private Long price;
     private Long salePrice;
     private Long categoryId;
-    private Long author;
+    private String author;
 
 
     public Long getId() {
@@ -87,11 +87,11 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public Long getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Long author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 }

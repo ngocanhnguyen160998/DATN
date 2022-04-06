@@ -58,9 +58,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Thêm mới</button>
                                 <button type="button" class="btn btn-primary">Thống kê</button>
-
                             </div>
                             <div class="card-body">
 
@@ -68,33 +66,30 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 60px">Mã ĐH</th>
-                                        <th>Mã SP</th>
-                                        <th>Số Lượng</th>
+                                        <th>Họ Tên</th>
+                                        <th>Email</th>
+                                        <th>SĐT</th>
+                                        <th>Địa Chỉ</th>
                                         <th>Ghi Chú</th>
+                                        <th>Ngày Tạo</th>
+                                        <th>Tổng Tiền</th>
+                                        <th>Thanh Toán</th>
+                                        <th>Sản Phẩm</th>
                                     </tr>
                                     </thead>
                                     <c:forEach var="item" items="${item}">
                                     <tbody>
                                     <tr>
                                         <td>${item.id}</td>
-                                        <td>${item.productId}</td>
-                                        <td>${item.amount}</td>
-                                        <td>${item.note}</td>
-                                        <td style="width: 110px">
-                                            <c:url var="edit" value="/admin/warehouse/edit">
-                                                <c:param name="id" value="${item.id}"/>
-                                            </c:url>
-                                            <a href="${edit}" class="nav-link" title="Sửa">
-                                                <div class="btn btn-primary">
-                                                    Sửa
-                                                </div>
-                                            </a>
-                                            <a href="${edit}" class="nav-link" title="Xóa">
-                                                <div class="btn btn-primary">
-                                                    Xóa
-                                                </div>
-                                            </a>
-                                        </td>
+                                        <td>${item.firstName} ${item.lastName}</td>
+                                        <td>${item.email}</td>
+                                        <td>${item.phone}</td>
+                                        <td>${item.address}</td>
+                                        <td>${item.specialNotes}</td>
+                                        <td>${item.modefinedDate}</td>
+                                        <td>${item.totalPrice}</td>
+                                        <td>${item.paymentMethod}</td>
+                                        <td>${item.listProduct}</td>
                                     </tr>
                                     </c:forEach>
                                 </table>

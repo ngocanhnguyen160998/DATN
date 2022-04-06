@@ -1,6 +1,9 @@
 package com.controller.admin;
 
+import com.model.Orders;
 import com.model.Product;
+import com.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +15,13 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminOrderController {
 
+    @Autowired
+    private OrderService orderService;
+
     @RequestMapping("/order/table")
     public ModelAndView product(Model model){
-//        List<Product> lst = productService.getAll();
-//        model.addAttribute("item", lst);
+        List<Orders> lst = orderService.getAll();
+        model.addAttribute("item", lst);
         return new ModelAndView("admin/order/table");
     }
 }

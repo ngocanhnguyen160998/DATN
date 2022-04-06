@@ -101,7 +101,10 @@
                                                     Sửa
                                                 </div>
                                             </a>
-                                            <a href="${edit}" class="nav-link" title="Xóa">
+                                            <c:url var="delete" value="/admin/product/delete">
+                                                <c:param name="id" value="${item.id}"/>
+                                            </c:url>
+                                            <a href="${delete}" class="nav-link" title="Xóa">
                                                 <div class="btn btn-primary">
                                                     Xóa
                                                 </div>

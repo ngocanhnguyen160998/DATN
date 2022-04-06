@@ -13,13 +13,14 @@ public class Orders {
     private String lastName;
     private String companyName;
     private String email;
+    private String phone;
     private String address;
     private String province;
     private String district;
     private String apartment;
     private String commune;
     private String postCode;
-    private String special_notes;
+    private String specialNotes;
     private Date modefinedDate;
     private Long totalPrice;
     private String paymentMethod;
@@ -63,6 +64,14 @@ public class Orders {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
@@ -113,12 +122,12 @@ public class Orders {
         this.postCode = postCode;
     }
 
-    public String getSpecial_notes() {
-        return special_notes;
+    public String getSpecialNotes() {
+        return specialNotes;
     }
 
-    public void setSpecial_notes(String special_notes) {
-        this.special_notes = special_notes;
+    public void setSpecialNotes(String specialNotes) {
+        this.specialNotes = specialNotes;
     }
 
     public Date getModefinedDate() {
