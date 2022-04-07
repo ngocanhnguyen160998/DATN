@@ -2,6 +2,7 @@ package com.repository;
 
 import com.dto.OrderDTO;
 import com.dto.ProductDTO;
+import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,6 +64,25 @@ public class DataAccess {
                             rs.getString("name"),
                             rs.getInt("amount"),
                             rs.getString("note")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return lst;
+    }
+
+    public List<UserDTO> getListUserDTO() {
+        List<UserDTO> lst = null;
+        try {
+            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id";
+            lst = jdbcTemplate.query(sql, (rs, rowNum) -> new UserDTO(
+                            rs.getLong("id"),
+                            rs.getString("user_name"),
+                            rs.getString("password"),
+                            rs.getString("phone"),
+                            rs.getString("email"),
+                            rs.getString("r.name")
                     )
             );
         } catch (Exception ex) {

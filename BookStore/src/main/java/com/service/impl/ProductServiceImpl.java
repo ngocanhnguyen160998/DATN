@@ -55,4 +55,9 @@ public class ProductServiceImpl implements ProductService {
     public Product insert(Product product) {
         return productRepository.save(product);
     }
+
+    @Override
+    public List<Product> getAllProductNotExistWarehouse() {
+        return productRepository.getAllProductNotExistWarehouse();
+    }
 }

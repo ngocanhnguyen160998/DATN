@@ -35,6 +35,15 @@
                 <%--                <li class="nav-header">QUẢN LÝ CỬA HÀNG</li>--%>
                 <li class="nav-item">
 
+                    <a href="/admin/category/table" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Thể Loại
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+
                     <a href="/admin/product/table" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
@@ -57,6 +66,15 @@
                         Đơn Hàng
                     </p>
                 </a>
+                </li>
+                <li class="nav-item">
+
+                    <a href="/admin/user/table" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Người Dùng
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

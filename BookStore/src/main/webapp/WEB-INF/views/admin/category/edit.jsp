@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lý kho hàng</h1>
+                        <h1>Sửa thông tin người dùng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Quản lý kho hàng</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+                            <li class="breadcrumb-item active">Sửa thông tin người dùng</li>
                         </ol>
                     </div>
                 </div>
@@ -52,28 +52,20 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/warehouse/edit" modelAttribute="warehouse" method="post">
+                            <form:form id="formSubmit" action="/admin/category/edit" modelAttribute="category" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form:label path="id">Mã Kho</form:label>
+                                        <form:label path="id">Mã Thể Loại</form:label>
                                         <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="productName">Tên SP</form:label>
-                                        <form:input path="productName" class="form-control" value="${item.productName}" readonly="true" />
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="amount">Số Lượng</form:label>
-                                        <form:input path="amount" class="form-control" value="${item.amount}" />
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="note">Ghi Chú</form:label>
-                                        <form:input path="note" class="form-control" value="${item.note}" />
+                                        <form:label path="name">Tên Thể Loại</form:label>
+                                        <form:input path="name" class="form-control" value="${item.name}" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
                                 </div>
                             </form:form>
                         </div>
@@ -156,6 +148,32 @@
             }
         });
     });
+
+    $('#btnUpdate').click(function (e) {
+        e.preventDefault();
+        var data = {};
+        var formData = $('#formSubmit').serializeArray();
+        $.each(formData, function (i, v) {
+            data["" + v.name + ""] = v.value;
+        });
+        updateProduct(data);
+    });
+
+    function updateProduct(data) {
+        $.ajax({
+            url: '${APIurl}',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            <%--success: function (result) {--%>
+            <%--    window.location.href = "admin-table-product?type=list&page=1&maxPageItem=10&sortName=null&sortBy=null";--%>
+            <%--},--%>
+            <%--error: function (error) {--%>
+            <%--    window.location.href = "${Userurl}?type=list&maxPageItem=2&page=1&message=error_system";--%>
+            <%--}--%>
+        });
+    }
 </script>
 </body>
 </html>

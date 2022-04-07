@@ -38,12 +38,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lý đơn hàng</h1>
+                        <h1>Quản lý thể loại</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
-                            <li class="breadcrumb-item active">Quản lý đơn hàng</li>
+                            <li class="breadcrumb-item active">Quản lý thể loại</li>
                         </ol>
                     </div>
                 </div>
@@ -58,38 +58,38 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Thống kê</button>
+                                <a href="/admin/user/insert" class="btn btn-primary" title="Sửa">
+                                    Thêm Mới
+                                </a>
                             </div>
                             <div class="card-body">
 
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
-                                        <th style="width: 60px">Mã ĐH</th>
-                                        <th>Họ Tên</th>
-                                        <th>Email</th>
-                                        <th>SĐT</th>
-                                        <th>Địa Chỉ</th>
-                                        <th>Ghi Chú</th>
-                                        <th>Ngày Tạo</th>
-                                        <th>Tổng Tiền</th>
-                                        <th>Thanh Toán</th>
-                                        <th>Sản Phẩm</th>
+                                        <th style="width: 100px">Mã thể loại</th>
+                                        <th>Tên thể loại</th>
                                     </tr>
                                     </thead>
                                     <c:forEach var="item" items="${item}">
                                     <tbody>
                                     <tr>
                                         <td>${item.id}</td>
-                                        <td>${item.firstName} ${item.lastName}</td>
-                                        <td>${item.email}</td>
-                                        <td>${item.phone}</td>
-                                        <td>${item.address}</td>
-                                        <td>${item.specialNotes}</td>
-                                        <td>${item.modefinedDate}</td>
-                                        <td>${item.totalPrice}</td>
-                                        <td>${item.paymentMethod}</td>
-                                        <td>${item.listProduct}</td>
+                                        <td>${item.name}</td>
+                                        <td style="width: 110px">
+                                            <c:url var="edit" value="/admin/category/edit">
+                                                <c:param name="id" value="${item.id}"/>
+                                            </c:url>
+                                            <a href="${edit}" class="btn btn-primary" title="Sửa">
+                                                Sửa
+                                            </a>
+                                            <c:url var="delete" value="/admin/category/delete">
+                                                <c:param name="id" value="${item.id}"/>
+                                            </c:url>
+                                            <a href="${delete}" class="btn btn-primary" title="Xóa">
+                                                Xóa
+                                            </a>
+                                        </td>
                                     </tr>
                                     </c:forEach>
                                 </table>
@@ -138,8 +138,17 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-
-
+    $(function () {
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
 </script>
 </body>
 </html>

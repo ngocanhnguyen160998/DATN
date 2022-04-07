@@ -1,6 +1,5 @@
 package com.service;
 
-import com.dto.ProductDTO;
 import com.model.Product;
 
 import java.util.List;
@@ -16,4 +15,6 @@ public interface ProductService {
     void deleteById(Long id);
 
     Product insert(Product product);
+
+    List<Product> getAllProductNotExistWarehouse();
 }

@@ -51,30 +51,32 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form id="quickForm">
+                            <form:form id="formSubmit" action="/admin/warehouse/insert" modelAttribute="warehouse" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label>Mã Kho</label>
-                                        <input class="form-control">
+                                        <form:label path="productId">Tên SP</form:label>
+                                        <form:select path="productId" class="form-control" name="product" id="product">
+                                            <option selected disabled hidden>-- Chọn sản phẩm --</option>
+                                            <c:forEach var="item" items="${item}">
+                                                <option value="${item.id}">${item.name}</option>
+                                            </c:forEach>
+
+                                        </form:select>
                                     </div>
                                     <div class="form-group">
-                                        <label>Tên SP</label>
-                                        <input class="form-control">
+                                        <form:label path="amount">Số Lượng</form:label>
+                                        <form:input path="amount" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <label>Số Lượng</label>
-                                        <input class="form-control">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ghi Chú</label>
-                                        <input class="form-control">
+                                        <form:label path="note">Ghi Chú</form:label>
+                                        <form:input path="note" class="form-control" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Thêm Mới</button>
+                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
                                 </div>
-                            </form>
+                            </form:form>
                         </div>
                         <!-- /.card -->
                     </div>

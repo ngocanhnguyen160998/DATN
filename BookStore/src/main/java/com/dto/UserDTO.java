@@ -1,24 +1,24 @@
-package com.model;
+package com.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-@Entity
-@Table(name = "user")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserDTO {
     private Long id;
     private String userName;
     private String password;
     private String phone;
     private String email;
-    private Long roleId;
+    private String roleName;
+
+    public UserDTO() {
+    }
+
+    public UserDTO(Long id, String userName, String password, String phone, String email, String roleName) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
+        this.roleName = roleName;
+    }
 
     public Long getId() {
         return id;
@@ -60,11 +60,11 @@ public class User {
         this.email = email;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lý kho hàng</h1>
+                        <h1>Sửa Sản Phẩm</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Quản lý kho hàng</li>
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">Validation</li>
                         </ol>
                     </div>
                 </div>
@@ -52,28 +52,54 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/warehouse/edit" modelAttribute="warehouse" method="post">
+                            <form:form id="formSubmit" action="/admin/user/edit" modelAttribute="user" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form:label path="id">Mã Kho</form:label>
+                                        <form:label path="id">Mã SP</form:label>
                                         <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="productName">Tên SP</form:label>
-                                        <form:input path="productName" class="form-control" value="${item.productName}" readonly="true" />
+                                        <form:label path="name">Tên SP</form:label>
+                                        <form:input path="name" class="form-control" value="${item.name}" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="amount">Số Lượng</form:label>
-                                        <form:input path="amount" class="form-control" value="${item.amount}" />
+                                        <form:label path="image">Hình Ảnh</form:label>
+                                        <form:input path="image" class="form-control" value="${item.image}" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="note">Ghi Chú</form:label>
-                                        <form:input path="note" class="form-control" value="${item.note}" />
+                                        <form:label path="info">Thông tin</form:label>
+                                        <form:input path="info" class="form-control" value="${item.info}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="descriptions">Mô tả</form:label>
+                                        <form:input path="descriptions" class="form-control" value="${item.descriptions}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="price">Giá</form:label>
+                                        <form:input path="price" class="form-control" value="${item.price}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="salePrice">Giá KM</form:label>
+                                        <form:input path="salePrice" class="form-control" value="${item.salePrice}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="categoryId">Thể Loại</form:label>
+                                        <form:select path="categoryId" class="form-control" name="category" id="category">
+                                            <option value="${chooseCategory.id}" label="${chooseCategory.name}" selected disabled hidden></option>
+                                            <c:forEach var="categoryItem" items="${categoryItem}">
+                                                <option value="${categoryItem.id}">${categoryItem.name}</option>
+                                            </c:forEach>
+
+                                        </form:select>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="author">Tác Giả</form:label>
+                                        <form:input path="author" class="form-control" value="${item.author}" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
                                 </div>
                             </form:form>
                         </div>
@@ -156,6 +182,32 @@
             }
         });
     });
+
+    $('#btnUpdate').click(function (e) {
+        e.preventDefault();
+        var data = {};
+        var formData = $('#formSubmit').serializeArray();
+        $.each(formData, function (i, v) {
+            data["" + v.name + ""] = v.value;
+        });
+        updateProduct(data);
+    });
+
+    function updateProduct(data) {
+        $.ajax({
+            url: '${APIurl}',
+            type: 'PUT',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            <%--success: function (result) {--%>
+            <%--    window.location.href = "admin-table-product?type=list&page=1&maxPageItem=10&sortName=null&sortBy=null";--%>
+            <%--},--%>
+            <%--error: function (error) {--%>
+            <%--    window.location.href = "${Userurl}?type=list&maxPageItem=2&page=1&message=error_system";--%>
+            <%--}--%>
+        });
+    }
 </script>
 </body>
 </html>

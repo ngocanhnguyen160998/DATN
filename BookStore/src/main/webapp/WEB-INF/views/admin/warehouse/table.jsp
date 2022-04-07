@@ -38,12 +38,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Quản lý kho hàng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Quản lý sản phẩm</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+                            <li class="breadcrumb-item active">Quản lý kho hàng</li>
                         </ol>
                     </div>
                 </div>
@@ -58,11 +58,11 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <a href="/admin/warehouse/insert" class="nav-link" title="Thêm Mới">
-                                    <div class="btn btn-primary">
+                                <div class="card-footer">
+                                    <a href="/admin/warehouse/insert" class="btn btn-primary" title="Sửa">
                                         Thêm Mới
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body">
 
@@ -86,15 +86,14 @@
                                             <c:url var="edit" value="/admin/warehouse/edit">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
-                                            <a href="${edit}" class="nav-link" title="Sửa">
-                                                <div class="btn btn-primary">
-                                                    Sửa
-                                                </div>
+                                            <a href="${edit}" class="btn btn-primary" title="Sửa">
+                                                Sửa
                                             </a>
-                                            <a href="${edit}" class="nav-link" title="Xóa">
-                                                <div class="btn btn-primary">
-                                                    Xóa
-                                                </div>
+                                            <c:url var="delete" value="/admin/warehouse/delete">
+                                                <c:param name="id" value="${item.id}"/>
+                                            </c:url>
+                                            <a href="${delete}" class="btn btn-primary" title="Xóa">
+                                                Xóa
                                             </a>
                                         </td>
                                     </tr>

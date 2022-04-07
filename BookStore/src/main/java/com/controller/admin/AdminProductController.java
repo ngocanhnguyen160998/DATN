@@ -71,7 +71,7 @@ public class AdminProductController {
     }
 
     @RequestMapping(value = "/delete")
-    public ModelAndView productDelete(@RequestParam(value = "id") Long id, Model model){
+    public ModelAndView productDelete(@RequestParam(value = "id") Long id){
         productService.deleteById(id);
         return new ModelAndView("redirect:/admin/product/table");
     }

@@ -38,11 +38,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>DataTables</h1>
+                        <h1>Quản lý sản phẩm</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
                             <li class="breadcrumb-item active">Quản lý sản phẩm</li>
                         </ol>
                     </div>
@@ -58,14 +58,13 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <a href="/admin/product/insert" class="nav-link" title="Sửa">
-                                    <div class="btn btn-primary">
+                                <div class="card-footer">
+                                    <a href="/admin/product/insert" class="btn btn-primary" title="Sửa">
                                         Thêm Mới
-                                    </div>
-                                </a>
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-body">
-
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr>
@@ -88,26 +87,24 @@
                                         <td>${item.image}</td>
                                         <td>${item.info}</td>
                                         <td>${item.descriptions}</td>
-                                        <td><fmt:formatNumber value="${item.price}" type="currency" ></fmt:formatNumber></td>
-                                        <td><fmt:formatNumber value="${item.salePrice}" type="currency" ></fmt:formatNumber></td>
+                                        <td><fmt:formatNumber value="${item.price}"
+                                                              type="currency"></fmt:formatNumber></td>
+                                        <td><fmt:formatNumber value="${item.salePrice}"
+                                                              type="currency"></fmt:formatNumber></td>
                                         <td>${item.categoryName}</td>
                                         <td>${item.author}</td>
                                         <td style="width: 110px">
                                             <c:url var="edit" value="/admin/product/edit">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
-                                            <a href="${edit}" class="nav-link" title="Sửa">
-                                                <div class="btn btn-primary">
-                                                    Sửa
-                                                </div>
+                                            <a href="${edit}" class="btn btn-primary" title="Sửa">
+                                                Sửa
                                             </a>
                                             <c:url var="delete" value="/admin/product/delete">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
-                                            <a href="${delete}" class="nav-link" title="Xóa">
-                                                <div class="btn btn-primary">
-                                                    Xóa
-                                                </div>
+                                            <a href="${delete}" class="btn btn-primary" title="Xóa">
+                                                Xóa
                                             </a>
                                         </td>
                                     </tr>
@@ -168,27 +165,16 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    var totalPage = ${model.totalPage}; //tong so trang
-    var currentPage = ${model.page};     //trang hien tai
-    var visiblePages = ${model.maxPageItem};
-    var sortName= '${model.sortName}';
-    var sortBy= '${model.sortBy}';
-    var limit =10;
     $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPage,
-            visiblePages: 10,        //tong so item tren 1 page
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-                if (currentPage!= page){
-                    $('#maxPageItem').val(limit);
-                    $('#page').val(page);
-                    $('#sortName').val(sortName);
-                    $('#sortBy').val(sortBy);
-                    $('#formSubmit').submit();
-                }
-            }
-        })
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
 </script>
 </body>

@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lý kho hàng</h1>
+                        <h1>Thêm người dùng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Quản lý kho hàng</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+                            <li class="breadcrumb-item active">Thêm người dùng</li>
                         </ol>
                     </div>
                 </div>
@@ -52,28 +52,50 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/warehouse/edit" modelAttribute="warehouse" method="post">
+                            <form:form id="formSubmit" action="/admin/user/insert" modelAttribute="user" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form:label path="id">Mã Kho</form:label>
-                                        <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
+                                        <form:label path="name">Tên SP</form:label>
+                                        <form:input path="name" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="productName">Tên SP</form:label>
-                                        <form:input path="productName" class="form-control" value="${item.productName}" readonly="true" />
+                                        <form:label path="image">Hình Ảnh</form:label>
+                                        <form:input path="image" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="amount">Số Lượng</form:label>
-                                        <form:input path="amount" class="form-control" value="${item.amount}" />
+                                        <form:label path="info">Thông tin</form:label>
+                                        <form:input path="info" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="note">Ghi Chú</form:label>
-                                        <form:input path="note" class="form-control" value="${item.note}" />
+                                        <form:label path="descriptions">Mô tả</form:label>
+                                        <form:input path="descriptions" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="price">Giá</form:label>
+                                        <form:input path="price" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="salePrice">Giá KM</form:label>
+                                        <form:input path="salePrice" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="categoryId">Thể Loại</form:label>
+                                        <form:select path="categoryId" class="form-control" name="category" id="category">
+                                            <option selected disabled hidden>-- Chọn thể loại --</option>
+                                            <c:forEach var="item" items="${item}">
+                                                <option value="${item.id}">${item.name}</option>
+                                            </c:forEach>
+
+                                        </form:select>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="author">Tác Giả</form:label>
+                                        <form:input path="author" class="form-control" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
                                 </div>
                             </form:form>
                         </div>

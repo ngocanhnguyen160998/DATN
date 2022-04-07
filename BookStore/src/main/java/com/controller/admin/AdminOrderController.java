@@ -12,13 +12,13 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/order")
 public class AdminOrderController {
 
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping("/order/table")
+    @RequestMapping("/table")
     public ModelAndView product(Model model){
         List<Orders> lst = orderService.getAll();
         model.addAttribute("item", lst);
