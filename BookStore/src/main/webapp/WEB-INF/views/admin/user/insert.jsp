@@ -55,42 +55,33 @@
                             <form:form id="formSubmit" action="/admin/user/insert" modelAttribute="user" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form:label path="name">Tên SP</form:label>
-                                        <form:input path="name" class="form-control" />
+                                        <form:label path="userName">Tên Tài Khoản</form:label>
+                                        <form:input path="userName" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="image">Hình Ảnh</form:label>
-                                        <form:input path="image" class="form-control" />
+                                        <form:label path="password">Mật Khẩu</form:label>
+                                        <form:password path="password" class="form-control"  />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="info">Thông tin</form:label>
-                                        <form:input path="info" class="form-control" />
+                                        <form:label path="fullName">Họ Tên</form:label>
+                                        <form:input path="fullName" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="descriptions">Mô tả</form:label>
-                                        <form:input path="descriptions" class="form-control" />
+                                        <form:label path="phone">Số Điện Thoại</form:label>
+                                        <form:input path="phone" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="price">Giá</form:label>
-                                        <form:input path="price" class="form-control" />
+                                        <form:label path="email">Email</form:label>
+                                        <form:input path="email" class="form-control" />
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="salePrice">Giá KM</form:label>
-                                        <form:input path="salePrice" class="form-control" />
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="categoryId">Thể Loại</form:label>
-                                        <form:select path="categoryId" class="form-control" name="category" id="category">
-                                            <option selected disabled hidden>-- Chọn thể loại --</option>
+                                        <form:label path="roleId">Quyền</form:label>
+                                        <form:select path="roleId" class="form-control" name="role" id="role">
+                                            <option selected disabled hidden>-- Chọn quyền --</option>
                                             <c:forEach var="item" items="${item}">
                                                 <option value="${item.id}">${item.name}</option>
                                             </c:forEach>
-
                                         </form:select>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="author">Tác Giả</form:label>
-                                        <form:input path="author" class="form-control" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

@@ -58,7 +58,7 @@
                         <div class="card">
                             <!-- /.card-header -->
                             <div class="card-footer">
-                                <a href="/admin/product/insert" class="btn btn-primary" title="Sửa">
+                                <a href="/admin/user/insert" class="btn btn-primary" title="Sửa">
                                     Thêm Mới
                                 </a>
                             </div>
@@ -67,7 +67,8 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 150px">Mã Người Dùng</th>
-                                        <th style="width: 200px">Tên Người Dùng</th>
+                                        <th style="width: 200px">Tên Tài Khoản</th>
+                                        <th style="width: 200px">Họ Tên</th>
                                         <th style="width: 200px">Số Điện Thoại</th>
                                         <th>Email</th>
                                         <th style="width: 100px">Quyền</th>
@@ -78,6 +79,7 @@
                                     <tr>
                                         <td>${item.id}</td>
                                         <td>${item.userName}</td>
+                                        <td>${item.fullName}</td>
                                         <td>${item.phone}</td>
                                         <td>${item.email}</td>
                                         <td>${item.roleName}</td>
@@ -91,7 +93,7 @@
                                             <c:url var="delete" value="/admin/user/delete">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
-                                            <a href="${delete}" class="btn btn-primary" title="Xóa">
+                                            <a href="${delete}" class="btn btn-primary" title="Xóa" id="btnDelete">
                                                 Xóa
                                             </a>
                                         </td>
@@ -163,6 +165,10 @@
             "autoWidth": true,
             "responsive": true,
         });
+    });
+
+    $('#btnDelete').click(function (e) {
+        alert("Xóa thành công!");
     });
 </script>
 </body>

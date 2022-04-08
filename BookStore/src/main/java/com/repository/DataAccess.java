@@ -75,11 +75,12 @@ public class DataAccess {
     public List<UserDTO> getListUserDTO() {
         List<UserDTO> lst = null;
         try {
-            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id";
+            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id ORDER BY u.id ASC";
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new UserDTO(
                             rs.getLong("id"),
                             rs.getString("user_name"),
                             rs.getString("password"),
+                            rs.getString("full_name"),
                             rs.getString("phone"),
                             rs.getString("email"),
                             rs.getString("r.name")

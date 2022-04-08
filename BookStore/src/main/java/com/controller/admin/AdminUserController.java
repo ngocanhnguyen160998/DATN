@@ -1,8 +1,10 @@
 package com.controller.admin;
 
 import com.dto.UserDTO;
+import com.model.Role;
 import com.model.User;
 import com.repository.DataAccess;
+import com.service.RoleService;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class AdminUserController {
     @Autowired
     private DataAccess dataAccess;
 
+    @Autowired
+    private RoleService roleService;
+
     @RequestMapping("/table")
     public ModelAndView user(Model model) {
         List<UserDTO> lst = dataAccess.getListUserDTO();
@@ -31,10 +36,14 @@ public class AdminUserController {
 
     @GetMapping(value = "/edit")
     public ModelAndView userEdit(@RequestParam(value = "id") Long id, Model model) {
-
+        List<Role> lst = roleService.getAll();
 
         User find = userService.getById(id).get();
+        Role chooseRole = roleService.getById(find.getRoleId()).get();
+        lst.remove(chooseRole);
         model.addAttribute("item", find);
+        model.addAttribute("chooseRole", chooseRole);
+        model.addAttribute("roleItem", lst);
         model.addAttribute("user", new User());
         return new ModelAndView("admin/user/edit");
     }
@@ -47,7 +56,8 @@ public class AdminUserController {
 
     @GetMapping("/insert")
     public ModelAndView userInsert(Model model) {
-
+        List<Role> lst = roleService.getAll();
+        model.addAttribute("item", lst);
         model.addAttribute("user", new User());
         return new ModelAndView("admin/user/insert");
     }

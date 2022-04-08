@@ -16,6 +16,7 @@ public class User {
     private Long id;
     private String userName;
     private String password;
+    private String fullName;
     private String phone;
     private String email;
     private Long roleId;
@@ -66,5 +67,13 @@ public class User {
 
     public void setRoleId(Long roleId) {
         this.roleId = roleId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

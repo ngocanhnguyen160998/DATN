@@ -26,10 +26,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Product updateById(Long id, User user) {
-
-
-        return null;
+    public User updateById(Long id, User user) {
+        User tmp = userRepository.findById(id).get();
+        if (tmp == null) {
+            return null;
+        }
+        tmp.setUserName(user.getUserName());
+        tmp.setPassword(user.getPassword());
+        tmp.setFullName(user.getFullName());
+        tmp.setPhone(user.getPhone());
+        tmp.setEmail(user.getEmail());
+        tmp.setRoleId(user.getRoleId());
+        return userRepository.save(tmp);
     }
 
     @Override

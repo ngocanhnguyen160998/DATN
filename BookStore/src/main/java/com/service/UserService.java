@@ -12,7 +12,7 @@ public interface UserService {
 
     Optional<User> getById(Long id);
 
-    Product updateById(Long id, User user);
+    User updateById(Long id, User user);
 
     void deleteById(Long id);
 

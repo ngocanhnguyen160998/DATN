@@ -85,7 +85,7 @@
                                     <div class="form-group">
                                         <form:label path="categoryId">Thể Loại</form:label>
                                         <form:select path="categoryId" class="form-control" name="category" id="category">
-                                            <option value="${chooseCategory.id}" label="${chooseCategory.name}" selected disabled hidden></option>
+                                            <option value="${chooseCategory.id}">${chooseCategory.name}</option>
                                             <c:forEach var="categoryItem" items="${categoryItem}">
                                                 <option value="${categoryItem.id}">${categoryItem.name}</option>
                                             </c:forEach>

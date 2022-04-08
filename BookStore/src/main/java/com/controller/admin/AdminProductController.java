@@ -42,6 +42,7 @@ public class AdminProductController {
         Product p = new Product();
         List<Category> lst = categoryService.getAll();
         Category category = categoryService.getById(product.getCategoryId()).get();
+        lst.remove(category);
         model.addAttribute("chooseCategory",category);
         model.addAttribute("categoryItem", lst);
         model.addAttribute("item", product);
