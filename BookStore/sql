@@ -1,0 +1,146 @@
+DROP DATABASE IF EXISTS QUANLYBANSACH;
+
+CREATE DATABASE QUANLYBANSACH CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+Use QUANLYBANSACH;
+
+create table ROLE
+(
+    id   int(11)      not null primary key auto_increment,
+    name varchar(100) not null
+);
+insert into ROLE(id, name)
+VALUES (1, 'ADMIN');
+insert into ROLE(id, name)
+VALUES (2, 'USER');
+
+create table USER
+(
+    id        int(11)      not null auto_increment primary key,
+    user_name varchar(100) not null,
+    password  varchar(100) not null,
+    full_name varchar(100) not null,
+    phone     varchar(100) not null,
+    email     varchar(100) not null,
+    role_id   int,
+    constraint fk_1 foreign key (role_id) references role (id) ON DELETE CASCADE
+);
+insert into USER(user_name, password, full_name, phone, email, role_id)
+values ('admin', 'admin', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 1);
+insert into USER(user_name, password, full_name, phone, email, role_id)
+values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 2);
+
+create table CATEGORY
+(
+    id   int(11) not null primary key auto_increment,
+    name nvarchar(20)
+);
+insert into CATEGORY(name)
+VALUES ('Văn Học');
+insert into CATEGORY(name)
+VALUES ('Kinh Tế');
+insert into CATEGORY(name)
+VALUES ('Kỹ Năng Sống');
+insert into CATEGORY(name)
+VALUES ('Truyện Thiếu Nhi');
+
+create table PRODUCT
+(
+    id           int(11)      not null primary key auto_increment,
+    name         varchar(100) not null,
+    image        varchar(100) not null,
+    info         varchar(5000),
+    descriptions varchar(5000),
+    price        int(100),
+    sale_price   int(100),
+    category_id  int(11),
+    author    varchar(100),
+    constraint fk_2 foreign key (category_id) references CATEGORY (id) ON DELETE CASCADE
+);
+
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi', '', 'Âm vang đồng quê là một chương trình nghệ thuật mới do Nhà hát Múa rối Việt Nam tổ chức, ra mắt vào tối 2-4 nhằm phục vụ các khán giả trong nước và quốc tế. Đến với chương trình, khán giả được thưởng thức sự kết hợp hài hòa giữa múa rối cạn và múa rối nước cùng những nét văn hóa đặc trưng của các dân tộc, vùng miền đất nước Việt Nam.
+
+Bên cạnh múa rối, nhiều tiết mục đậm chất văn hóa truyền thống dân tộc được trình diễn như trống hội, hát văn, hầu đồng... đan xen cùng những con rối mô phỏng các trò chơi dân gian như đánh đu, chọi gà, múa rồng... khiến các khán giả nhí vô cùng thích thú và chăm chú theo dõi. ',
+        'Truyện hay', 269000, 269000, 1, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi1', '', '', 'Truyện hay', 269000, 269000, 1, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi2', '', '', 'Truyện hay', 269000, 269000, 2, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi3', '', '', 'Truyện hay', 269000, 269000, 3, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi4', '', '', 'Truyện hay', 269000, 269000, 2, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 1, 'Anhnn');
+
+create table WAREHOUSE
+(
+    id         int(11)  not null primary key auto_increment,
+    product_id int(11) unique,
+    amount     int(100) not null,
+    note       nvarchar(255),
+    constraint fk_22 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
+);
+
+insert into warehouse(product_id, amount, note)
+values (1, 15, 'Sản phẩm tốt');
+insert into warehouse(product_id, amount, note)
+values (2, 22, 'Sản phẩm xấu');
+insert into warehouse(product_id, amount, note)
+values (3, 24, 'Sản phẩm đẹp');
+insert into warehouse(product_id, amount, note)
+values (4, 26, 'Sản phẩm chất lượng');
+insert into warehouse(product_id, amount, note)
+values (5, 29, 'Sản phẩm không phù hợp');
+
+
+
+create table WHITELIST
+(
+    id         int(10) not null auto_increment primary key,
+    product_id int(11) not null,
+    user_id    int(11) not null,
+    constraint fk_23 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE,
+    constraint fk_24 foreign key (user_id) references USER (id) ON DELETE CASCADE
+);
+
+create table CART
+(
+    id         int(10) not null auto_increment primary key,
+    product_id int(11) not null,
+    amount     int(11),
+    user_id    int(11),
+    total      int(11),
+    status     int(11),
+    constraint fk_5 foreign key (user_id) references USER (id) ON DELETE CASCADE,
+    constraint fk_6 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
+);
+
+
+create table ORDERS
+(
+    id             int(100) not null primary key auto_increment,
+    first_name     varchar(100),
+    last_name      varchar(100),
+    company_name   varchar(100),
+    email          varchar(100),
+    phone          varchar(100),
+    address        varchar(100),
+    province       varchar(100),
+    district       varchar(100),
+    apartment      varchar(100),
+    commune        varchar(100),
+    post_code      varchar(100),
+    special_notes  varchar(100),
+    modefined_date date,
+    total_price    int,
+    payment_method varchar(20),
+    user_id        int(100),
+    list_product   varchar(1000),
+    constraint fk1232 foreign key (user_id) references user (id) ON DELETE CASCADE
+);
+
+insert into ORDERS(first_name, last_name, company_name, email, phone, address, province, district, apartment, commune, post_code, special_notes, modefined_date, total_price, payment_method, user_id, list_product)
+values('Nguyễn Ngọc','Anh','Aladin','ngocanhnguyen160998@gmail.com','0914663198','69','1','1','2','3','4','Đặc biệt','20220405',50000,'Paypal',1,'Sách OK');
+
+
