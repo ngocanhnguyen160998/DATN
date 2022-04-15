@@ -3,10 +3,13 @@ package com.controller.admin;
 import com.dto.WarehouseDTO;
 import com.model.Product;
 import com.model.Warehouse;
+import com.model.response.PageResponse;
 import com.repository.DataAccess;
 import com.service.ProductService;
 import com.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,10 +29,20 @@ public class AdminWarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
-    @RequestMapping("/table")
-    public ModelAndView warehouse(Model model) {
-        List<WarehouseDTO> lst = dataAccess.getListWarehouseDTO();
+    @GetMapping("/table")
+    public ModelAndView warehouse(Model model, @RequestParam("page") int page) {
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setLimit(10);
+        pageResponse.setPage(page);
+        pageResponse.setTotalItem(warehouseService.count());
+        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        List<WarehouseDTO> lst = dataAccess.getListWarehouseDTO(pageable).getContent();
+
+//        List<Warehouse> lst = warehouseService.getAll(pageable);
         model.addAttribute("item", lst);
+        model.addAttribute("page", pageResponse);
         return new ModelAndView("admin/warehouse/table");
     }
 

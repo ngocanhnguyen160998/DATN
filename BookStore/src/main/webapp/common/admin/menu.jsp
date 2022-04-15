@@ -4,7 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="position: fixed">
     <!-- Brand Logo -->
     <a href="/admin/home" class="brand-link">
         <img src="<c:url value="/template/admin/dist/img/AdminLTELogo.png" />" alt="AdminLTE Logo"
@@ -35,7 +35,7 @@
                 <%--                <li class="nav-header">QUẢN LÝ CỬA HÀNG</li>--%>
                 <li class="nav-item">
 
-                    <a href="/admin/category/table" class="nav-link">
+                    <a href="/admin/category/table?page=1" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Thể Loại
@@ -44,7 +44,7 @@
                 </li>
                 <li class="nav-item">
 
-                    <a href="/admin/product/table" class="nav-link">
+                    <a href="/admin/product/table?page=1" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Sản Phẩm
@@ -53,14 +53,14 @@
                 </li>
                 <li class="nav-item">
                     <i class=""></i>
-                    <a href="/admin/warehouse/table" class="nav-link">
+                    <a href="/admin/warehouse/table?page=1" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Kho Hàng
                         </p>
                     </a>
                 </li>
-                <li class="nav-item"><a href="/admin/order/table" class="nav-link">
+                <li class="nav-item"><a href="/admin/order/table?page=1" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Đơn Hàng
@@ -69,7 +69,7 @@
                 </li>
                 <li class="nav-item">
 
-                    <a href="/admin/user/table" class="nav-link">
+                    <a href="/admin/user/table?page=1" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                             Người Dùng

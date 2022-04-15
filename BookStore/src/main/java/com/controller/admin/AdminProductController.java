@@ -3,10 +3,13 @@ package com.controller.admin;
 import com.dto.ProductDTO;
 import com.model.Category;
 import com.model.Product;
+import com.model.response.PageResponse;
 import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +32,19 @@ public class AdminProductController {
     @Autowired
     private DataAccess dataAccess;
 
-    @RequestMapping("/table")
-    public ModelAndView product(Model model){
-        List<ProductDTO> lst = dataAccess.getListProductDTO();
+    @GetMapping("/table")
+    public ModelAndView product(Model model, @RequestParam("page") int page){
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setLimit(10);
+        pageResponse.setPage(page);
+        pageResponse.setTotalItem(productService.count());
+        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+        Pageable pageable = PageRequest.of(page - 1, 10);
+
+        List<ProductDTO> lst = dataAccess.getListProductDTO(pageable).getContent();
+
         model.addAttribute("item", lst);
+        model.addAttribute("page", pageResponse);
         return new ModelAndView("admin/product/table");
     }
 

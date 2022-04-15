@@ -17,8 +17,8 @@ public class CategoryController {
 
     @RequestMapping("/category")
     public ModelAndView findAll(Model model){
-        List<Category> categoryList = categoryService.getAll();
-        model.addAttribute("item", categoryList);
+//        List<Category> categoryList = categoryService.getAll();
+//        model.addAttribute("item", categoryList);
         return new ModelAndView("admin/product/table");
     }
 }

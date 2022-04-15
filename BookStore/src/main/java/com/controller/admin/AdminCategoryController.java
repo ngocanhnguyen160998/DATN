@@ -1,8 +1,11 @@
 package com.controller.admin;
 
 import com.model.Category;
+import com.model.response.PageResponse;
 import com.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +20,19 @@ public class AdminCategoryController {
     @Autowired
     private CategoryService categoryService;
 
-    @RequestMapping("/table")
-    public ModelAndView category(Model model) {
-        List<Category> lst = categoryService.getAll();
+    @GetMapping("/table")
+    public ModelAndView category(Model model, @RequestParam("page") int page) {
+        PageResponse pageRespone = new PageResponse();
+        pageRespone.setLimit(10);
+        pageRespone.setPage(page);
+        pageRespone.setTotalItem(categoryService.count());
+        pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
+
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        List<Category> lst = categoryService.getAll(pageable);
+
         model.addAttribute("item", lst);
+        model.addAttribute("page", pageRespone);
         return new ModelAndView("admin/category/table");
     }
 

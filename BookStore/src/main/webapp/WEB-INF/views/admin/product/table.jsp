@@ -51,85 +51,80 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-footer">
+        <form action="<c:url value='/admin/product/table'/>" id="formSubmit" method="get">
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
                                 <div class="card-footer">
-                                    <a href="/admin/product/insert" class="btn btn-primary" title="Sửa">
-                                        Thêm Mới
-                                    </a>
+                                    <div class="card-footer">
+                                        <a href="/admin/product/insert" class="btn btn-primary" title="Sửa">
+                                            Thêm Mới
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 40px">Mã SP</th>
-                                        <th style="width: 150px">Tên SP</th>
-                                        <th style="width: 200px">Hình Ảnh</th>
-                                        <th>Thông Tin</th>
-                                        <th style="width: 100px">Mô tả</th>
-                                        <th style="width: 50px">Giá</th>
-                                        <th style="width: 50px">Giá KM</th>
-                                        <th style="width: 60px">Thể Loại</th>
-                                        <th style="width: 60px">Tác Giả</th>
-                                    </tr>
-                                    </thead>
-                                    <c:forEach var="item" items="${item}">
-                                    <tbody>
-                                    <tr>
-                                        <td>${item.id}</td>
-                                        <td>${item.name}</td>
-                                        <td>${item.image}</td>
-                                        <td>${item.info}</td>
-                                        <td>${item.descriptions}</td>
-                                        <td><fmt:formatNumber value="${item.price}"
-                                                              type="currency"></fmt:formatNumber></td>
-                                        <td><fmt:formatNumber value="${item.salePrice}"
-                                                              type="currency"></fmt:formatNumber></td>
-                                        <td>${item.categoryName}</td>
-                                        <td>${item.author}</td>
-                                        <td style="width: 110px">
-                                            <c:url var="edit" value="/admin/product/edit">
-                                                <c:param name="id" value="${item.id}"/>
-                                            </c:url>
-                                            <a href="${edit}" class="btn btn-primary" title="Sửa">
-                                                Sửa
-                                            </a>
-                                            <c:url var="delete" value="/admin/product/delete">
-                                                <c:param name="id" value="${item.id}"/>
-                                            </c:url>
-                                            <a href="${delete}" class="btn btn-primary" title="Xóa">
-                                                Xóa
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                                <div class="container">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination" id="pagination"></ul>
-                                        <input type="hidden" value="" id="page" name="page">
-                                        <input type="hidden" value="" id="maxPageItem" name="maxPageItem">
-                                        <input type="hidden" value="" id="sortName" name="sortName">
-                                        <input type="hidden" value="" id="sortBy" name="sortBy">
-                                        <input type="hidden" value="list" id="type" name="type">
-                                    </nav>
+                                <div class="card-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 40px">Mã SP</th>
+                                            <th style="width: 150px">Tên SP</th>
+                                            <th style="width: 200px">Hình Ảnh</th>
+                                            <th>Thông Tin</th>
+                                            <th style="width: 100px">Mô tả</th>
+                                            <th style="width: 50px">Giá</th>
+                                            <th style="width: 50px">Giá KM</th>
+                                            <th style="width: 60px">Thể Loại</th>
+                                            <th style="width: 60px">Tác Giả</th>
+                                        </tr>
+                                        </thead>
+                                        <c:forEach var="item" items="${item}">
+                                        <tbody>
+                                        <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.name}</td>
+                                            <td>${item.image}</td>
+                                            <td>${item.info}</td>
+                                            <td>${item.descriptions}</td>
+                                            <td><fmt:formatNumber value="${item.price}"
+                                                                  type="currency"></fmt:formatNumber></td>
+                                            <td><fmt:formatNumber value="${item.salePrice}"
+                                                                  type="currency"></fmt:formatNumber></td>
+                                            <td>${item.categoryName}</td>
+                                            <td>${item.author}</td>
+                                            <td style="width: 140px; text-align: center">
+                                                <c:url var="edit" value="/admin/product/edit">
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a href="${edit}" class="btn btn-primary" title="Sửa">
+                                                    Sửa
+                                                </a>
+                                                <c:url var="delete" value="/admin/product/delete">
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a href="${delete}" class="btn btn-primary" title="Xóa">
+                                                    Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </c:forEach>
+                                    </table>
+                                    <ul class="pagination" id="pagination"
+                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                    <input type="hidden" value="" id="page" name="page"/>
                                 </div>
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card-body -->
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.row -->
                 </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </section>
+                <!-- /.container-fluid -->
+            </section>
+        </form>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -164,16 +159,24 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
+<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
 <script>
+    var totalPages = ${page.totalPage};
+    var currentPage = ${page.page};
+    <%--var search="${search}";--%>
     $(function () {
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 10,
+            startPage: currentPage,
+            // search:search,
+            onPageClick: function (event, page) {
+                if (currentPage != page) {
+                    $('#page').val(page);
+                    // $('#search').val(search),
+                    $('#formSubmit').submit();
+                }
+            }
         });
     });
 </script>

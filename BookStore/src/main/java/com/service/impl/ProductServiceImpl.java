@@ -5,6 +5,7 @@ import com.repository.DataAccess;
 import com.repository.ProductRepository;
 import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,6 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private DataAccess dataAccess;
 
     @Override
     public List<Product> getAll() {
@@ -59,5 +57,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProductNotExistWarehouse() {
         return productRepository.getAllProductNotExistWarehouse();
+    }
+
+    @Override
+    public long count() {
+        return productRepository.count();
     }
 }

@@ -4,7 +4,12 @@ import com.dto.OrderDTO;
 import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
+import com.service.ProductService;
+import com.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -16,10 +21,16 @@ public class DataAccess {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<WarehouseDTO> getListWarehouseDTO() {
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private WarehouseService warehouseService;
+
+    public Page<WarehouseDTO> getListWarehouseDTO(Pageable pageable) {
         List<WarehouseDTO> lst = null;
         try {
-            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id";
+            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new WarehouseDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
@@ -30,13 +41,13 @@ public class DataAccess {
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return lst;
+        return new PageImpl<>(lst, pageable, warehouseService.count());
     }
 
-    public List<ProductDTO> getListProductDTO() {
+    public Page<ProductDTO> getListProductDTO(Pageable pageable) {
         List<ProductDTO> lst = null;
         try {
-            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY ID ASC";
+            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id  ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new ProductDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
@@ -52,7 +63,7 @@ public class DataAccess {
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return lst;
+        return new PageImpl<>(lst, pageable, productService.count());
     }
 
     public WarehouseDTO findWarehouseById(Long id) {

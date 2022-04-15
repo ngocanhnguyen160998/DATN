@@ -1,6 +1,7 @@
 package com.service;
 
 import com.model.Product;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +18,6 @@ public interface ProductService {
     Product insert(Product product);
 
     List<Product> getAllProductNotExistWarehouse();
+
+    long count();
 }

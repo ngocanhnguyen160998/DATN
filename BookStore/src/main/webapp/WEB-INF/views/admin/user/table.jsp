@@ -154,16 +154,17 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
+<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
 <script>
     $(function () {
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": true,
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: 10,
+            visiblePages: 10,
+            onPageClick: function (event, page) {
+                console.info(page + ' (from options)');
+            }
+        }).on('page', function (event, page) {
+            console.info(page + ' (from event listening)');
         });
     });
 

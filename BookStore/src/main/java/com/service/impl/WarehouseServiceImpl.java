@@ -6,6 +6,7 @@ import com.model.Warehouse;
 import com.repository.WarehouseRepository;
 import com.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,8 @@ public class WarehouseServiceImpl implements WarehouseService {
     private WarehouseRepository warehouseRepository;
 
     @Override
-    public List<Warehouse> getAll() {
-        return warehouseRepository.findAll();
+    public List<Warehouse> getAll(Pageable pageable) {
+        return warehouseRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -49,5 +50,10 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public Warehouse insert(Warehouse warehouse) {
         return warehouseRepository.save(warehouse);
+    }
+
+    @Override
+    public long count() {
+        return warehouseRepository.count();
     }
 }

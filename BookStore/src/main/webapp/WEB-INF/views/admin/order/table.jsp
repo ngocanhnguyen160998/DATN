@@ -21,6 +21,7 @@
           href="<c:url value="/template/admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />">
     <!-- Theme style -->
     <link rel="stylesheet" href="<c:url value="/template/admin/dist/css/adminlte.min.css" />">
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -49,60 +50,64 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        <form action="<c:url value='/admin/order/table'/>" id="formSubmit" method="get">
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+                                <div class="card-footer">
+                                    <button type="button" class="btn btn-primary">Thống kê</button>
+                                </div>
+                                <div class="card-body">
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-primary">Thống kê</button>
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 60px">Mã ĐH</th>
+                                            <th>Họ Tên</th>
+                                            <th>Email</th>
+                                            <th>SĐT</th>
+                                            <th>Địa Chỉ</th>
+                                            <th>Ghi Chú</th>
+                                            <th>Ngày Tạo</th>
+                                            <th>Tổng Tiền</th>
+                                            <th>Thanh Toán</th>
+                                            <th>Sản Phẩm</th>
+                                        </tr>
+                                        </thead>
+                                        <c:forEach var="item" items="${item}">
+                                        <tbody>
+                                        <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.firstName} ${item.lastName}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.phone}</td>
+                                            <td>${item.address}</td>
+                                            <td>${item.specialNotes}</td>
+                                            <td>${item.modefinedDate}</td>
+                                            <td>${item.totalPrice}</td>
+                                            <td>${item.paymentMethod}</td>
+                                            <td>${item.listProduct}</td>
+                                        </tr>
+                                        </c:forEach>
+                                    </table>
+                                    <ul class="pagination" id="pagination"
+                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                    <input type="hidden" value="" id="page" name="page"/>
+                                </div>
+                                <!-- /.card-body -->
                             </div>
-                            <div class="card-body">
-
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 60px">Mã ĐH</th>
-                                        <th>Họ Tên</th>
-                                        <th>Email</th>
-                                        <th>SĐT</th>
-                                        <th>Địa Chỉ</th>
-                                        <th>Ghi Chú</th>
-                                        <th>Ngày Tạo</th>
-                                        <th>Tổng Tiền</th>
-                                        <th>Thanh Toán</th>
-                                        <th>Sản Phẩm</th>
-                                    </tr>
-                                    </thead>
-                                    <c:forEach var="item" items="${item}">
-                                    <tbody>
-                                    <tr>
-                                        <td>${item.id}</td>
-                                        <td>${item.firstName} ${item.lastName}</td>
-                                        <td>${item.email}</td>
-                                        <td>${item.phone}</td>
-                                        <td>${item.address}</td>
-                                        <td>${item.specialNotes}</td>
-                                        <td>${item.modefinedDate}</td>
-                                        <td>${item.totalPrice}</td>
-                                        <td>${item.paymentMethod}</td>
-                                        <td>${item.listProduct}</td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.row -->
                 </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </section>
+                <!-- /.container-fluid -->
+            </section>
+        </form>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -137,9 +142,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
+<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
 <script>
-
-
+    var totalPages = ${page.totalPage};
+    var currentPage = ${page.page};
+    <%--var search="${search}";--%>
+    $(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 10,
+            startPage: currentPage,
+            // search:search,
+            onPageClick: function (event, page) {
+                if (currentPage != page) {
+                    $('#page').val(page);
+                    // $('#search').val(search),
+                    $('#formSubmit').submit();
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>

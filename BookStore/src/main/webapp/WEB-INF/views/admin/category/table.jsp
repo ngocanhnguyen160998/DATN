@@ -51,6 +51,7 @@
         </section>
 
         <!-- Main content -->
+        <form action="<c:url value='/admin/category/table'/>" id="formSubmit" method="get">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -76,7 +77,7 @@
                                     <tr>
                                         <td>${item.id}</td>
                                         <td>${item.name}</td>
-                                        <td style="width: 110px">
+                                        <td style="width: 150px; text-align: center">
                                             <c:url var="edit" value="/admin/category/edit">
                                                 <c:param name="id" value="${item.id}"/>
                                             </c:url>
@@ -93,6 +94,8 @@
                                     </tr>
                                     </c:forEach>
                                 </table>
+                                <ul class="pagination" id="pagination" style="margin-left: 30%; margin-top: 10px"></ul>
+                                <input type="hidden" value="" id="page" name="page"/>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -103,6 +106,7 @@
             </div>
             <!-- /.container-fluid -->
         </section>
+        </form>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
@@ -137,16 +141,24 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
+<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
 <script>
+    var totalPages = ${page.totalPage};
+    var currentPage = ${page.page};
+    <%--var search="${search}";--%>
     $(function () {
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 10,
+            startPage: currentPage,
+            // search:search,
+            onPageClick: function (event, page) {
+                if (currentPage != page) {
+                    $('#page').val(page);
+                    // $('#search').val(search),
+                    $('#formSubmit').submit();
+                }
+            }
         });
     });
 </script>

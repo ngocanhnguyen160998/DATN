@@ -4,6 +4,7 @@ import com.model.Category;
 import com.repository.CategoryRepository;
 import com.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public class CatergoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Category> getAll(Pageable pageable) {
+        return categoryRepository.findAll(pageable).getContent();
     }
 
     @Override
@@ -42,5 +48,10 @@ public class CatergoryServiceImpl implements CategoryService {
     @Override
     public Category insert(Category category) {
         return categoryRepository.save(category);
+    }
+
+    @Override
+    public long count() {
+        return categoryRepository.count();
     }
 }

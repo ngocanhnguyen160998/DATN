@@ -2,12 +2,13 @@ package com.service;
 
 import com.dto.WarehouseDTO;
 import com.model.Warehouse;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface WarehouseService {
-    List<Warehouse> getAll();
+    List<Warehouse> getAll(Pageable pageable);
 
     Optional<Warehouse> getById(Long id);
 
@@ -16,4 +17,6 @@ public interface WarehouseService {
     void deleteById(Long id);
 
     Warehouse insert(Warehouse warehouse);
+
+    long count();
 }
