@@ -3,15 +3,19 @@ package com.controller.admin;
 import com.dto.UserDTO;
 import com.model.Role;
 import com.model.User;
+import com.model.response.PageResponse;
 import com.repository.DataAccess;
 import com.service.RoleService;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -27,10 +31,22 @@ public class AdminUserController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping("/table")
-    public ModelAndView user(Model model) {
-        List<UserDTO> lst = dataAccess.getListUserDTO();
+    @GetMapping("/table")
+    public ModelAndView user(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setLimit(10);
+        pageResponse.setPage(page);
+
+
+        Pageable pageable = PageRequest.of(page - 1, 10);
+        List<UserDTO> lst = dataAccess.getListUserDTO(pageable).getContent();
+        pageResponse.setTotalItem(userService.count());
+        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+
+
         model.addAttribute("item", lst);
+        model.addAttribute("page", pageResponse);
+        model.addAttribute("search", search);
         return new ModelAndView("admin/user/table");
     }
 
@@ -47,6 +63,7 @@ public class AdminUserController {
         model.addAttribute("user", new User());
         return new ModelAndView("admin/user/edit");
     }
+
 
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("user") User user) {

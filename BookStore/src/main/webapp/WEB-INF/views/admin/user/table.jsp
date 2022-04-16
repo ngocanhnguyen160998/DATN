@@ -49,78 +49,88 @@
                 </div>
             </div><!-- /.container-fluid -->
         </section>
+        <div class="card-footer">
+            <a href="/admin/user/insert" class="btn btn-primary" title="Thêm mới">
+                Thêm Mới
+            </a>
+            <div class="form-inline" style="float: right">
+<%--                <form:form action="<c:url value='/admin/user/table?page=1'/>" modelAttribute="search" method="post">--%>
+                    <input path="search" class="form-control form-control-sidebar" type="search" placeholder="Search"
+                                aria-label="Search" name="search"> </input>
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+<%--                </form:form>--%>
+
+            </div>
+        </div>
 
         <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <!-- /.card-header -->
-                            <div class="card-footer">
-                                <a href="/admin/user/insert" class="btn btn-primary" title="Sửa">
-                                    Thêm Mới
-                                </a>
-                            </div>
-                            <div class="card-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 150px">Mã Người Dùng</th>
-                                        <th style="width: 200px">Tên Tài Khoản</th>
-                                        <th style="width: 200px">Họ Tên</th>
-                                        <th style="width: 200px">Số Điện Thoại</th>
-                                        <th>Email</th>
-                                        <th style="width: 100px">Quyền</th>
-                                    </tr>
-                                    </thead>
-                                    <c:forEach var="item" items="${item}">
-                                    <tbody>
-                                    <tr>
-                                        <td>${item.id}</td>
-                                        <td>${item.userName}</td>
-                                        <td>${item.fullName}</td>
-                                        <td>${item.phone}</td>
-                                        <td>${item.email}</td>
-                                        <td>${item.roleName}</td>
-                                        <td style="width: 110px">
-                                            <c:url var="edit" value="/admin/user/edit">
-                                                <c:param name="id" value="${item.id}"/>
-                                            </c:url>
-                                            <a href="${edit}" class="btn btn-primary" title="Sửa">
-                                                Sửa
-                                            </a>
-                                            <c:url var="delete" value="/admin/user/delete">
-                                                <c:param name="id" value="${item.id}"/>
-                                            </c:url>
-                                            <a href="${delete}" class="btn btn-primary" title="Xóa" id="btnDelete">
-                                                Xóa
-                                            </a>
-                                        </td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                                <div class="container">
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination" id="pagination"></ul>
-                                        <input type="hidden" value="" id="page" name="page">
-                                        <input type="hidden" value="" id="maxPageItem" name="maxPageItem">
-                                        <input type="hidden" value="" id="sortName" name="sortName">
-                                        <input type="hidden" value="" id="sortBy" name="sortBy">
-                                        <input type="hidden" value="list" id="type" name="type">
-                                    </nav>
+        <form action="<c:url value='/admin/user/table'/>" id="formSubmit" method="get">
+
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <!-- /.card-header -->
+
+
+                                <div class="card-body">
+                                    <table id="example2" class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th style="width: 150px">Mã Người Dùng</th>
+                                            <th style="width: 200px">Tên Tài Khoản</th>
+                                            <th style="width: 200px">Họ Tên</th>
+                                            <th style="width: 200px">Số Điện Thoại</th>
+                                            <th>Email</th>
+                                            <th style="width: 100px">Quyền</th>
+                                        </tr>
+                                        </thead>
+                                        <c:forEach var="item" items="${item}">
+                                        <tbody>
+                                        <tr>
+                                            <td>${item.id}</td>
+                                            <td>${item.userName}</td>
+                                            <td>${item.fullName}</td>
+                                            <td>${item.phone}</td>
+                                            <td>${item.email}</td>
+                                            <td>${item.roleName}</td>
+                                            <td style="width: 140px; text-align: center">
+                                                <c:url var="edit" value="/admin/user/edit">
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a href="${edit}" class="btn btn-primary" title="Sửa">
+                                                    Sửa
+                                                </a>
+                                                <c:url var="delete" value="/admin/user/delete">
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a href="${delete}" class="btn btn-primary" title="Xóa" id="btnDelete">
+                                                    Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </c:forEach>
+                                    </table>
+                                    <ul class="pagination" id="pagination"
+                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                    <input type="hidden" value="" id="page" name="page"/>
                                 </div>
+                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card-body -->
                         </div>
+                        <!-- /.col -->
                     </div>
-                    <!-- /.col -->
+                    <!-- /.row -->
                 </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </form>
     </div>
     <!-- /.content-wrapper -->
 
@@ -156,20 +166,23 @@
 <!-- Page specific script -->
 <script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
 <script>
+    var totalPages = ${page.totalPage};
+    var currentPage = ${page.page};
+    var search = "${search}";
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
-            totalPages: 10,
+            totalPages: totalPages,
             visiblePages: 10,
+            startPage: currentPage,
+            // search: search,
             onPageClick: function (event, page) {
-                console.info(page + ' (from options)');
+                if (currentPage != page) {
+                    $('#page').val(page);
+                    // $('#search').val(search),
+                        $('#formSubmit').submit();
+                }
             }
-        }).on('page', function (event, page) {
-            console.info(page + ' (from event listening)');
         });
-    });
-
-    $('#btnDelete').click(function (e) {
-        alert("Xóa thành công!");
     });
 </script>
 </body>

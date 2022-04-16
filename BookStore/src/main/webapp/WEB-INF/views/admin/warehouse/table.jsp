@@ -83,7 +83,7 @@
                                             <td>${item.productName}</td>
                                             <td>${item.amount}</td>
                                             <td>${item.note}</td>
-                                            <td style="width: 110px">
+                                            <td style="width: 140px; text-align: center">
                                                 <c:url var="edit" value="/admin/warehouse/edit">
                                                     <c:param name="id" value="${item.id}"/>
                                                 </c:url>

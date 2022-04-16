@@ -5,6 +5,7 @@ import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
 import com.service.ProductService;
+import com.service.UserService;
 import com.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,9 @@ public class DataAccess {
 
     @Autowired
     private WarehouseService warehouseService;
+
+    @Autowired
+    private UserService userService;
 
     public Page<WarehouseDTO> getListWarehouseDTO(Pageable pageable) {
         List<WarehouseDTO> lst = null;
@@ -83,10 +87,10 @@ public class DataAccess {
         return lst;
     }
 
-    public List<UserDTO> getListUserDTO() {
+    public Page<UserDTO> getListUserDTO(Pageable pageable) {
         List<UserDTO> lst = null;
         try {
-            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id ORDER BY u.id ASC";
+            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id ORDER BY u.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new UserDTO(
                             rs.getLong("id"),
                             rs.getString("user_name"),
@@ -100,7 +104,27 @@ public class DataAccess {
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return lst;
+        return new PageImpl<>(lst, pageable, userService.count());
+    }
+
+    public Page<UserDTO> getListUserDTOByUserName(String userName, Pageable pageable) {
+        List<UserDTO> lst = null;
+        try {
+            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id AND user_name = ? ORDER BY u.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{userName}, (rs, rowNum) -> new UserDTO(
+                            rs.getLong("id"),
+                            rs.getString("user_name"),
+                            rs.getString("password"),
+                            rs.getString("full_name"),
+                            rs.getString("phone"),
+                            rs.getString("email"),
+                            rs.getString("r.name")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, userService.count());
     }
 //
 //    public ProductDTO findProductById(Long id) {
