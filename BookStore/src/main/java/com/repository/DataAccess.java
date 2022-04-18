@@ -1,9 +1,10 @@
 package com.repository;
 
-import com.dto.OrderDTO;
 import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
+import com.model.Category;
+import com.service.CategoryService;
 import com.service.ProductService;
 import com.service.UserService;
 import com.service.WarehouseService;
@@ -30,6 +31,9 @@ public class DataAccess {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public Page<WarehouseDTO> getListWarehouseDTO(Pageable pageable) {
         List<WarehouseDTO> lst = null;
@@ -110,8 +114,8 @@ public class DataAccess {
     public Page<UserDTO> getListUserDTOByUserName(String userName, Pageable pageable) {
         List<UserDTO> lst = null;
         try {
-            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id AND user_name = ? ORDER BY u.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
-            lst = jdbcTemplate.query(sql, new Object[]{userName}, (rs, rowNum) -> new UserDTO(
+            String sql = "SELECT u.*, r.* FROM USER u, ROLE r WHERE u.role_id = r.id AND user_name LIKE ? ORDER BY u.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{"%" + userName + "%"}, (rs, rowNum) -> new UserDTO(
                             rs.getLong("id"),
                             rs.getString("user_name"),
                             rs.getString("password"),
@@ -124,7 +128,61 @@ public class DataAccess {
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return new PageImpl<>(lst, pageable, userService.count());
+        return new PageImpl<>(lst, pageable, userService.countByUserNameLike(userName));
+    }
+
+    public Page<Category> getListCategoryByName(String name, Pageable pageable) {
+        List<Category> lst = null;
+        try {
+            String sql = "SELECT * FROM CATEGORY WHERE name LIKE ? ORDER BY id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new Category(
+                            rs.getLong("id"),
+                            rs.getString("name")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, categoryService.countByNameLike(name));
+    }
+
+    public Page<ProductDTO> getListProductDTOByName(String name, Pageable pageable) {
+        List<ProductDTO> lst = null;
+        try {
+            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.name LIKE ?  ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"},(rs, rowNum) -> new ProductDTO(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getString("image"),
+                            rs.getString("info"),
+                            rs.getString("descriptions"),
+                            rs.getLong("price"),
+                            rs.getLong("sale_price"),
+                            rs.getString("c.name"),
+                            rs.getString("author")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, productService.countByNameLike(name));
+    }
+
+    public Page<WarehouseDTO> getListWarehouseDTOByNameProduct(String name, Pageable pageable) {
+        List<WarehouseDTO> lst = null;
+        try {
+            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id AND p.name LIKE ? ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new WarehouseDTO(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getInt("amount"),
+                            rs.getString("note")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, warehouseService.countByLikeNameProduct(name));
     }
 //
 //    public ProductDTO findProductById(Long id) {

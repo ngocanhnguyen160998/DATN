@@ -4,6 +4,7 @@ import com.dto.ProductDTO;
 import com.model.Category;
 import com.model.Product;
 import com.model.response.PageResponse;
+import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
@@ -32,20 +33,38 @@ public class AdminProductController {
     @Autowired
     private DataAccess dataAccess;
 
-    @GetMapping("/table")
-    public ModelAndView product(Model model, @RequestParam("page") int page){
-        PageResponse pageResponse = new PageResponse();
-        pageResponse.setLimit(10);
-        pageResponse.setPage(page);
-        pageResponse.setTotalItem(productService.count());
-        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
-        Pageable pageable = PageRequest.of(page - 1, 10);
+    public String searchInput = "";
 
-        List<ProductDTO> lst = dataAccess.getListProductDTO(pageable).getContent();
+    @GetMapping("/table")
+    public ModelAndView product(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search){
+        PageResponse pageResponse = new PageResponse();
+        pageResponse.setLimit(9);
+        pageResponse.setPage(page);
+
+        Pageable pageable = PageRequest.of(page - 1, 9);
+
+        List<ProductDTO> lst;
+
+        if (!"all".equals(search)) {
+            lst = dataAccess.getListProductDTOByName(searchInput, pageable).getContent();
+            pageResponse.setTotalItem(productService.countByNameLike(searchInput));
+        } else {
+            lst = dataAccess.getListProductDTO(pageable).getContent();
+            pageResponse.setTotalItem(productService.count());
+        }
+        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
         model.addAttribute("item", lst);
         model.addAttribute("page", pageResponse);
+        model.addAttribute("input", search);
+        model.addAttribute("search", new Search());
         return new ModelAndView("admin/product/table");
+    }
+
+    @PostMapping("/table")
+    public ModelAndView submitFormSearch(@ModelAttribute("search") Search search) {
+        searchInput = search.getInput().trim();
+        return new ModelAndView("redirect:/admin/product/table?page=1&search=" + ("".equals(search.getInput().trim()) ? "all" : search.getInput().trim()));
     }
 
     @GetMapping(value = "/edit")
@@ -65,7 +84,7 @@ public class AdminProductController {
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("product") Product product){
         productService.updateById(product.getId(), product);
-        return new ModelAndView("redirect:/admin/product/table");
+        return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 
     @GetMapping("/insert")
@@ -80,12 +99,12 @@ public class AdminProductController {
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("product") Product product){
         productService.insert(product);
-        return new ModelAndView("redirect:/admin/product/table");
+        return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView productDelete(@RequestParam(value = "id") Long id){
         productService.deleteById(id);
-        return new ModelAndView("redirect:/admin/product/table");
+        return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 }

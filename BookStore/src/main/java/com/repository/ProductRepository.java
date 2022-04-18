@@ -3,6 +3,7 @@ package com.repository;
 import com.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "SELECT p.* FROM PRODUCT p LEFT JOIN WAREHOUSE w ON p.id = w.product_id WHERE w.id IS NULL", nativeQuery = true)
     List<Product> getAllProductNotExistWarehouse();
+
+    @Query(value = "SELECT COUNT(p.id) FROM PRODUCT p WHERE name LIKE %:name%", nativeQuery = true)
+    Long countByNameLike(@Param("name") String name);
 }

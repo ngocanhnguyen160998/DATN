@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product</title>
+    <title>User Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thêm người dùng</h1>
+                        <h1>Thêm thông tin người dùng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
-                            <li class="breadcrumb-item active">Thêm người dùng</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thêm thông tin người dùng</li>
                         </ol>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                    <button type="submit" class="btn btn-primary" id="btnAdd">Thêm mới</button>
                                 </div>
                             </form:form>
                         </div>
@@ -168,6 +168,10 @@
                 $(element).removeClass('is-invalid');
             }
         });
+    });
+    $('#btnUpdate').click(function (e) {
+
+        window.alert("Chỉnh sửa thành công")
     });
 </script>
 </body>

@@ -19,4 +19,6 @@ public interface WarehouseService {
     Warehouse insert(Warehouse warehouse);
 
     long count();
+
+    long countByLikeNameProduct(String name);
 }

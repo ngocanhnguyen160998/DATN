@@ -4,6 +4,7 @@ import com.dto.WarehouseDTO;
 import com.model.Product;
 import com.model.Warehouse;
 import com.model.response.PageResponse;
+import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.ProductService;
 import com.service.WarehouseService;
@@ -29,21 +30,39 @@ public class AdminWarehouseController {
     @Autowired
     private WarehouseService warehouseService;
 
+    public String searchInput = "";
+
     @GetMapping("/table")
-    public ModelAndView warehouse(Model model, @RequestParam("page") int page) {
+    public ModelAndView warehouse(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
         PageResponse pageResponse = new PageResponse();
-        pageResponse.setLimit(10);
+        pageResponse.setLimit(9);
         pageResponse.setPage(page);
-        pageResponse.setTotalItem(warehouseService.count());
+
+        Pageable pageable = PageRequest.of(page - 1, 9);
+        List<WarehouseDTO> lst;
+
+        if (!"all".equals(search)) {
+            lst = dataAccess.getListWarehouseDTOByNameProduct(searchInput.trim(), pageable).getContent();
+            pageResponse.setTotalItem(warehouseService.countByLikeNameProduct(searchInput.trim()));
+        } else {
+            lst = dataAccess.getListWarehouseDTO(pageable).getContent();
+            pageResponse.setTotalItem(warehouseService.count());
+        }
         pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
-        Pageable pageable = PageRequest.of(page - 1, 10);
-        List<WarehouseDTO> lst = dataAccess.getListWarehouseDTO(pageable).getContent();
 
 //        List<Warehouse> lst = warehouseService.getAll(pageable);
         model.addAttribute("item", lst);
         model.addAttribute("page", pageResponse);
+        model.addAttribute("input", search);
+        model.addAttribute("search", new Search());
         return new ModelAndView("admin/warehouse/table");
+    }
+
+    @PostMapping("/table")
+    public ModelAndView submitFormSearch(@ModelAttribute("search") Search search) {
+        searchInput = search.getInput();
+        return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=" + ("".equals(search.getInput().trim()) ? "all" : search.getInput().trim()));
     }
 
     @GetMapping("/edit")
@@ -60,7 +79,7 @@ public class AdminWarehouseController {
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("warehouse") WarehouseDTO warehouseDTO){
         warehouseService.updateById(warehouseDTO.getId(), warehouseDTO);
-        return new ModelAndView("redirect:/admin/warehouse/table");
+        return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
     @GetMapping("/insert")
@@ -75,12 +94,12 @@ public class AdminWarehouseController {
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("warehouse") Warehouse warehouse){
         warehouseService.insert(warehouse);
-        return new ModelAndView("redirect:/admin/warehouse/table");
+        return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView warehouseDelete(@RequestParam(value = "id") Long id){
         warehouseService.deleteById(id);
-        return new ModelAndView("redirect:/admin/warehouse/table");
+        return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 }

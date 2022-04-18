@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product</title>
+    <title>Warehouse Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Quản lý kho hàng</h1>
+                        <h1>Sửa thông tin kho hàng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Quản lý kho hàng</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Sửa thông tin kho hàng</li>
                         </ol>
                     </div>
                 </div>

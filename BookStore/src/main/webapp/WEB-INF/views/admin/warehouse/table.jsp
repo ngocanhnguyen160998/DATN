@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | DataTables</title>
+    <title>Warehouse Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -42,14 +42,30 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
                             <li class="breadcrumb-item active">Quản lý kho hàng</li>
                         </ol>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
         </section>
-
+        <div class="card-footer">
+            <a href="/admin/warehouse/insert" class="btn btn-primary" title="Thêm mới">
+                Thêm Mới
+            </a>
+            <div class="form-inline" style="float: right">
+                <form:form id="formSearch" action="/admin/warehouse/table" modelAttribute="search" method="post">
+                    <form:input path="input" class="form-control form-control-sidebar" type="search"
+                                placeholder="Tìm kiếm"
+                                aria-label="Search" name="search"></form:input>
+                    <div class="input-group-append" style="float: right">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search fa-fw"></i>
+                        </button>
+                    </div>
+                </form:form>
+            </div>
+        </div>
         <!-- Main content -->
         <form action="<c:url value='/admin/warehouse/table'/>" id="formSubmit" method="get">
             <section class="content">
@@ -57,20 +73,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <!-- /.card-header -->
-                                <div class="card-footer">
-                                    <div class="card-footer">
-                                        <a href="/admin/warehouse/insert" class="btn btn-primary" title="Sửa">
-                                            Thêm Mới
-                                        </a>
-                                    </div>
-                                </div>
                                 <div class="card-body">
-
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                         <tr>
-                                            <th style="width: 40px">Mã Kho</th>
+                                            <th style="width: 80px">Mã Kho</th>
                                             <th>Tên SP</th>
                                             <th>Số Lượng</th>
                                             <th>Ghi Chú</th>
@@ -103,6 +110,7 @@
                                     <ul class="pagination" id="pagination"
                                         style="margin-left: 30%; margin-top: 10px"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
+                                    <input type="hidden" value="" id="search" name="search"/>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -152,17 +160,17 @@
 <script>
     var totalPages = ${page.totalPage};
     var currentPage = ${page.page};
-    <%--var search="${search}";--%>
+    var search="${input}";
     $(function () {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: totalPages,
-            visiblePages: 10,
+            visiblePages: 9,
             startPage: currentPage,
-            // search:search,
+            search:search,
             onPageClick: function (event, page) {
                 if (currentPage != page) {
                     $('#page').val(page);
-                    // $('#search').val(search),
+                    $('#search').val(search),
                     $('#formSubmit').submit();
                 }
             }

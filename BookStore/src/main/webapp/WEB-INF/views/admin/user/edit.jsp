@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product</title>
+    <title>User Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sửa Sản Phẩm</h1>
+                        <h1>Sửa thông tin người dùng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Validation</li>
+                            <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Sửa thông tin người dùng</li>
                         </ol>
                     </div>
                 </div>
@@ -135,44 +135,7 @@
                 alert("Form successful submitted!");
             }
         });
-    //     $('#quickForm').validate({
-    //         rules: {
-    //             email: {
-    //                 required: true,
-    //                 email: true,
-    //             },
-    //             password: {
-    //                 required: true,
-    //                 minlength: 5
-    //             },
-    //             terms: {
-    //                 required: true
-    //             },
-    //         },
-    //         messages: {
-    //             email: {
-    //                 required: "Please enter a email address",
-    //                 email: "Please enter a valid email address"
-    //             },
-    //             password: {
-    //                 required: "Please provide a password",
-    //                 minlength: "Your password must be at least 5 characters long"
-    //             },
-    //             terms: "Please accept our terms"
-    //         },
-    //         errorElement: 'span',
-    //         errorPlacement: function (error, element) {
-    //             error.addClass('invalid-feedback');
-    //             element.closest('.form-group').append(error);
-    //         },
-    //         highlight: function (element, errorClass, validClass) {
-    //             $(element).addClass('is-invalid');
-    //         },
-    //         unhighlight: function (element, errorClass, validClass) {
-    //             $(element).removeClass('is-invalid');
-    //         }
-    //     });
-    // });
+    });
 
     $('#btnUpdate').click(function (e) {
 

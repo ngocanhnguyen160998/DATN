@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -16,11 +17,36 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Orders> getAll(Pageable pageable) {
-        return orderRepository.findAll(pageable).getContent();
+        return orderRepository.findAllByOrderByIdDesc(pageable).getContent();
     }
 
     @Override
     public long count() {
         return orderRepository.count();
+    }
+
+    @Override
+    public Orders updateById(Long id) {
+        Orders tmp = orderRepository.findById(id).get();
+        if (tmp == null) {
+            return null;
+        }
+        tmp.setStatus(1l);
+        return orderRepository.save(tmp);
+    }
+
+    @Override
+    public long countByFullNameAndPhone(String input) {
+        return orderRepository.countByFullNameAndPhone(input);
+    }
+
+    @Override
+    public List<Orders> getByFullNameAndPhone(String input, Pageable pageable) {
+        return orderRepository.findByFullNameAndPhone(input, pageable).getContent();
+    }
+
+    @Override
+    public Optional<Orders> getById(Long id) {
+        return orderRepository.findById(id);
     }
 }

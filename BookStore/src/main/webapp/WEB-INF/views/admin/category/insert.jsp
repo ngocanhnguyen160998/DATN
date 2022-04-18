@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Product</title>
+    <title>Category Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thêm người dùng</h1>
+                        <h1>Thêm thể loại</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="/admin/home">Home</a></li>
-                            <li class="breadcrumb-item active">Thêm người dùng</li>
+                            <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
+                            <li class="breadcrumb-item active">Thêm thể loại</li>
                         </ol>
                     </div>
                 </div>

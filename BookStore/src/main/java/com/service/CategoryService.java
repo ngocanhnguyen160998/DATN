@@ -22,4 +22,6 @@ public interface CategoryService {
     Category insert(Category category);
 
     long count();
+
+    long countByNameLike(String name);
 }

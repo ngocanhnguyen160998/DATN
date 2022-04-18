@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CatergoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
@@ -53,5 +53,10 @@ public class CatergoryServiceImpl implements CategoryService {
     @Override
     public long count() {
         return categoryRepository.count();
+    }
+
+    @Override
+    public long countByNameLike(String name) {
+        return categoryRepository.countByNameLike(name);
     }
 }

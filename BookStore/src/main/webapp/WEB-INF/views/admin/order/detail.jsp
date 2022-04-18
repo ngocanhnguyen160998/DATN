@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Category Manager</title>
+    <title>Order Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sửa thể loại</h1>
+                        <h1>Chi tiết đơn hàng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Sửa thể loại</li>
+                            <li class="breadcrumb-item active">Chi tiết đơn hàng</li>
                         </ol>
                     </div>
                 </div>
@@ -52,22 +52,73 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/category/edit" modelAttribute="category" method="post">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <form:label path="id">Mã Thể Loại</form:label>
-                                        <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="name">Tên Thể Loại</form:label>
-                                        <form:input path="name" class="form-control" value="${item.name}" />
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
-                                </div>
-                            </form:form>
+                            <div class="card-body" style="font-size: 25px">
+                                <table>
+                                    <tr>
+                                        <td style="width: 400px"><label>Mã Đơn Hàng:</label></td>
+                                        <td><label>${item.id}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Họ Tên:</label></td>
+                                        <td><label>${item.firstName} ${item.lastName}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>SĐT:</label></td>
+                                        <td><label>${item.phone}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Email:</label></td>
+                                        <td><label>${item.email}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Tỉnh/TP:</label></td>
+                                        <td><label>${item.address}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Quận/Huyện:</label></td>
+                                        <td><label>${item.district}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Phường/Xã:</label></td>
+                                        <td><label>${item.commune}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Ghi Chú:</label></td>
+                                        <td><label>${item.specialNotes}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Ngày Lập:</label></td>
+                                        <td><label><fmt:formatDate value="${item.modefinedDate}"
+                                                                   pattern="dd-MM-yyyy"></fmt:formatDate></label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Thành Tiền:</label></td>
+                                        <td><label>${item.totalPrice}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Tình Trạng:</label></td>
+                                        <td>
+                                            <label>
+                                                <c:if test="${item.status == 1}">Đã xác nhận</c:if>
+                                                <c:if test="${item.status == 0}">Chưa xác nhận</c:if>
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Phương Thức Thanh Toán:</label></td>
+                                        <td><label>${item.paymentMethod}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Danh Sách Sản Phẩm:</label></td>
+                                        <td><label>${item.listProduct}</label></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <a href="/admin/order/table?page=1&search=all" class="btn btn-primary" title="Trở về"
+                               style="font-size: 25px">
+                                Trở về
+                            </a>
                         </div>
                         <!-- /.card -->
                     </div>

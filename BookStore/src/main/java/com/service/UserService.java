@@ -20,4 +20,5 @@ public interface UserService {
 
     Long count();
 
+    Long countByUserNameLike(String userName);
 }

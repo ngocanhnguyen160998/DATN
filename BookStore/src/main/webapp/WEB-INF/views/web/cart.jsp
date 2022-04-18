@@ -132,10 +132,6 @@
 </section>
 <!-- / Cart view section -->
 
-<!-- Subscribe section -->
-<%@ include file="/common/web/subscribe.jsp" %>
-<!-- / Subscribe section -->
-
 <!-- footer -->
 <%@ include file="/common/web/footer.jsp" %>
 <!-- / footer -->

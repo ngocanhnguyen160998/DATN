@@ -4,6 +4,7 @@ import com.dto.UserDTO;
 import com.model.Role;
 import com.model.User;
 import com.model.response.PageResponse;
+import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.RoleService;
 import com.service.UserService;
@@ -15,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -31,23 +31,40 @@ public class AdminUserController {
     @Autowired
     private RoleService roleService;
 
+    public String searchInput = "";
+
     @GetMapping("/table")
     public ModelAndView user(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
         PageResponse pageResponse = new PageResponse();
-        pageResponse.setLimit(10);
+        pageResponse.setLimit(9);
         pageResponse.setPage(page);
 
 
-        Pageable pageable = PageRequest.of(page - 1, 10);
-        List<UserDTO> lst = dataAccess.getListUserDTO(pageable).getContent();
+        Pageable pageable = PageRequest.of(page - 1, 9);
+        List<UserDTO> lst;
         pageResponse.setTotalItem(userService.count());
         pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
+        if (!"all".equals(search)) {
+            lst = dataAccess.getListUserDTOByUserName(searchInput, pageable).getContent();
+            pageResponse.setTotalItem(userService.countByUserNameLike(searchInput));
+        } else {
+            lst = dataAccess.getListUserDTO(pageable).getContent();
+            pageResponse.setTotalItem(userService.count());
+        }
+        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
         model.addAttribute("item", lst);
         model.addAttribute("page", pageResponse);
-        model.addAttribute("search", search);
+        model.addAttribute("search", new Search());
+        model.addAttribute("input", search);
         return new ModelAndView("admin/user/table");
+    }
+
+    @PostMapping("/table")
+    public ModelAndView submitFormSearch(@ModelAttribute("search") Search search) {
+        searchInput = search.getInput().trim();
+        return new ModelAndView("redirect:/admin/user/table?page=1&search=" + ("".equals(search.getInput().trim()) ? "all" : search.getInput().trim()));
     }
 
     @GetMapping(value = "/edit")
@@ -68,7 +85,7 @@ public class AdminUserController {
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("user") User user) {
         userService.updateById(user.getId(), user);
-        return new ModelAndView("redirect:/admin/user/table");
+        return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
 
     @GetMapping("/insert")
@@ -81,13 +98,19 @@ public class AdminUserController {
 
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("user") User user) {
-        userService.insert(user);
-        return new ModelAndView("redirect:/admin/user/table");
+        try{
+            userService.insert(user);
+        } catch (Exception ex) {
+
+        }
+        return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView userDelete(@RequestParam(value = "id") Long id) {
         userService.deleteById(id);
-        return new ModelAndView("redirect:/admin/user/table");
+        return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
+
+
 }

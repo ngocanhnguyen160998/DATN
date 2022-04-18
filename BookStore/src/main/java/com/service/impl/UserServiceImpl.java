@@ -54,4 +54,9 @@ public class UserServiceImpl implements UserService {
     public Long count() {
         return userRepository.count();
     }
+
+    @Override
+    public Long countByUserNameLike(String userName) {
+        return userRepository.countByUserNameLike(userName);
+    }
 }

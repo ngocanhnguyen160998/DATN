@@ -11,22 +11,15 @@
              class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">Admin</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
 
-
-        <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false"
-                s>
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <%--                <li class="nav-header">QUẢN LÝ CỬA HÀNG</li>--%>
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
 
-                    <a href="/admin/category/table?page=1" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                    <a href="/admin/category/table?page=1&search=all" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
                             Thể Loại
                         </p>
@@ -34,8 +27,8 @@
                 </li>
                 <li class="nav-item">
 
-                    <a href="/admin/product/table?page=1" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                    <a href="/admin/product/table?page=1&search=all" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
                         <p>
                             Sản Phẩm
                         </p>
@@ -43,28 +36,27 @@
                 </li>
                 <li class="nav-item">
                     <i class=""></i>
-                    <a href="/admin/warehouse/table?page=1" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
+                    <a href="/admin/warehouse/table?page=1&search=all" class="nav-link">
+                        <i class="nav-icon fas fa-columns"></i>
                         <p>
                             Kho Hàng
                         </p>
                     </a>
                 </li>
-                <li class="nav-item"><a href="/admin/order/table?page=1" class="nav-link">
+                <li class="nav-item">
+                    <a href="/admin/user/table?page=1&search=all" class="nav-link">
+                        <i class="nav-icon fas fa-person-booth"></i>
+                        <p>
+                            Người Dùng
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item"><a href="/admin/order/table?page=1&search=all" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                         Đơn Hàng
                     </p>
                 </a>
-                </li>
-                <li class="nav-item">
-
-                    <a href="/admin/user/table?page=1&search=all" class="nav-link">
-                        <i class="nav-icon fas fa-table"></i>
-                        <p>
-                            Người Dùng
-                        </p>
-                    </a>
                 </li>
             </ul>
         </nav>

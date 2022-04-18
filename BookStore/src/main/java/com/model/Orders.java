@@ -11,20 +11,18 @@ public class Orders {
     private Long id;
     private String firstName;
     private String lastName;
-    private String companyName;
     private String email;
     private String phone;
     private String address;
     private String province;
     private String district;
-    private String apartment;
     private String commune;
-    private String postCode;
     private String specialNotes;
     private Date modefinedDate;
     private Long totalPrice;
     private String paymentMethod;
     private String listProduct;
+    private Long status;
 
     public Long getId() {
         return id;
@@ -48,14 +46,6 @@ public class Orders {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
     }
 
     public String getEmail() {
@@ -98,28 +88,12 @@ public class Orders {
         this.district = district;
     }
 
-    public String getApartment() {
-        return apartment;
-    }
-
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
-    }
-
     public String getCommune() {
         return commune;
     }
 
     public void setCommune(String commune) {
         this.commune = commune;
-    }
-
-    public String getPostCode() {
-        return postCode;
-    }
-
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
     }
 
     public String getSpecialNotes() {
@@ -160,5 +134,13 @@ public class Orders {
 
     public void setListProduct(String listProduct) {
         this.listProduct = listProduct;
+    }
+
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
     }
 }

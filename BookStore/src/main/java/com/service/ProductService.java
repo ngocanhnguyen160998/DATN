@@ -20,4 +20,6 @@ public interface ProductService {
     List<Product> getAllProductNotExistWarehouse();
 
     long count();
+
+    long countByNameLike(String name);
 }
