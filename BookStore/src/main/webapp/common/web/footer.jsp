@@ -9,7 +9,7 @@
     <div class="aa-footer-top">
         <div class="container">
             <div class="aa-footer-top-area">
-                <div class="row" style="margin-left: 250px">
+                <div class="row" style="margin-left: 200px">
                     <div class="col-md-3 col-sm-6">
                         <div class="aa-footer-widget">
                             <h3>Về Chúng Tôi</h3>
@@ -23,10 +23,10 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <div class="aa-footer-widget">
                             <div class="aa-footer-widget">
-                                <h3>Hỗ Trợ Khác Hàng</h3>
+                                <h3>Hỗ Trợ Khách Hàng</h3>
                                 <ul class="aa-footer-nav">
                                     <li><a href="#">Các Câu Hỏi Thường Gặp</a></li>
                                     <li><a href="#">Chính Sách Đổi/Trả Hàng</a></li>
@@ -35,12 +35,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6">
+                    <div class="col-md-4 col-sm-6">
                         <div class="aa-footer-widget">
                             <div class="aa-footer-widget">
-                                <h3>Contact Us</h3>
+                                <h3>Thông Tin Liên Hệ</h3>
                                 <address>
-                                    <p> Đ/c: 102 Trường Chinh, Phường Phương Mai, Quận Đống Đa, TP. Hà Nội</p>
+                                    <p><span class="fa fa-home"> 102 Trường Chinh, Phường Phương Mai, Quận Đống Đa, TP. Hà Nội</p>
                                     <p><span class="fa fa-phone"></span>Hotline: 0914.663.198</p>
                                     <p><span class="fa fa-envelope"></span>Email: tranganhsupport@gmail.com</p>
                                 </address>
