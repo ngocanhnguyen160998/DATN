@@ -22,14 +22,14 @@
                     <!-- Left nav -->
                     <ul class="nav navbar-nav">
                         <li><a href="/">Trang chủ</a></li>
-                        <li><a href="#">Văn Học </a></li>
-                        <li><a href="#">Kinh Tế </a></li>
-                        <li><a href="#">Kỹ Năng Sống </a></li>
-                        <li><a href="#">Tâm Lý </a></li>
-                        <li><a href="#">Giáo Dục </a></li>
-                        <li><a href="#">Giới Trẻ </a></li>
-                        <li><a href="#">Ngoại Ngữ </a></li>
-                        <li><a href="#">Xem Thêm <span class="caret"></span></a></li>
+                        <li><a href="/product?page=1&category-id=1">Văn Học </a></li>
+                        <li><a href="/product?page=1&category-id=2">Kinh Tế </a></li>
+                        <li><a href="/product?page=1&category-id=3">Kỹ Năng Sống </a></li>
+                        <li><a href="/product?page=1&category-id=4">Tâm Lý </a></li>
+                        <li><a href="/product?page=1&category-id=5">Giáo Dục </a></li>
+                        <li><a href="/product?page=1&category-id=6">Giới Trẻ </a></li>
+                        <li><a href="/product?page=1&category-id=7">Ngoại Ngữ </a></li>
+                        <li><a href="/product?page=1&category-id=8">Xem Thêm <span class="caret"></span></a></li>
                         <li><a href="/contact">Liên hệ</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
