@@ -6,7 +6,7 @@ Use QUANLYBANSACH;
 create table ROLE
 (
     id   int(11)      not null primary key auto_increment,
-    name varchar(100) not null
+    name varchar(100) not null unique
 );
 insert into ROLE(id, name)
 VALUES (1, 'ADMIN');
@@ -16,7 +16,7 @@ VALUES (2, 'USER');
 create table USER
 (
     id        int(11)      not null auto_increment primary key,
-    user_name varchar(100) not null,
+    user_name varchar(100) not null unique,
     password  varchar(100) not null,
     full_name varchar(100) not null,
     phone     varchar(100) not null,
@@ -32,7 +32,7 @@ values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 2);
 create table CATEGORY
 (
     id   int(11) not null primary key auto_increment,
-    name nvarchar(20)
+    name nvarchar(20) unique
 );
 insert into CATEGORY(name)
 VALUES ('Văn Học');
@@ -46,14 +46,14 @@ VALUES ('Truyện Thiếu Nhi');
 create table PRODUCT
 (
     id           int(11)      not null primary key auto_increment,
-    name         varchar(100) not null,
+    name         varchar(100) not null unique,
     image        varchar(100) not null,
     info         varchar(5000),
     descriptions varchar(5000),
     price        int(100),
     sale_price   int(100),
     category_id  int(11),
-    author    varchar(100),
+    author       varchar(100),
     constraint fk_2 foreign key (category_id) references CATEGORY (id) ON DELETE CASCADE
 );
 
@@ -122,25 +122,25 @@ create table ORDERS
     id             int(100) not null primary key auto_increment,
     first_name     varchar(100),
     last_name      varchar(100),
-    company_name   varchar(100),
     email          varchar(100),
     phone          varchar(100),
     address        varchar(100),
     province       varchar(100),
     district       varchar(100),
-    apartment      varchar(100),
     commune        varchar(100),
-    post_code      varchar(100),
     special_notes  varchar(100),
     modefined_date date,
     total_price    int,
     payment_method varchar(20),
     user_id        int(100),
     list_product   varchar(1000),
+    status         int(100),
     constraint fk1232 foreign key (user_id) references user (id) ON DELETE CASCADE
 );
 
-insert into ORDERS(first_name, last_name, company_name, email, phone, address, province, district, apartment, commune, post_code, special_notes, modefined_date, total_price, payment_method, user_id, list_product)
-values('Nguyễn Ngọc','Anh','Aladin','ngocanhnguyen160998@gmail.com','0914663198','69','1','1','2','3','4','Đặc biệt','20220405',50000,'Paypal',1,'Sách OK');
+insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
+                   special_notes, modefined_date, total_price, payment_method, user_id, list_product)
+values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội', 'Thanh Trì', 'Văn Điển',
+        'Đặc biệt', '20220405', 500000, 'COD', 1, 'Sách hay');
 
 
