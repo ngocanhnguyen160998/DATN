@@ -18,7 +18,7 @@ create table USER
     id        int(11)      not null auto_increment primary key,
     user_name varchar(100) not null unique,
     password  varchar(100) not null,
-    full_name varchar(100) not null,
+    full_name nvarchar(100) not null,
     phone     varchar(100) not null,
     email     varchar(100) not null,
     role_id   int,
@@ -46,14 +46,14 @@ VALUES ('Truyện Thiếu Nhi');
 create table PRODUCT
 (
     id           int(11)      not null primary key auto_increment,
-    name         varchar(100) not null unique,
+    name         nvarchar(100) not null unique,
     image        varchar(100) not null,
-    info         varchar(5000),
-    descriptions varchar(5000),
+    info         nvarchar(5000),
+    descriptions nvarchar(5000),
     price        int(100),
     sale_price   int(100),
     category_id  int(11),
-    author       varchar(100),
+    author       nvarchar(100),
     constraint fk_2 foreign key (category_id) references CATEGORY (id) ON DELETE CASCADE
 );
 
@@ -120,20 +120,20 @@ create table CART
 create table ORDERS
 (
     id             int(100) not null primary key auto_increment,
-    first_name     varchar(100),
-    last_name      varchar(100),
+    first_name     nvarchar(100),
+    last_name      nvarchar(100),
     email          varchar(100),
     phone          varchar(100),
-    address        varchar(100),
-    province       varchar(100),
-    district       varchar(100),
-    commune        varchar(100),
-    special_notes  varchar(100),
+    address        nvarchar(100),
+    province       nvarchar(100),
+    district       nvarchar(100),
+    commune        nvarchar(100),
+    special_notes  nvarchar(100),
     modefined_date date,
     total_price    int,
     payment_method varchar(20),
     user_id        int(100),
-    list_product   varchar(1000),
+    list_product   nvarchar(1000),
     status         int(100),
     constraint fk1232 foreign key (user_id) references user (id) ON DELETE CASCADE
 );
