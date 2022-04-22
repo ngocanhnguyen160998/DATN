@@ -4,16 +4,18 @@ public class WarehouseDTO {
     private Long id;
     private String productName;
     private Integer amount;
+    private Integer inputAmount;
     private Integer inputPrice;
     private String note;
 
     public WarehouseDTO() {
     }
 
-    public WarehouseDTO(Long id, String productName, Integer amount, Integer inputPrice, String note) {
+    public WarehouseDTO(Long id, String productName, Integer amount, Integer inputAmount, Integer inputPrice, String note) {
         this.id = id;
         this.productName = productName;
         this.amount = amount;
+        this.inputAmount = inputAmount;
         this.inputPrice = inputPrice;
         this.note = note;
     }
@@ -56,5 +58,13 @@ public class WarehouseDTO {
 
     public void setInputPrice(Integer inputPrice) {
         this.inputPrice = inputPrice;
+    }
+
+    public Integer getInputAmount() {
+        return inputAmount;
+    }
+
+    public void setInputAmount(Integer inputAmount) {
+        this.inputAmount = inputAmount;
     }
 }

@@ -11,6 +11,7 @@ public class Warehouse {
     private Integer amount;
     private Long productId;
     private Integer inputPrice;
+    private Integer inputAmount;
     private String note;
 
     public Long getId() {
@@ -51,5 +52,13 @@ public class Warehouse {
 
     public void setInputPrice(Integer inputPrice) {
         this.inputPrice = inputPrice;
+    }
+
+    public Integer getInputAmount() {
+        return inputAmount;
+    }
+
+    public void setInputAmount(Integer inputAmount) {
+        this.inputAmount = inputAmount;
     }
 }

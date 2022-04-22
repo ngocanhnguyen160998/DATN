@@ -43,6 +43,7 @@ public class DataAccess {
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_amount"),
                             rs.getInt("input_price"),
                             rs.getString("note")
                     )
@@ -83,6 +84,7 @@ public class DataAccess {
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_amount"),
                             rs.getInt("input_price"),
                             rs.getString("note")
                     )
@@ -179,6 +181,7 @@ public class DataAccess {
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_amount"),
                             rs.getInt("input_price"),
                             rs.getString("note")
                     )

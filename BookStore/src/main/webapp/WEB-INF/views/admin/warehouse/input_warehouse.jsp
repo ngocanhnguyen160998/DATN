@@ -31,12 +31,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Sửa thông tin kho hàng</h1>
+                        <h1>Nhập thông tin kho hàng</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Sửa thông tin kho hàng</li>
+                            <li class="breadcrumb-item active">Nhập thông tin kho hàng</li>
                         </ol>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/warehouse/edit" modelAttribute="warehouse"
+                            <form:form id="formSubmit" action="/admin/warehouse/input_warehouse" modelAttribute="warehouse"
                                        method="post" onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
@@ -65,23 +65,14 @@
                                                     readonly="true"/>
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="inputAmount">Số Lượng</form:label>
-                                        <form:input path="inputAmount" class="form-control" value="${item.inputAmount}"/>
+                                        <form:label path="inputAmount">Số Lượng Nhập</form:label>
+                                        <form:input path="inputAmount" class="form-control"/>
                                         <label id="inputAmountValidate" style="color: red;"></label>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="inputPrice">Giá Nhập</form:label>
-                                        <form:input path="inputPrice" class="form-control" value="${item.inputPrice}"/>
-                                        <label id="inputPriceValidate" style="color: red;"></label>
-                                    </div>
-                                    <div class="form-group">
-                                        <form:label path="note">Ghi Chú</form:label>
-                                        <form:input path="note" class="form-control" value="${item.note}"/>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
                                 </div>
                             </form:form>
                         </div>
@@ -127,18 +118,6 @@
         } else {
             document.getElementById("amountValidate").innerHTML = "";
         }
-
-        let regexPrice = /^\d{1,15}$/
-        if (document.getElementById("inputPrice").value.trim() === "") {
-            document.getElementById("inputPriceValidate").innerHTML = "* Giá nhập không được để trống!";
-            x = false;
-        } else if(!document.getElementById("inputPrice").value.trim().match(regexPrice)) {
-            document.getElementById("inputPriceValidate").innerHTML = "* Giá nhập phải là kí tự số!";
-            x = false;
-        } else {
-            document.getElementById("inputPriceValidate").innerHTML = "";
-        }
-
         return x;
     }
 </script>

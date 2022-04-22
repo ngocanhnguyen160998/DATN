@@ -82,6 +82,23 @@ public class AdminWarehouseController {
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
+    @GetMapping("/input_warehouse")
+    public ModelAndView warehouseInput(@RequestParam(value = "id") Long id, Model model){
+        List<Product> productList = productService.getAll();
+        WarehouseDTO warehouseDTO = new WarehouseDTO();
+        WarehouseDTO lst = dataAccess.findWarehouseById(id);
+        model.addAttribute("item", lst);
+        model.addAttribute("productList",productList);
+        model.addAttribute("warehouse",warehouseDTO);
+        return new ModelAndView("admin/warehouse/input_warehouse");
+    }
+
+    @PostMapping("/input_warehouse")
+    public ModelAndView submitFormInput(@ModelAttribute("warehouse") WarehouseDTO warehouseDTO){
+        warehouseService.inputWarehouseById(warehouseDTO.getId(), warehouseDTO);
+        return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
+    }
+
     @GetMapping("/insert")
     public ModelAndView warehouseInsert(Model model){
         Warehouse warehouse = new Warehouse();

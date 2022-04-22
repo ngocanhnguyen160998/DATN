@@ -75,9 +75,9 @@
                         <div class="col-12">
                             <div class="card" >
                                 <div class="card-body" style="overflow: auto">
-                                    <table id="example2" class="table table-bordered table-hover" style="width: 1220px;">
+                                    <table id="example2" class="table table-bordered table-hover" >
                                         <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th style="width: 70px">Mã SP</th>
                                             <th style="width: 150px">Tên SP</th>
                                             <th style="width: 200px">Hình Ảnh</th>

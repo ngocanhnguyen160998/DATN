@@ -81,7 +81,7 @@
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th style="width: 150px">Mã Người Dùng</th>
                                             <th style="width: 200px">Tên Tài Khoản</th>
                                             <th style="width: 200px">Họ Tên</th>

@@ -76,12 +76,13 @@
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr>
+                                        <tr style="text-align: center">
                                             <th style="width: 80px">Mã Kho</th>
                                             <th>Tên SP</th>
-                                            <th>Số Lượng</th>
-                                            <th>Giá Nhập</th>
-                                            <th>Ghi Chú</th>
+                                            <th style="width: 130px">Số Lượng Tồn</th>
+                                            <th style="width: 140px">Số Lượng Nhập</th>
+                                            <th style="width: 110px">Giá Nhập</th>
+                                            <th style="width: 450px">Ghi Chú</th>
                                         </tr>
                                         </thead>
                                         <c:forEach var="item" items="${item}">
@@ -90,10 +91,17 @@
                                             <td>${item.id}</td>
                                             <td>${item.productName}</td>
                                             <td>${item.amount}</td>
+                                            <td>${item.inputAmount}</td>
                                             <td><fmt:formatNumber value="${item.inputPrice}"
                                                                       type="number"></fmt:formatNumber>đ</td>
                                             <td>${item.note}</td>
-                                            <td style="width: 140px; text-align: center">
+                                            <td style="width: 250px; text-align: center">
+                                                <c:url var="delete" value="/admin/warehouse/input_warehouse">
+                                                    <c:param name="id" value="${item.id}"/>
+                                                </c:url>
+                                                <a href="${delete}" class="btn btn-primary" title="Nhập Kho">
+                                                    Nhập Kho
+                                                </a>
                                                 <c:url var="edit" value="/admin/warehouse/edit">
                                                     <c:param name="id" value="${item.id}"/>
                                                 </c:url>

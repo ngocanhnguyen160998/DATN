@@ -32,7 +32,8 @@ values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 2);
 create table CATEGORY
 (
     id   int(11) not null primary key auto_increment,
-    name nvarchar(20) unique
+    name nvarchar(20) unique,
+    note nvarchar(100)
 );
 insert into CATEGORY(name)
 VALUES ('Văn Học');
@@ -84,16 +85,16 @@ create table WAREHOUSE
     constraint fk_22 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
 );
 
-insert into warehouse(product_id, amount, input_price, note)
-values (1, 15, 100000, 'Sản phẩm tốt');
-insert into warehouse(product_id, amount, input_price, note)
-values (2, 22, 50000, 'Sản phẩm xấu');
-insert into warehouse(product_id, amount, input_price, note)
-values (3, 24, 60000, 'Sản phẩm đẹp');
-insert into warehouse(product_id, amount, input_price, note)
-values (4, 26, 170000, 'Sản phẩm chất lượng');
-insert into warehouse(product_id, amount, input_price, note)
-values (5, 29, 10000, 'Sản phẩm không phù hợp');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (1, 15, 50, 100000, 'Sản phẩm tốt');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (2, 22, 59, 50000, 'Sản phẩm xấu');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (3, 24, 50, 60000, 'Sản phẩm đẹp');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (4, 26, 50, 170000, 'Sản phẩm chất lượng');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (5, 29, 50, 10000, 'Sản phẩm không phù hợp');
 
 
 

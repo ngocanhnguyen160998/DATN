@@ -39,7 +39,18 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setInputPrice(warehouseDTO.getInputPrice());
         warehouse.setAmount(warehouseDTO.getAmount());
         warehouse.setNote(warehouseDTO.getNote());
+        warehouse.setInputAmount(warehouseDTO.getInputAmount());
+        return warehouseRepository.save(warehouse);
+    }
 
+    @Override
+    public Warehouse inputWarehouseById(Long id, WarehouseDTO warehouseDTO) {
+        Warehouse warehouse = warehouseRepository.findById(id).get();
+        if (warehouse == null) {
+            return null;
+        }
+        warehouse.setAmount(warehouse.getAmount() + warehouseDTO.getInputAmount());
+        warehouse.setInputAmount(warehouse.getInputAmount() + warehouseDTO.getInputAmount());
         return warehouseRepository.save(warehouse);
     }
 

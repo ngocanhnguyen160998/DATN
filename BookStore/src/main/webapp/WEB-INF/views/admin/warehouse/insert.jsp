@@ -66,9 +66,9 @@
                                         <label id="productValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="amount">Số Lượng</form:label>
-                                        <form:input path="amount" class="form-control"/>
-                                        <label id="amountValidate" style="color: red;"></label>
+                                        <form:label path="inputAmount">Số Lượng Nhập</form:label>
+                                        <form:input path="inputAmount" class="form-control"/>
+                                        <label id="inputAmountValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="inputPrice">Giá Nhập</form:label>
@@ -134,11 +134,11 @@
         }
 
         let regexAmount = /^\d{1,5}$/;
-        if (document.getElementById("amount").value.trim() === "") {
-            document.getElementById("amountValidate").innerHTML = "* Số lượng không được để trống!";
+        if (document.getElementById("inputAmount").value.trim() === "") {
+            document.getElementById("inputAmountValidate").innerHTML = "* Số lượng nhập không được để trống!";
             x = false;
-        } else if (!document.getElementById("amount").value.trim().match(regexAmount)){
-            document.getElementById("amountValidate").innerHTML = "* Số lượng phải là kí tự số!";
+        } else if (!document.getElementById("inputAmount").value.trim().match(regexAmount)){
+            document.getElementById("inputAmountValidate").innerHTML = "* Số lượng nhập phải là kí tự số!";
             x = false;
         } else {
             document.getElementById("amountValidate").innerHTML = "";
