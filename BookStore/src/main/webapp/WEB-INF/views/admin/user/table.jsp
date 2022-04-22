@@ -99,7 +99,7 @@
                                             <td>${item.phone}</td>
                                             <td>${item.email}</td>
                                             <td>${item.roleName}</td>
-                                            <td style="width: 140px; text-align: center">
+                                            <td style="width: 180px; text-align: center">
                                                 <c:url var="edit" value="/admin/user/edit">
                                                     <c:param name="id" value="${item.id}"/>
                                                 </c:url>

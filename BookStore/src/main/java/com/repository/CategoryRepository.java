@@ -15,4 +15,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query(value = "SELECT COUNT(c.id) FROM CATEGORY c WHERE name LIKE %:name%", nativeQuery = true)
     Long countByNameLike(@Param("name") String name);
+
+    Page<Category> findAllByOrderByIdAsc(Pageable pageable);
 }

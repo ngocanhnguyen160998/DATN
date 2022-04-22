@@ -52,36 +52,43 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/user/insert" modelAttribute="user" method="post">
+                            <form:form id="formSubmit" action="/admin/user/insert" modelAttribute="user" method="post"
+                                       onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="userName">Tên Tài Khoản</form:label>
-                                        <form:input path="userName" class="form-control" />
+                                        <form:input path="userName" class="form-control"/>
+                                        <label id="userNameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="password">Mật Khẩu</form:label>
-                                        <form:password path="password" class="form-control"  />
+                                        <form:password path="password" class="form-control"/>
+                                        <label id="passwordValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="fullName">Họ Tên</form:label>
-                                        <form:input path="fullName" class="form-control" />
+                                        <form:input path="fullName" class="form-control"/>
+                                        <label id="fullNameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="phone">Số Điện Thoại</form:label>
-                                        <form:input path="phone" class="form-control" />
+                                        <form:input path="phone" class="form-control"/>
+                                        <label id="phoneValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="email">Email</form:label>
-                                        <form:input path="email" class="form-control" />
+                                        <form:input path="email" class="form-control"/>
+                                        <label id="emailValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="roleId">Quyền</form:label>
-                                        <form:select path="roleId" class="form-control" name="role" id="role">
-                                            <option selected disabled hidden>-- Chọn quyền --</option>
+                                        <form:select path="roleId" class="form-control">
+                                            <option value="0" selected disabled hidden>-- Chọn quyền --</option>
                                             <c:forEach var="item" items="${item}">
                                                 <option value="${item.id}">${item.name}</option>
                                             </c:forEach>
                                         </form:select>
+                                        <label id="roleValidate" style="color: red;"></label>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -92,12 +99,6 @@
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!--/.col (left) -->
-                    <!-- right column -->
-                    <div class="col-md-6">
-
-                    </div>
-                    <!--/.col (right) -->
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -125,54 +126,71 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        });
-        $('#quickForm').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                terms: {
-                    required: true
-                },
-            },
-            messages: {
-                email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                terms: "Please accept our terms"
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
-    $('#btnUpdate').click(function (e) {
+    function validate() {
+        let x = true;
 
-        window.alert("Chỉnh sửa thành công")
-    });
+        let regexSpecialCharacters = /^[a-zA-Z0-9]{5,30}$/;
+        if (document.getElementById("userName").value.trim() === "") {
+            document.getElementById("userNameValidate").innerHTML = "* Tài khoản không được để trống!";
+            x = false;
+        } else if (!document.getElementById("userName").value.trim().match(regexSpecialCharacters)) {
+            document.getElementById("userNameValidate").innerHTML = "* Tài khoản phải có độ dài từ 5 đến 30 kí tự và  không chứa kí tự đặc biệt!";
+            x = false;
+        } else {
+            document.getElementById("userNameValidate").innerHTML = "";
+        }
+
+        let regexPassword = /^\S+$/
+        if (document.getElementById("password").value === "") {
+            document.getElementById("passwordValidate").innerHTML = "* Mật khẩu không được để trống!";
+            x = false;
+        } else if (!document.getElementById("password").value.match(regexPassword)) {
+            document.getElementById("passwordValidate").innerHTML = "* Mật khẩu không được để khoảng trắng!";
+            x = false;
+        } else {
+            document.getElementById("passwordValidate").innerHTML = "";
+        }
+
+        if (document.getElementById("fullName").value.trim() === "") {
+            document.getElementById("fullNameValidate").innerHTML = "* Họ tên không được để trống!";
+            x = false;
+        } else {
+            document.getElementById("fullNameValidate").innerHTML = "";
+        }
+
+        let regexPhone = /^\d{10,15}$/
+        if (document.getElementById("phone").value.trim() === "") {
+            document.getElementById("phoneValidate").innerHTML = "* Số điện thoại không được để trống!";
+            x = false;
+        } else if (!document.getElementById("phone").value.trim().match(regexPhone)) {
+            document.getElementById("phoneValidate").innerHTML = "* Số điện thoại không hợp lệ! (10 - 15 kí tự số)";
+            x = false;
+        } else {
+            document.getElementById("phoneValidate").innerHTML = "";
+        }
+
+        let regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
+        if (document.getElementById("email").value.trim() === "") {
+            document.getElementById("emailValidate").innerHTML = "* Email không được để trống!";
+            x = false;
+        } else if (!document.getElementById("email").value.trim().match(regexEmail)) {
+            document.getElementById("emailValidate").innerHTML = "* Email không đúng định dạng! (Ví dụ: example@gmail.com)";
+            x = false;
+        } else {
+            document.getElementById("emailValidate").innerHTML = "";
+        }
+
+        let select = document.getElementById('roleId');
+        let value = select.options[select.selectedIndex].value;
+        if (value === "0") {
+            document.getElementById("roleValidate").innerHTML = "* Phân quyền không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("roleValidate").innerHTML = "";
+        }
+
+        return x;
+    }
 </script>
 </body>
 </html>

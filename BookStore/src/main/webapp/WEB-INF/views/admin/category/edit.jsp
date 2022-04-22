@@ -52,7 +52,7 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/category/edit" modelAttribute="category" method="post">
+                            <form:form id="formSubmit" action="/admin/category/edit" modelAttribute="category" method="post" onsubmit = "return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="id">Mã Thể Loại</form:label>
@@ -61,6 +61,11 @@
                                     <div class="form-group">
                                         <form:label path="name">Tên Thể Loại</form:label>
                                         <form:input path="name" class="form-control" value="${item.name}" />
+                                        <label id="nameValidate" style="color: red;"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="note">Ghi Chú</form:label>
+                                        <form:input path="note" class="form-control" value="${item.note}" />
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -69,19 +74,10 @@
                                 </div>
                             </form:form>
                         </div>
-                        <!-- /.card -->
                     </div>
-                    <!--/.col (left) -->
-                    <!-- right column -->
-                    <div class="col-md-6">
-
-                    </div>
-                    <!--/.col (right) -->
                 </div>
-                <!-- /.row -->
             </div><!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
     </div>
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
@@ -104,75 +100,12 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        });
-        $('#quickForm').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                terms: {
-                    required: true
-                },
-            },
-            messages: {
-                email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                terms: "Please accept our terms"
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
-
-    $('#btnUpdate').click(function (e) {
-        e.preventDefault();
-        var data = {};
-        var formData = $('#formSubmit').serializeArray();
-        $.each(formData, function (i, v) {
-            data["" + v.name + ""] = v.value;
-        });
-        updateProduct(data);
-    });
-
-    function updateProduct(data) {
-        $.ajax({
-            url: '${APIurl}',
-            type: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            <%--success: function (result) {--%>
-            <%--    window.location.href = "admin-table-product?type=list&page=1&maxPageItem=10&sortName=null&sortBy=null";--%>
-            <%--},--%>
-            <%--error: function (error) {--%>
-            <%--    window.location.href = "${Userurl}?type=list&maxPageItem=2&page=1&message=error_system";--%>
-            <%--}--%>
-        });
+    function validate() {
+        if (document.getElementById("name").value.trim() === "") {
+            document.getElementById("nameValidate").innerHTML = "* Tên không không được để trống!";
+            return false;
+        }
+        return true;
     }
 </script>
 </body>

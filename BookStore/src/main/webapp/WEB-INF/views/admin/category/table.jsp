@@ -79,6 +79,7 @@
                                     <tr>
                                         <th style="width: 150px">Mã thể loại</th>
                                         <th>Tên thể loại</th>
+                                        <th>Ghi Chú</th>
                                     </tr>
                                     </thead>
                                     <c:forEach var="item" items="${item}">
@@ -86,6 +87,7 @@
                                     <tr>
                                         <td>${item.id}</td>
                                         <td>${item.name}</td>
+                                        <td>${item.note}</td>
                                         <td style="width: 150px; text-align: center">
                                             <c:url var="edit" value="/admin/category/edit">
                                                 <c:param name="id" value="${item.id}"/>

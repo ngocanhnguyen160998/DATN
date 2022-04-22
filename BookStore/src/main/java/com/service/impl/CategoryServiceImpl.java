@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable).getContent();
+        return categoryRepository.findAllByOrderByIdAsc(pageable).getContent();
     }
 
     @Override
@@ -37,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
             return null;
         }
         tmp.setName(category.getName());
+        tmp.setNote(category.getNote());
         return categoryRepository.save(tmp);
     }
 

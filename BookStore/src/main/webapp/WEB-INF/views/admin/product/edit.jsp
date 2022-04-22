@@ -52,7 +52,7 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/product/edit" modelAttribute="product" method="post">
+                            <form:form id="formSubmit" action="/admin/product/edit" modelAttribute="product" method="post" onsubmit = "return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="id">Mã SP</form:label>
@@ -61,10 +61,12 @@
                                     <div class="form-group">
                                         <form:label path="name">Tên SP</form:label>
                                         <form:input path="name" class="form-control" value="${item.name}" />
+                                        <label id="nameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="image">Hình Ảnh</form:label>
                                         <form:input path="image" class="form-control" value="${item.image}" />
+                                        <label id="imageValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="info">Thông tin</form:label>
@@ -77,10 +79,12 @@
                                     <div class="form-group">
                                         <form:label path="price">Giá</form:label>
                                         <form:input path="price" class="form-control" value="${item.price}" />
+                                        <label id="priceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="salePrice">Giá KM</form:label>
                                         <form:input path="salePrice" class="form-control" value="${item.salePrice}" />
+                                        <label id="salePriceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="categoryId">Thể Loại</form:label>
@@ -89,7 +93,6 @@
                                             <c:forEach var="categoryItem" items="${categoryItem}">
                                                 <option value="${categoryItem.id}">${categoryItem.name}</option>
                                             </c:forEach>
-
                                         </form:select>
                                     </div>
                                     <div class="form-group">
@@ -105,12 +108,6 @@
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!--/.col (left) -->
-                    <!-- right column -->
-                    <div class="col-md-6">
-
-                    </div>
-                    <!--/.col (right) -->
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -138,76 +135,44 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        });
-        $('#quickForm').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                terms: {
-                    required: true
-                },
-            },
-            messages: {
-                email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                terms: "Please accept our terms"
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
+    function validate() {
+        let x = true;
+        if(document.getElementById("name").value.trim() === "" ) {
+            document.getElementById("nameValidate").innerHTML = "* Tên không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("nameValidate").innerHTML = "";
+        }
 
-    $('#btnUpdate').click(function (e) {
-        e.preventDefault();
-        var data = {};
-        var formData = $('#formSubmit').serializeArray();
-        $.each(formData, function (i, v) {
-            data["" + v.name + ""] = v.value;
-        });
-        updateProduct(data);
-    });
+        if(document.getElementById("image").value.trim() === "" ) {
+            document.getElementById("imageValidate").innerHTML = "* Hình ảnh không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("imageValidate").innerHTML = "";
+        }
 
-    function updateProduct(data) {
-        $.ajax({
-            url: '${APIurl}',
-            type: 'PUT',
-            contentType: 'application/json',
-            data: JSON.stringify(data),
-            dataType: 'json',
-            <%--success: function (result) {--%>
-            <%--    window.location.href = "admin-table-product?type=list&page=1&maxPageItem=10&sortName=null&sortBy=null";--%>
-            <%--},--%>
-            <%--error: function (error) {--%>
-            <%--    window.location.href = "${Userurl}?type=list&maxPageItem=2&page=1&message=error_system";--%>
-            <%--}--%>
-        });
+        let regexPrice = /^\d{1,15}$/;
+        if(document.getElementById("price").value.trim() === "" ) {
+            document.getElementById("priceValidate").innerHTML = "* Giá không được để trống!";
+            x = false;
+        } else if (!document.getElementById("price").value.trim().match(regexPrice)) {
+            document.getElementById("priceValidate").innerHTML = "* Giá phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("priceValidate").innerHTML = "";
+        }
+
+        let regexPriceCanEmpty = /^\d*$/;
+        if (!document.getElementById("salePrice").value.trim().match(regexPriceCanEmpty)) {
+            document.getElementById("salePriceValidate").innerHTML = "* Giá khuyến mại phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("salePriceValidate").innerHTML = "";
+        }
+
+        return x;
     }
+
 </script>
 </body>
 </html>

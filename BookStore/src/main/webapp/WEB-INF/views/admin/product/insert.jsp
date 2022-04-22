@@ -52,46 +52,51 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/product/insert" modelAttribute="product" method="post">
+                            <form:form id="formSubmit" action="/admin/product/insert" modelAttribute="product"
+                                       method="post" onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="name">Tên SP</form:label>
-                                        <form:input path="name" class="form-control" />
+                                        <form:input path="name" class="form-control"/>
+                                        <label id="nameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="image">Hình Ảnh</form:label>
-                                        <form:input path="image" class="form-control" type="file" />
-<%--                                        <input  type="file" class="col-xs-10 col-sm-5" id="image" onchange="uploadFileImage()"  />--%>
+                                        <form:input path="image" class="form-control" type="file"/>
+                                            <%--                                        <input  type="file" class="col-xs-10 col-sm-5" id="image" onchange="uploadFileImage()"  />--%>
+                                        <label id="imageValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="info">Thông tin</form:label>
-                                        <form:input path="info" class="form-control" />
+                                        <form:input path="info" class="form-control"/>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="descriptions">Mô tả</form:label>
-                                        <form:input path="descriptions" class="form-control" />
+                                        <form:input path="descriptions" class="form-control"/>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="price">Giá</form:label>
-                                        <form:input path="price" class="form-control" />
+                                        <form:input path="price" class="form-control"/>
+                                        <label id="priceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="salePrice">Giá KM</form:label>
-                                        <form:input path="salePrice" class="form-control" />
+                                        <form:input path="salePrice" class="form-control"/>
+                                        <label id="salePriceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="categoryId">Thể Loại</form:label>
-                                        <form:select path="categoryId" class="form-control" name="category" id="category">
-                                            <option selected disabled hidden>-- Chọn thể loại --</option>
+                                        <form:select path="categoryId" class="form-control">
+                                            <option value="0" selected disabled hidden>-- Chọn thể loại --</option>
                                             <c:forEach var="item" items="${item}">
                                                 <option value="${item.id}">${item.name}</option>
                                             </c:forEach>
-
                                         </form:select>
+                                        <label id="categoryValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="author">Tác Giả</form:label>
-                                        <form:input path="author" class="form-control" />
+                                        <form:input path="author" class="form-control"/>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -102,12 +107,6 @@
                         </div>
                         <!-- /.card -->
                     </div>
-                    <!--/.col (left) -->
-                    <!-- right column -->
-                    <div class="col-md-6">
-
-                    </div>
-                    <!--/.col (right) -->
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -135,7 +134,55 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
+    function validate() {
+        let x = true;
 
+        if (document.getElementById("name").value.trim() === "") {
+            document.getElementById("nameValidate").innerHTML = "* Tên không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("nameValidate").innerHTML = "";
+        }
+
+        if (document.getElementById("image").value.trim() === "") {
+            document.getElementById("imageValidate").innerHTML = "* Hình ảnh không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("imageValidate").innerHTML = "";
+        }
+
+        let regexPrice = /^\d{1,15}$/;
+        if(document.getElementById("price").value.trim() === "" ) {
+            document.getElementById("priceValidate").innerHTML = "* Giá không được để trống!";
+            x = false;
+        } else if (!document.getElementById("price").value.trim().match(regexPrice)) {
+            document.getElementById("priceValidate").innerHTML = "* Giá phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("priceValidate").innerHTML = "";
+        }
+
+        let regexPriceCanEmpty = /^\d*$/;
+        if (!document.getElementById("salePrice").value.trim().match(regexPriceCanEmpty)) {
+            document.getElementById("salePriceValidate").innerHTML = "* Giá khuyến mại phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("salePriceValidate").innerHTML = "";
+        }
+
+        let select = document.getElementById('categoryId');
+        let value = select.options[select.selectedIndex].value;
+        if (value === "0") {
+            document.getElementById("categoryValidate").innerHTML = "* Thể loại không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("categoryValidate").innerHTML = "";
+        }
+
+
+
+        return x;
+    }
 </script>
 </body>
 </html>

@@ -139,7 +139,8 @@ public class DataAccess {
             String sql = "SELECT * FROM CATEGORY WHERE name LIKE ? ORDER BY id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new Category(
                             rs.getLong("id"),
-                            rs.getString("name")
+                            rs.getString("name"),
+                            rs.getString("note")
                     )
             );
         } catch (Exception ex) {

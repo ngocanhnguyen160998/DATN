@@ -73,15 +73,15 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <table id="example2" class="table table-bordered table-hover">
+                            <div class="card" >
+                                <div class="card-body" style="overflow: auto">
+                                    <table id="example2" class="table table-bordered table-hover" style="width: 1220px;">
                                         <thead>
                                         <tr>
                                             <th style="width: 70px">Mã SP</th>
                                             <th style="width: 150px">Tên SP</th>
                                             <th style="width: 200px">Hình Ảnh</th>
-                                            <th>Thông Tin</th>
+                                            <th style="width: 300px">Thông Tin</th>
                                             <th style="width: 100px">Mô tả</th>
                                             <th style="width: 50px">Giá</th>
                                             <th style="width: 50px">Giá KM</th>
@@ -103,7 +103,7 @@
                                                                   type="number"></fmt:formatNumber>đ</td>
                                             <td>${item.categoryName}</td>
                                             <td>${item.author}</td>
-                                            <td style="width: 140px; text-align: center">
+                                            <td style="width: 170px; text-align: center">
                                                 <c:url var="edit" value="/admin/product/edit">
                                                     <c:param name="id" value="${item.id}"/>
                                                 </c:url>

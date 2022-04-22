@@ -8,7 +8,8 @@
     <title>Warehouse Manager</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<c:url value="/template/admin/plugins/fontawesome-free/css/all.min.css" />">
     <!-- Theme style -->
@@ -51,29 +52,32 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/warehouse/insert" modelAttribute="warehouse" method="post">
+                            <form:form id="formSubmit" action="/admin/warehouse/insert" modelAttribute="warehouse"
+                                       method="post" onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="productId">Tên SP</form:label>
-                                        <form:select path="productId" class="form-control" name="product" id="product">
-                                            <option selected disabled hidden>-- Chọn sản phẩm --</option>
+                                        <form:select path="productId" class="form-control">
+                                            <option value="0" selected disabled hidden>-- Chọn sản phẩm --</option>
                                             <c:forEach var="item" items="${item}">
                                                 <option value="${item.id}">${item.name}</option>
                                             </c:forEach>
-
                                         </form:select>
+                                        <label id="productValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="amount">Số Lượng</form:label>
-                                        <form:input path="amount" class="form-control" />
+                                        <form:input path="amount" class="form-control"/>
+                                        <label id="amountValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="inputPrice">Giá Nhập</form:label>
-                                        <form:input path="inputPrice" class="form-control" />
+                                        <form:input path="inputPrice" class="form-control"/>
+                                        <label id="inputPriceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="note">Ghi Chú</form:label>
-                                        <form:input path="note" class="form-control" />
+                                        <form:input path="note" class="form-control"/>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -117,50 +121,42 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                alert( "Form successful submitted!" );
-            }
-        });
-        $('#quickForm').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                terms: {
-                    required: true
-                },
-            },
-            messages: {
-                email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                terms: "Please accept our terms"
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
+    function validate() {
+        let x = true;
+
+        let select = document.getElementById('productId');
+        let value = select.options[select.selectedIndex].value;
+        if (value === "0") {
+            document.getElementById("productValidate").innerHTML = "* Sản phẩm không hợp lệ!";
+            x = false;
+        } else {
+            document.getElementById("productValidate").innerHTML = "";
+        }
+
+        let regexAmount = /^\d{1,5}$/;
+        if (document.getElementById("amount").value.trim() === "") {
+            document.getElementById("amountValidate").innerHTML = "* Số lượng không được để trống!";
+            x = false;
+        } else if (!document.getElementById("amount").value.trim().match(regexAmount)){
+            document.getElementById("amountValidate").innerHTML = "* Số lượng phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("amountValidate").innerHTML = "";
+        }
+
+        let regexPrice = /^\d{1,15}$/;
+        if (document.getElementById("inputPrice").value.trim() === "") {
+            document.getElementById("inputPriceValidate").innerHTML = "* Giá nhập không được để trống!";
+            x = false;
+        } else if(!document.getElementById("inputPrice").value.trim().match(regexPrice)) {
+            document.getElementById("inputPriceValidate").innerHTML = "* Giá nhập phải là kí tự số!";
+            x = false;
+        } else {
+            document.getElementById("inputPriceValidate").innerHTML = "";
+        }
+
+        return x;
+    }
 </script>
 </body>
 </html>

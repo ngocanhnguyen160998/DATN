@@ -52,11 +52,18 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/category/insert" modelAttribute="category" method="post">
+                            <form:form id="formSubmit" action="/admin/category/insert" modelAttribute="category"
+                                       onsubmit="return(validate());" method="post">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="name">Tên Thể Loại</form:label>
-                                        <form:input path="name" class="form-control" />
+                                        <form:input path="name" class="form-control"/>
+                                        <label id="nameValidate" style="color: red;"></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <form:label path="note">Ghi Chú</form:label>
+                                        <form:input path="note" id="note" class="form-control"/>
+                                        <label id="noteValidate" style="color: red;"></label>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -100,50 +107,13 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
-    $(function () {
-        $.validator.setDefaults({
-            submitHandler: function () {
-                alert("Form successful submitted!");
-            }
-        });
-        $('#quickForm').validate({
-            rules: {
-                email: {
-                    required: true,
-                    email: true,
-                },
-                password: {
-                    required: true,
-                    minlength: 5
-                },
-                terms: {
-                    required: true
-                },
-            },
-            messages: {
-                email: {
-                    required: "Please enter a email address",
-                    email: "Please enter a valid email address"
-                },
-                password: {
-                    required: "Please provide a password",
-                    minlength: "Your password must be at least 5 characters long"
-                },
-                terms: "Please accept our terms"
-            },
-            errorElement: 'span',
-            errorPlacement: function (error, element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight: function (element, errorClass, validClass) {
-                $(element).addClass('is-invalid');
-            },
-            unhighlight: function (element, errorClass, validClass) {
-                $(element).removeClass('is-invalid');
-            }
-        });
-    });
+    function validate() {
+        if (document.getElementById("name").value.trim() === "") {
+            document.getElementById("nameValidate").innerHTML = "* Tên không không được để trống!";
+            return false;
+        }
+        return true;
+    }
 </script>
 </body>
 </html>
