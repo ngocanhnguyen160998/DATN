@@ -1,7 +1,9 @@
 package com.controller.web;
 
 import com.dto.ProductDTO;
+import com.model.Category;
 import com.model.response.PageResponse;
+import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
@@ -10,9 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -29,21 +29,47 @@ public class ProductController {
     @Autowired
     private DataAccess dataAccess;
 
+    public String searchInput = "";
+
     @GetMapping("/product")
-    public ModelAndView product(Model model, @RequestParam("category-id") int categoryId, @RequestParam("page") int page) {
-        PageResponse pageResponse = new PageResponse();
-        pageResponse.setLimit(9);
-        pageResponse.setPage(page);
+    public ModelAndView product(Model model, @RequestParam(value = "category-id", required = false) String categoryId, @RequestParam(value = "search", required = false) String search, @RequestParam("page") int page) {
+        try {
+            PageResponse pageResponse = new PageResponse();
+            pageResponse.setLimit(9);
+            pageResponse.setPage(page);
 
-        Pageable pageable = PageRequest.of(page - 1, 9);
+            Pageable pageable = PageRequest.of(page - 1, 9);
 
-        List<ProductDTO> lst = dataAccess.getListProductDTO(pageable).getContent();
-        pageResponse.setTotalItem(productService.count());
-        pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+            List<ProductDTO> lst;
+            List<Category> lstCategory = categoryService.getAll();
+            if (!"all".equals(search) && search != null) {
+                lst = dataAccess.getListProductDTOByName(searchInput, pageable).getContent();
+                pageResponse.setTotalItem(productService.countByNameLike(searchInput));
+            } else {
+                lst = dataAccess.getListProductDTOByCategoryId(pageable, categoryId).getContent();
+                if (categoryId != null && !"".equals(categoryId)) {
+                    pageResponse.setTotalItem(productService.countByCategoryId(categoryId));
+                } else {
+                    pageResponse.setTotalItem(productService.count());
+                }
+            }
+            pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
-        model.addAttribute("item", lst);
-        model.addAttribute("categoryId", categoryId);
-        model.addAttribute("page", pageResponse);
-        return new ModelAndView("web/product");
+            model.addAttribute("item", lst);
+            model.addAttribute("itemCategory", lstCategory);
+            model.addAttribute("search", new Search());
+            model.addAttribute("categoryId", categoryId);
+            model.addAttribute("page", pageResponse);
+            return new ModelAndView("web/product");
+        } catch (Exception e) {
+            return new ModelAndView("web/404");
+        }
+
+    }
+
+    @PostMapping({"/product","/", "/contact"})
+    public ModelAndView submitFormSearch(@ModelAttribute("search") Search search) {
+        searchInput = search.getInput().trim();
+        return new ModelAndView("redirect:/product?page=1&search=" + ("".equals(search.getInput().trim()) ? "all" : search.getInput().trim()));
     }
 }

@@ -32,9 +32,7 @@
 <!-- / menu -->
 
 <!-- catg header banner section -->
-<section id="aa-catg-head-banner">
-    <img src="<c:url value="/template/web/img/fashion/fashion-header-bg-8.jpg" />" alt="fashion img">
-</section>
+<%@ include file="/common/web/banner.jsp" %>
 <!-- / catg header banner section -->
 
 <!-- product category -->

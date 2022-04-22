@@ -15,12 +15,12 @@ VALUES (2, 'USER');
 
 create table USER
 (
-    id        int(11)      not null auto_increment primary key,
-    user_name varchar(100) not null unique,
-    password  varchar(100) not null,
+    id        int(11)       not null auto_increment primary key,
+    user_name varchar(100)  not null unique,
+    password  varchar(100)  not null,
     full_name nvarchar(100) not null,
-    phone     varchar(100) not null,
-    email     varchar(100) not null,
+    phone     varchar(100)  not null,
+    email     varchar(100)  not null,
     role_id   int,
     constraint fk_1 foreign key (role_id) references role (id) ON DELETE CASCADE
 );
@@ -45,9 +45,9 @@ VALUES ('Truyện Thiếu Nhi');
 
 create table PRODUCT
 (
-    id           int(11)      not null primary key auto_increment,
+    id           int(11)       not null primary key auto_increment,
     name         nvarchar(100) not null unique,
-    image        varchar(100) not null,
+    image        varchar(100)  not null,
     info         nvarchar(5000),
     descriptions nvarchar(5000),
     price        int(100),
@@ -75,23 +75,25 @@ values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 1, 'An
 
 create table WAREHOUSE
 (
-    id         int(11)  not null primary key auto_increment,
-    product_id int(11) unique,
-    amount     int(100) not null,
-    note       nvarchar(255),
+    id          int(11)  not null primary key auto_increment,
+    product_id  int(11) unique,
+    amount      int(100) not null,
+    input_amount int(100) not null,
+    input_price int(100) not null,
+    note        nvarchar(255),
     constraint fk_22 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
 );
 
-insert into warehouse(product_id, amount, note)
-values (1, 15, 'Sản phẩm tốt');
-insert into warehouse(product_id, amount, note)
-values (2, 22, 'Sản phẩm xấu');
-insert into warehouse(product_id, amount, note)
-values (3, 24, 'Sản phẩm đẹp');
-insert into warehouse(product_id, amount, note)
-values (4, 26, 'Sản phẩm chất lượng');
-insert into warehouse(product_id, amount, note)
-values (5, 29, 'Sản phẩm không phù hợp');
+insert into warehouse(product_id, amount, input_price, note)
+values (1, 15, 100000, 'Sản phẩm tốt');
+insert into warehouse(product_id, amount, input_price, note)
+values (2, 22, 50000, 'Sản phẩm xấu');
+insert into warehouse(product_id, amount, input_price, note)
+values (3, 24, 60000, 'Sản phẩm đẹp');
+insert into warehouse(product_id, amount, input_price, note)
+values (4, 26, 170000, 'Sản phẩm chất lượng');
+insert into warehouse(product_id, amount, input_price, note)
+values (5, 29, 10000, 'Sản phẩm không phù hợp');
 
 
 
@@ -140,7 +142,16 @@ create table ORDERS
 
 insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
                    special_notes, modefined_date, total_price, payment_method, user_id, list_product)
-values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội', 'Thanh Trì', 'Văn Điển',
+values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
+        'Thanh Trì', 'Văn Điển',
         'Đặc biệt', '20220405', 500000, 'COD', 1, 'Sách hay');
 
+
+# create table statistic
+# (
+#     id int(100) not null primary key auto_increment,
+#     product_id int(11) not null,
+#
+#
+# );
 

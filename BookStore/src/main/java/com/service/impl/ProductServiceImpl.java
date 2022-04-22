@@ -1,11 +1,9 @@
 package com.service.impl;
 
 import com.model.Product;
-import com.repository.DataAccess;
 import com.repository.ProductRepository;
 import com.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,5 +65,33 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public long countByNameLike(String name) {
         return productRepository.countByNameLike(name);
+    }
+
+    @Override
+    public long countByCategoryId(String categoryId) {
+        if("".equals(categoryId)) {
+            return productRepository.count();
+        }
+        return productRepository.countByCategoryId(categoryId);
+    }
+
+    @Override
+    public List<Product> get8ProductHot() {
+        return productRepository.find8ProductHot();
+    }
+
+    @Override
+    public List<Product> get8ProductSale() {
+        return productRepository.find8ProductSale();
+    }
+
+    @Override
+    public List<Product> get8ProductNew() {
+        return productRepository.find8ProductNew();
+    }
+
+    @Override
+    public List<Product> get8ProductByCategory(String categoryId) {
+        return productRepository.find8ProductByCategoryId(categoryId);
     }
 }

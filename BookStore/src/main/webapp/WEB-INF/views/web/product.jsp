@@ -35,9 +35,7 @@
 <!-- / menu -->
 
 <!-- catg header banner section -->
-<section id="aa-catg-head-banner">
-    <img src="<c:url value="/template/web/img/fashion/fashion-header-bg-8.jpg" />" alt="fashion img">
-</section>
+<%@ include file="/common/web/banner.jsp" %>
 <!-- / catg header banner section -->
 
 <!-- product category -->
@@ -49,12 +47,11 @@
                     <div class="aa-product-catg-head">
                         <div class="aa-product-catg-head-left">
                             <form action="" class="aa-sort-form">
-                                <label for="">Sort by</label>
+                                <label for="">Sắp xếp</label>
                                 <select name="">
-                                    <option value="1" selected="Default">Default</option>
-                                    <option value="2">Name</option>
-                                    <option value="3">Price</option>
-                                    <option value="4">Date</option>
+                                    <option value="1" selected="Default">Mặc định</option>
+                                    <option value="2">Giá tăng dần</option>
+                                    <option value="3">Giá giảm dần</option>
                                 </select>
                             </form>
                         </div>
@@ -110,11 +107,12 @@
                                     </li>
                                 </c:forEach>
                             </ul>
-                            <ul class="pagination" id="pagination"
-                                style="margin-left: 15%; margin-top: 10px"></ul>
-                            <input type="hidden" value="" id="page" name="page"/>
-                            <input type="hidden" value="" id="category-id" name="category-id"/>
                         </div>
+                        <ul class="pagination" id="pagination"
+                            style="margin-left: 15%; margin-top: 10px"></ul>
+                        <input type="hidden" value="" id="page" name="page"/>
+                        <input type="hidden" value="" id="category-id" name="category-id"/>
+                        <input type="hidden" value="" id="search" name="search"/>
                     </form>
                 </div>
             </div>
@@ -124,11 +122,9 @@
                     <div class="aa-sidebar-widget">
                         <h3>Thể Loại</h3>
                         <ul class="aa-catg-nav">
-                            <li><a href="#">Men</a></li>
-                            <li><a href="">Women</a></li>
-                            <li><a href="">Kids</a></li>
-                            <li><a href="">Electornics</a></li>
-                            <li><a href="">Sports</a></li>
+                            <c:forEach var="itemCategory" items="${itemCategory}">
+                                <li><a href="/product?page=1&category-id=${itemCategory.id}">${itemCategory.name}</a></li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </aside>

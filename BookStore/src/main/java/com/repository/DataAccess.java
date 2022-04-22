@@ -38,11 +38,12 @@ public class DataAccess {
     public Page<WarehouseDTO> getListWarehouseDTO(Pageable pageable) {
         List<WarehouseDTO> lst = null;
         try {
-            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            String sql = "SELECT w.*, p.name FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, (rs, rowNum) -> new WarehouseDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_price"),
                             rs.getString("note")
                     )
             );
@@ -77,11 +78,12 @@ public class DataAccess {
     public WarehouseDTO findWarehouseById(Long id) {
         WarehouseDTO lst = null;
         try {
-            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id AND w.id = ?";
+            String sql = "SELECT w.*, p.name FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id AND w.id = ?";
             lst = jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> new WarehouseDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_price"),
                             rs.getString("note")
                     )
             );
@@ -150,7 +152,7 @@ public class DataAccess {
         List<ProductDTO> lst = null;
         try {
             String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.name LIKE ?  ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
-            lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"},(rs, rowNum) -> new ProductDTO(
+            lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new ProductDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getString("image"),
@@ -171,11 +173,12 @@ public class DataAccess {
     public Page<WarehouseDTO> getListWarehouseDTOByNameProduct(String name, Pageable pageable) {
         List<WarehouseDTO> lst = null;
         try {
-            String sql = "SELECT w.id, p.name, w.amount, w.note FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id AND p.name LIKE ? ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            String sql = "SELECT w.*, p.name FROM PRODUCT p, WAREHOUSE w WHERE p.id = w.product_id AND p.name LIKE ? ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
             lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new WarehouseDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
                             rs.getInt("amount"),
+                            rs.getInt("input_price"),
                             rs.getString("note")
                     )
             );
@@ -184,26 +187,45 @@ public class DataAccess {
         }
         return new PageImpl<>(lst, pageable, warehouseService.countByLikeNameProduct(name));
     }
-//
-//    public ProductDTO findProductById(Long id) {
-//        ProductDTO lst = null;
-//        try {
-//            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id";
-//            lst = jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> new ProductDTO(
-//                            rs.getLong("id"),
-//                            rs.getString("name"),
-//                            rs.getString("image"),
-//                            rs.getString("info"),
-//                            rs.getString("descriptions"),
-//                            rs.getLong("price"),
-//                            rs.getLong("sale_price"),
-//                            rs.getString("c.name"),
-//                            rs.getString("author")
-//                    )
-//            );
-//        } catch (Exception ex) {
-//            ex.getMessage();
-//        }
-//        return lst;
-//    }
+
+    public Page<ProductDTO> getListProductDTOByCategoryId(Pageable pageable, String idCategory) {
+        List<ProductDTO> lst = null;
+        try {
+            String sql = "";
+            if ("".equals(idCategory) || idCategory == null) {
+                sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, (rs, rowNum) -> new ProductDTO(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("image"),
+                                rs.getString("info"),
+                                rs.getString("descriptions"),
+                                rs.getLong("price"),
+                                rs.getLong("sale_price"),
+                                rs.getString("c.name"),
+                                rs.getString("author")
+                        )
+                );
+            } else {
+                sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.category_id = ? ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{idCategory}, (rs, rowNum) -> new ProductDTO(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getString("image"),
+                                rs.getString("info"),
+                                rs.getString("descriptions"),
+                                rs.getLong("price"),
+                                rs.getLong("sale_price"),
+                                rs.getString("c.name"),
+                                rs.getString("author")
+                        )
+                );
+            }
+
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, productService.count());
+    }
+
 }

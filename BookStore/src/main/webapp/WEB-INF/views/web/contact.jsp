@@ -32,20 +32,7 @@
 <!-- / menu -->
 
 <!-- catg header banner section -->
-<section id="aa-catg-head-banner">
-    <img src="<c:url value="/template/web/img/fashion/fashion-header-bg-8.jpg" />" alt="fashion img">
-    <div class="aa-catg-head-banner-area">
-        <div class="container">
-            <div class="aa-catg-head-banner-content">
-                <h2>Contact</h2>
-                <ol class="breadcrumb">
-                    <li><a href="/">Home</a></li>
-                    <li class="active">Contact</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
+<%@ include file="/common/web/banner.jsp" %>
 <!-- / catg header banner section -->
 <!-- start contact section -->
 <section id="aa-contact">

@@ -29,7 +29,7 @@
                         <li><a href="/product?page=1&category-id=5">Giáo Dục </a></li>
                         <li><a href="/product?page=1&category-id=6">Giới Trẻ </a></li>
                         <li><a href="/product?page=1&category-id=7">Ngoại Ngữ </a></li>
-                        <li><a href="/product?page=1&category-id=8">Xem Thêm <span class="caret"></span></a></li>
+                        <li><a href="/product?page=1">Xem Thêm <span class="caret"></span></a></li>
                         <li><a href="/contact">Liên hệ</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->

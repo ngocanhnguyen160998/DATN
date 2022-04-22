@@ -9,7 +9,7 @@
     <div class="aa-footer-top">
         <div class="container">
             <div class="aa-footer-top-area">
-                <div class="row" style="margin-left: 200px">
+                <div class="row" style="margin-left: 110px">
                     <div class="col-md-3 col-sm-6">
                         <div class="aa-footer-widget">
                             <h3>Về Chúng Tôi</h3>

@@ -18,4 +18,19 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "SELECT COUNT(p.id) FROM PRODUCT p WHERE name LIKE %:name%", nativeQuery = true)
     Long countByNameLike(@Param("name") String name);
+
+    @Query(value = "SELECT COUNT(*) FROM PRODUCT p WHERE category_id = :categoryId", nativeQuery = true)
+    Long countByCategoryId(@Param("categoryId") String categoryId);
+
+    @Query(value = "SELECT * FROM product ORDER BY id DESC LIMIT 8", nativeQuery = true)
+    List<Product> find8ProductNew();
+
+    @Query(value = "SELECT p.* FROM product p, warehouse w WHERE p.id = w.product_id ORDER BY amount ASC LIMIT 8", nativeQuery = true)
+    List<Product> find8ProductHot();
+
+    @Query(value = "SELECT * FROM product WHERE sale_price > 0 AND sale_price < price ORDER BY id DESC LIMIT 8", nativeQuery = true)
+    List<Product> find8ProductSale();
+
+    @Query(value = "SELECT * FROM product WHERE category_id = :categoryId  ORDER BY id DESC LIMIT 8", nativeQuery = true)
+    List<Product> find8ProductByCategoryId(@Param("categoryId") String categoryId);
 }

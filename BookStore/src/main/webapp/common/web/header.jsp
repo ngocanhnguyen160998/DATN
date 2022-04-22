@@ -50,7 +50,7 @@
                         <!-- / header top left -->
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
-                                <li><a href="/account">Tài khoản</a></li>
+                                <li><a href="/account">Đăng Ký</a></li>
                                 <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
                                 <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
                                 <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
@@ -123,10 +123,16 @@
                         <!-- / cart box -->
                         <!-- search box -->
                         <div class="aa-search-box">
-                            <form action="">
-                                <input type="text" name="" id="search" placeholder="Tìm kiếm">
-                                <button type="submit"><span class="fa fa-search"></span></button>
-                            </form>
+                            <form:form id="formSearch" action="/product" modelAttribute="search" method="post">
+                                <form:input path="input" class="form-control form-control-sidebar" type="search"
+                                            placeholder="Tìm kiếm"
+                                            aria-label="Search" name="search"></form:input>
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </form:form>
                         </div>
                         <!-- / search box -->
                     </div>

@@ -68,6 +68,10 @@
                                         <form:input path="amount" class="form-control" />
                                     </div>
                                     <div class="form-group">
+                                        <form:label path="inputPrice">Giá Nhập</form:label>
+                                        <form:input path="inputPrice" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
                                         <form:label path="note">Ghi Chú</form:label>
                                         <form:input path="note" class="form-control" />
                                     </div>

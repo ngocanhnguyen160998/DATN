@@ -22,4 +22,14 @@ public interface ProductService {
     long count();
 
     long countByNameLike(String name);
+
+    long countByCategoryId(String categoryId);
+
+    List<Product> get8ProductHot();
+
+    List<Product> get8ProductSale();
+
+    List<Product> get8ProductNew();
+
+    List<Product> get8ProductByCategory(String categoryId);
 }

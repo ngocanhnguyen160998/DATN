@@ -52,7 +52,7 @@
         </section>
         <div class="card-footer">
             <a href="/admin/product/insert" class="btn btn-primary" title="Thống kê">
-                Thống kê
+                Xuất Excel
             </a>
             <div class="form-inline" style="float: right">
                 <form:form id="formSearch" action="/admin/order/table" modelAttribute="search" method="post">

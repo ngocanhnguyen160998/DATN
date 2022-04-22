@@ -80,6 +80,7 @@
                                             <th style="width: 80px">Mã Kho</th>
                                             <th>Tên SP</th>
                                             <th>Số Lượng</th>
+                                            <th>Giá Nhập</th>
                                             <th>Ghi Chú</th>
                                         </tr>
                                         </thead>
@@ -89,6 +90,8 @@
                                             <td>${item.id}</td>
                                             <td>${item.productName}</td>
                                             <td>${item.amount}</td>
+                                            <td><fmt:formatNumber value="${item.inputPrice}"
+                                                                      type="number"></fmt:formatNumber>đ</td>
                                             <td>${item.note}</td>
                                             <td style="width: 140px; text-align: center">
                                                 <c:url var="edit" value="/admin/warehouse/edit">

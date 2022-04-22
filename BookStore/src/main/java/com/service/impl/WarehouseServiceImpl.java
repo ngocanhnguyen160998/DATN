@@ -36,6 +36,7 @@ public class WarehouseServiceImpl implements WarehouseService {
             return null;
         }
 
+        warehouse.setInputPrice(warehouseDTO.getInputPrice());
         warehouse.setAmount(warehouseDTO.getAmount());
         warehouse.setNote(warehouseDTO.getNote());
 
