@@ -59,6 +59,10 @@
                                         <td><label>${item.id}</label></td>
                                     </tr>
                                     <tr>
+                                        <td><label>Tài Khoản:</label></td>
+                                        <td><label>${item.userName}</label></td>
+                                    </tr>
+                                    <tr>
                                         <td><label>Họ Tên:</label></td>
                                         <td><label>${item.firstName} ${item.lastName}</label></td>
                                     </tr>
@@ -89,11 +93,12 @@
                                     <tr>
                                         <td><label>Ngày Lập:</label></td>
                                         <td><label><fmt:formatDate value="${item.modefinedDate}"
-                                                                   pattern="dd-MM-yyyy"></fmt:formatDate></label></td>
+                                                                   pattern="dd-MM-yyyy HH:mm:ss"></fmt:formatDate></label></td>
                                     </tr>
                                     <tr>
                                         <td><label>Thành Tiền:</label></td>
-                                        <td><label>${item.totalPrice}</label></td>
+                                        <td><label><fmt:formatNumber value="${item.totalPrice}"
+                                                                     type="number"></fmt:formatNumber>đ</label></td>
                                     </tr>
                                     <tr>
                                         <td><label>Tình Trạng:</label></td>
@@ -108,10 +113,10 @@
                                         <td><label>Phương Thức Thanh Toán:</label></td>
                                         <td><label>${item.paymentMethod}</label></td>
                                     </tr>
-                                    <tr>
-                                        <td><label>Danh Sách Sản Phẩm:</label></td>
-                                        <td><label>${item.listProduct}</label></td>
-                                    </tr>
+<%--                                    <tr>--%>
+<%--                                        <td><label>Danh Sách Sản Phẩm:</label></td>--%>
+<%--                                        <td><label>${item.listProduct}</label></td>--%>
+<%--                                    </tr>--%>
                                 </table>
                             </div>
 

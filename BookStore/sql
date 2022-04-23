@@ -76,12 +76,12 @@ values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 1, 'An
 
 create table WAREHOUSE
 (
-    id          int(11)  not null primary key auto_increment,
-    product_id  int(11) unique,
-    amount      int(100) not null,
+    id           int(11)  not null primary key auto_increment,
+    product_id   int(11) unique,
+    amount       int(100) not null,
     input_amount int(100) not null,
-    input_price int(100) not null,
-    note        nvarchar(255),
+    input_price  int(100) not null,
+    note         nvarchar(255),
     constraint fk_22 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
 );
 
@@ -136,16 +136,16 @@ create table ORDERS
     total_price    int,
     payment_method varchar(20),
     user_id        int(100),
-    list_product   nvarchar(1000),
-    status         int(100),
+    product_id     int(100),
+    status         int(100) not null,
     constraint fk1232 foreign key (user_id) references user (id) ON DELETE CASCADE
 );
 
 insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
-                   special_notes, modefined_date, total_price, payment_method, user_id, list_product)
+                   special_notes, modefined_date, total_price, payment_method, user_id, product_id, status)
 values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
         'Thanh Trì', 'Văn Điển',
-        'Đặc biệt', '20220405', 500000, 'COD', 1, 'Sách hay');
+        'Đặc biệt', '20220405', 500000, 'COD', 1, 1, 0);
 
 
 # create table statistic

@@ -13,9 +13,9 @@ import org.springframework.stereotype.Repository;
 public interface OrderRepository extends JpaRepository<Orders, Long> {
     Page<Orders> findAllByOrderByIdDesc(Pageable pageable);
 
-    @Query("SELECT count(o.id) FROM Orders o WHERE concat(o.firstName, o.lastName, o.phone) LIKE %?1%")
+    @Query("SELECT count(o.id) FROM Orders o WHERE concat(o.firstName, ' ',o.lastName, o.phone) LIKE %?1%")
     Long countByFullNameAndPhone(@Param("input") String input);
 
-    @Query("SELECT o FROM Orders o WHERE concat(o.firstName, ' ' ,o.lastName, o.phone) LIKE %?1% ORDER BY o.id DESC")
+    @Query("SELECT o FROM Orders o WHERE concat(o.firstName, ' ',o.lastName, o.phone) LIKE %?1% ORDER BY o.id DESC")
     Page<Orders> findByFullNameAndPhone(String input, Pageable pageable);
 }

@@ -1,8 +1,10 @@
 package com.controller.admin;
 
+import com.dto.OrderDTO;
 import com.model.Orders;
 import com.model.response.PageResponse;
 import com.model.response.Search;
+import com.repository.DataAccess;
 import com.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +23,9 @@ public class AdminOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private DataAccess dataAccess;
 
     public String searchInput = "";
 
@@ -62,7 +67,7 @@ public class AdminOrderController {
 
     @RequestMapping("/details")
     public ModelAndView detail(Model model, @RequestParam(value = "id") Long id) {
-        Orders orders = orderService.getById(id).get();
+        OrderDTO orders = dataAccess.getOrderDTOById(id);
         model.addAttribute("item", orders);
         return new ModelAndView("/admin/order/detail");
     }

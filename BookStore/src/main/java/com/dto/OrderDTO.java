@@ -9,27 +9,37 @@ public class OrderDTO {
     private String email;
     private String phone;
     private String address;
-    private String note;
-    private Date dateCreated;
+    private String province;
+    private String district;
+    private String commune;
+    private String specialNotes;
+    private Date modefinedDate;
     private Long totalPrice;
     private String paymentMethod;
-    private String listProduct;
+    private String userName;
+    private String productName;
+    private Long status;
 
     public OrderDTO() {
     }
 
-    public OrderDTO(Long id, String firstName, String lastName, String email, String phone, String address, String note, Date dateCreated, Long totalPrice, String paymentMethod, String listProduct) {
+    public OrderDTO(Long id, String firstName, String lastName, String email, String phone, String address, String province, String district, String commune, String specialNotes, Date modefinedDate, Long totalPrice, String paymentMethod, String userName, String productName, Long status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.address = address;
-        this.note = note;
-        this.dateCreated = dateCreated;
+        this.province = province;
+        this.district = district;
+        this.commune = commune;
+        this.specialNotes = specialNotes;
+        this.modefinedDate = modefinedDate;
         this.totalPrice = totalPrice;
         this.paymentMethod = paymentMethod;
-        this.listProduct = listProduct;
+        this.userName = userName;
+        this.productName = productName;
+        this.status = status;
     }
 
     public Long getId() {
@@ -80,20 +90,44 @@ public class OrderDTO {
         this.address = address;
     }
 
-    public String getNote() {
-        return note;
+    public String getProvince() {
+        return province;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public Date getDateCreated() {
-        return dateCreated;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getCommune() {
+        return commune;
+    }
+
+    public void setCommune(String commune) {
+        this.commune = commune;
+    }
+
+    public String getSpecialNotes() {
+        return specialNotes;
+    }
+
+    public void setSpecialNotes(String specialNotes) {
+        this.specialNotes = specialNotes;
+    }
+
+    public Date getModefinedDate() {
+        return modefinedDate;
+    }
+
+    public void setModefinedDate(Date modefinedDate) {
+        this.modefinedDate = modefinedDate;
     }
 
     public Long getTotalPrice() {
@@ -112,11 +146,27 @@ public class OrderDTO {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getListProduct() {
-        return listProduct;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setListProduct(String listProduct) {
-        this.listProduct = listProduct;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Long getStatus() {
+        return status;
+    }
+
+    public void setStatus(Long status) {
+        this.status = status;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

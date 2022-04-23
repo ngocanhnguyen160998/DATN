@@ -1,13 +1,11 @@
 package com.repository;
 
+import com.dto.OrderDTO;
 import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
 import com.model.Category;
-import com.service.CategoryService;
-import com.service.ProductService;
-import com.service.UserService;
-import com.service.WarehouseService;
+import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -34,6 +32,9 @@ public class DataAccess {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private OrderService orderService;
 
     public Page<WarehouseDTO> getListWarehouseDTO(Pageable pageable) {
         List<WarehouseDTO> lst = null;
@@ -231,5 +232,38 @@ public class DataAccess {
         }
         return new PageImpl<>(lst, pageable, productService.count());
     }
+
+    public OrderDTO getOrderDTOById(Long input) {
+        OrderDTO orderDTO = null;
+        try {
+            String sql = "SELECT o.*, u.user_name, p.name FROM PRODUCT p, ORDERS o, USER u WHERE p.id = o.product_id AND u.id = o.user_id AND o.id = ?";
+            orderDTO = jdbcTemplate.queryForObject(sql, new Object[]{input}, (rs, rowNum) -> new OrderDTO(
+                            rs.getLong("id"),
+                            rs.getString("first_name"),
+                            rs.getString("last_name"),
+                            rs.getString("email"),
+                            rs.getString("phone"),
+                            rs.getString("address"),
+                            rs.getString("province"),
+                            rs.getString("district"),
+                            rs.getString("commune"),
+                            rs.getString("special_notes"),
+                            rs.getDate("modefined_date"),
+                            rs.getLong("total_price"),
+                            rs.getString("payment_method"),
+                            rs.getString("u.user_name"),
+                            rs.getString("p.name"),
+                            rs.getLong("status")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return orderDTO;
+    }
+
+//    public List<String> getListProductOder(){
+//
+//    }
 
 }

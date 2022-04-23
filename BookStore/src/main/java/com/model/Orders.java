@@ -21,7 +21,8 @@ public class Orders {
     private Date modefinedDate;
     private Long totalPrice;
     private String paymentMethod;
-    private String listProduct;
+    private String userId;
+    private String productId;
     private Long status;
 
     public Long getId() {
@@ -128,12 +129,12 @@ public class Orders {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getListProduct() {
-        return listProduct;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setListProduct(String listProduct) {
-        this.listProduct = listProduct;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public Long getStatus() {
@@ -142,5 +143,13 @@ public class Orders {
 
     public void setStatus(Long status) {
         this.status = status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
