@@ -31,6 +31,7 @@ public class AdminWarehouseController {
     private WarehouseService warehouseService;
 
     public String searchInput = "";
+    public String message = "";
 
     @GetMapping("/table")
     public ModelAndView warehouse(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
@@ -56,6 +57,8 @@ public class AdminWarehouseController {
         model.addAttribute("page", pageResponse);
         model.addAttribute("input", search);
         model.addAttribute("search", new Search());
+        model.addAttribute("message", message);
+        message = "";
         return new ModelAndView("admin/warehouse/table");
     }
 
@@ -78,7 +81,12 @@ public class AdminWarehouseController {
 
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("warehouse") WarehouseDTO warehouseDTO){
-        warehouseService.updateById(warehouseDTO.getId(), warehouseDTO);
+        try {
+            warehouseService.updateById(warehouseDTO.getId(), warehouseDTO);
+            message = "Thông báo: Chỉnh sửa thông tin kho hàng thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Chỉnh sửa thông tin kho hàng thất bại!";
+        }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
@@ -95,7 +103,12 @@ public class AdminWarehouseController {
 
     @PostMapping("/input_warehouse")
     public ModelAndView submitFormInput(@ModelAttribute("warehouse") WarehouseDTO warehouseDTO){
-        warehouseService.inputWarehouseById(warehouseDTO.getId(), warehouseDTO);
+        try {
+            warehouseService.inputWarehouseById(warehouseDTO.getId(), warehouseDTO);
+            message = "Thông báo: Nhập số lượng sản phẩm thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Nhập số lượng sản phẩm thất bại!";
+        }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
@@ -110,13 +123,23 @@ public class AdminWarehouseController {
 
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("warehouse") Warehouse warehouse){
-        warehouseService.insert(warehouse);
+        try {
+            warehouseService.insert(warehouse);
+            message = "Thông báo: Thêm mới thông tin kho hàng thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Thêm mới thông tin kho hàng thất bại!";
+        }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView warehouseDelete(@RequestParam(value = "id") Long id){
-        warehouseService.deleteById(id);
+        try {
+            warehouseService.deleteById(id);
+            message = "Thông báo: Xóa thông tin kho hàng thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Xóa thông tin kho hàng thất bại!";
+        }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
 }

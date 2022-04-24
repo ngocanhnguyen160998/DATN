@@ -94,6 +94,9 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" id="btnAdd">Thêm mới</button>
+                                    <a href="/admin/user/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                        Trở về
+                                    </a>
                                 </div>
                             </form:form>
                         </div>

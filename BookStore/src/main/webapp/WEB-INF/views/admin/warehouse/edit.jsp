@@ -65,7 +65,7 @@
                                                     readonly="true"/>
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="inputAmount">Số Lượng</form:label>
+                                        <form:label path="inputAmount">Số Lượng Nhập</form:label>
                                         <form:input path="inputAmount" class="form-control" value="${item.inputAmount}"/>
                                         <label id="inputAmountValidate" style="color: red;"></label>
                                     </div>
@@ -82,6 +82,9 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Chỉnh Sửa</button>
+                                    <a href="/admin/warehouse/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                        Trở về
+                                    </a>
                                 </div>
                             </form:form>
                         </div>

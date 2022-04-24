@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,10 +37,22 @@ public class WarehouseServiceImpl implements WarehouseService {
             return null;
         }
 
-        warehouse.setInputPrice(warehouseDTO.getInputPrice());
-        warehouse.setAmount(warehouseDTO.getAmount());
-        warehouse.setNote(warehouseDTO.getNote());
+        if (warehouse.getInputAmount() < warehouseDTO.getInputAmount()) {
+            warehouse.setAmount(warehouse.getAmount() + (warehouseDTO.getInputAmount() - warehouse.getInputAmount()));
+        } else if (warehouse.getInputAmount() > warehouseDTO.getInputAmount()) {
+            warehouse.setAmount(warehouse.getAmount() - (warehouse.getInputAmount() - warehouseDTO.getInputAmount()));
+        } else {
+            warehouse.setAmount(warehouse.getAmount());
+        }
+        if (warehouse.getAmount() < 0) {
+            warehouse.setAmount(null);
+        }
+
         warehouse.setInputAmount(warehouseDTO.getInputAmount());
+        warehouse.setInputPrice(warehouseDTO.getInputPrice());
+        warehouse.setNote(warehouseDTO.getNote());
+
+
         return warehouseRepository.save(warehouse);
     }
 
@@ -61,6 +74,7 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public Warehouse insert(Warehouse warehouse) {
+        warehouse.setAmount(warehouse.getInputAmount());
         return warehouseRepository.save(warehouse);
     }
 

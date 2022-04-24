@@ -58,12 +58,28 @@
                     </p>
                 </a>
                 </li>
-                <li class="nav-item"><a href="/admin/order/table?page=1&search=all" class="nav-link">
-                    <i class="nav-icon fas fa-book"></i>
-                    <p>
-                        Thống Kê
-                    </p>
-                </a>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-table"></i>
+                        <p>
+                            Thống Kê Doanh Thu
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/admin/statistic-product/table?page=1&search=all" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Doanh Thu Theo SP</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/statistic/table?page=1&search=all" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Tổng Doanh Thu</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>

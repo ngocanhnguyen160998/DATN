@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>BeautyShop_Spring</artifactId>
+    <artifactId>BookStore_Spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>BeautyShop_Spring</name>
-    <description>BeautyShop_Spring</description>
+    <name>BookStore_Spring</name>
+    <description>BookStore_Spring</description>
     <packaging>war</packaging>
     <properties>
         <java.version>11</java.version>
@@ -117,6 +117,11 @@
             <version>2.6.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>

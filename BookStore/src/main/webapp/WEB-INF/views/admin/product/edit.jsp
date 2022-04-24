@@ -103,6 +103,9 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
+                                    <a href="/admin/product/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                        Trở về
+                                    </a>
                                 </div>
                             </form:form>
                         </div>

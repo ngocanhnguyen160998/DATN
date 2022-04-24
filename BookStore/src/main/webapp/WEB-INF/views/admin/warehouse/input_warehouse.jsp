@@ -73,6 +73,9 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                                    <a href="/admin/warehouse/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                        Trở về
+                                    </a>
                                 </div>
                             </form:form>
                         </div>

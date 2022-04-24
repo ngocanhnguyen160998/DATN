@@ -22,7 +22,6 @@ public class Orders {
     private Long totalPrice;
     private String paymentMethod;
     private String userId;
-    private String productId;
     private Long status;
 
     public Long getId() {
@@ -127,14 +126,6 @@ public class Orders {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
     }
 
     public Long getStatus() {

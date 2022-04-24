@@ -1,10 +1,11 @@
 package com.repository;
 
-import com.dto.OrderDTO;
+import com.dto.OrderDetailDTO;
 import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
 import com.model.Category;
+import com.model.response.SearchDate;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -233,11 +234,69 @@ public class DataAccess {
         return new PageImpl<>(lst, pageable, productService.count());
     }
 
-    public OrderDTO getOrderDTOById(Long input) {
-        OrderDTO orderDTO = null;
+    public List<OrderDetailDTO> getListOrderDTO(SearchDate searchDate) {
+        List<OrderDetailDTO> orderDetailDTO = null;
         try {
-            String sql = "SELECT o.*, u.user_name, p.name FROM PRODUCT p, ORDERS o, USER u WHERE p.id = o.product_id AND u.id = o.user_id AND o.id = ?";
-            orderDTO = jdbcTemplate.queryForObject(sql, new Object[]{input}, (rs, rowNum) -> new OrderDTO(
+            String sql = "";
+            if (!"".equals(searchDate.getFromDate()) && !"".equals(searchDate.getToDate())) {
+                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id AND modefined_date BETWEEN ? AND ?";
+                orderDetailDTO = jdbcTemplate.query(sql, new Object[]{searchDate.getFromDate(), searchDate.getToDate()}, (rs, rowNum) -> new OrderDetailDTO(
+                                rs.getLong("id"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                rs.getString("email"),
+                                rs.getString("phone"),
+                                rs.getString("address"),
+                                rs.getString("province"),
+                                rs.getString("district"),
+                                rs.getString("commune"),
+                                rs.getString("special_notes"),
+                                rs.getDate("modefined_date"),
+                                rs.getLong("total_price"),
+                                rs.getString("payment_method"),
+                                rs.getString("u.user_name"),
+                                rs.getString("p.name"),
+                                rs.getLong("od.unit_price"),
+                                rs.getInt("od.amount"),
+                                rs.getLong("status")
+                        )
+                );
+            } else {
+                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id";
+                orderDetailDTO = jdbcTemplate.query(sql, (rs, rowNum) -> new OrderDetailDTO(
+                                rs.getLong("id"),
+                                rs.getString("first_name"),
+                                rs.getString("last_name"),
+                                rs.getString("email"),
+                                rs.getString("phone"),
+                                rs.getString("address"),
+                                rs.getString("province"),
+                                rs.getString("district"),
+                                rs.getString("commune"),
+                                rs.getString("special_notes"),
+                                rs.getDate("modefined_date"),
+                                rs.getLong("total_price"),
+                                rs.getString("payment_method"),
+                                rs.getString("u.user_name"),
+                                rs.getString("p.name"),
+                                rs.getLong("od.unit_price"),
+                                rs.getInt("od.amount"),
+                                rs.getLong("status")
+                        )
+                );
+            }
+
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return orderDetailDTO;
+    }
+
+    public List<OrderDetailDTO> getOrderDTOById(Long input) {
+        List<OrderDetailDTO> orderDetailDTO = null;
+        try {
+            String sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id AND o.id = ?";
+            orderDetailDTO = jdbcTemplate.query(sql, new Object[]{input}, (rs, rowNum) -> new OrderDetailDTO(
                             rs.getLong("id"),
                             rs.getString("first_name"),
                             rs.getString("last_name"),
@@ -253,13 +312,15 @@ public class DataAccess {
                             rs.getString("payment_method"),
                             rs.getString("u.user_name"),
                             rs.getString("p.name"),
+                            rs.getLong("od.unit_price"),
+                            rs.getInt("od.amount"),
                             rs.getLong("status")
                     )
             );
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return orderDTO;
+        return orderDetailDTO;
     }
 
 //    public List<String> getListProductOder(){

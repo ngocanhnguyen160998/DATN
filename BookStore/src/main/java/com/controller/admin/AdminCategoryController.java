@@ -26,6 +26,7 @@ public class AdminCategoryController {
     private DataAccess dataAccess;
 
     public String searchInput = "";
+    public String message = "";
 
     @GetMapping("/table")
     public ModelAndView category(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
@@ -48,6 +49,8 @@ public class AdminCategoryController {
         model.addAttribute("page", pageRespone);
         model.addAttribute("input", search);
         model.addAttribute("search", new Search());
+        model.addAttribute("message", message);
+        message = "";
         return new ModelAndView("admin/category/table");
     }
 
@@ -62,12 +65,18 @@ public class AdminCategoryController {
         Category find = categoryService.getById(id).get();
         model.addAttribute("item", find);
         model.addAttribute("category", new Category());
+
         return new ModelAndView("admin/category/edit");
     }
 
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("category") Category category) {
-        categoryService.updateById(category.getId(), category);
+        try {
+            categoryService.updateById(category.getId(), category);
+            message = "Thông báo: Chỉnh sửa thông tin thể loại thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Chỉnh sửa thông tin thể loại thất bại!";
+        }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }
 
@@ -79,13 +88,23 @@ public class AdminCategoryController {
 
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("category") Category category) {
-        categoryService.insert(category);
+        try {
+            categoryService.insert(category);
+            message = "Thông báo: Thêm mới thông tin thể loại thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Thêm mới thông tin thể loại thất bại!";
+        }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView categoryDelete(@RequestParam(value = "id") Long id) {
-        categoryService.deleteById(id);
+        try {
+            categoryService.deleteById(id);
+            message = "Thông báo: Xóa thông tin thể loại thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Xóa thông tin thể loại thất bại!";
+        }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }
 }

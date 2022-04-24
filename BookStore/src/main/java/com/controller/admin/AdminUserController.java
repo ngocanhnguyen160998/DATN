@@ -32,6 +32,7 @@ public class AdminUserController {
     private RoleService roleService;
 
     public String searchInput = "";
+    public String message = "";
 
     @GetMapping("/table")
     public ModelAndView user(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
@@ -58,6 +59,8 @@ public class AdminUserController {
         model.addAttribute("page", pageResponse);
         model.addAttribute("search", new Search());
         model.addAttribute("input", search);
+        model.addAttribute("message", message);
+        message = "";
         return new ModelAndView("admin/user/table");
     }
 
@@ -84,7 +87,12 @@ public class AdminUserController {
 
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("user") User user) {
-        userService.updateById(user.getId(), user);
+        try {
+            userService.updateById(user.getId(), user);
+            message = "Thông báo: Chỉnh sửa thông tin người dùng thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Chỉnh sửa thông tin người dùng thất bại!";
+        }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
 
@@ -100,15 +108,21 @@ public class AdminUserController {
     public ModelAndView submitFormInsert(@ModelAttribute("user") User user) {
         try{
             userService.insert(user);
+            message = "Thông báo: Thêm mới thông tin người dùng thành công!";
         } catch (Exception ex) {
-
+            message = "Thông báo: Thêm mới thông tin người dùng thất bại!";
         }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView userDelete(@RequestParam(value = "id") Long id) {
-        userService.deleteById(id);
+        try{
+            userService.deleteById(id);
+            message = "Thông báo: Xóa thông tin người dùng thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Xóa thông tin người dùng thất bại!";
+        }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
 

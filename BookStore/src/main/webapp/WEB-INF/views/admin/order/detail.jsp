@@ -96,14 +96,11 @@
                                                                    pattern="dd-MM-yyyy HH:mm:ss"></fmt:formatDate></label></td>
                                     </tr>
                                     <tr>
-                                        <td><label>Thành Tiền:</label></td>
-                                        <td><label><fmt:formatNumber value="${item.totalPrice}"
-                                                                     type="number"></fmt:formatNumber>đ</label></td>
-                                    </tr>
-                                    <tr>
                                         <td><label>Tình Trạng:</label></td>
                                         <td>
                                             <label>
+                                                <c:if test="${item.status == 3}">Hoàn thành</c:if>
+                                                <c:if test="${item.status == 2}">Đã hủy</c:if>
                                                 <c:if test="${item.status == 1}">Đã xác nhận</c:if>
                                                 <c:if test="${item.status == 0}">Chưa xác nhận</c:if>
                                             </label>
@@ -113,10 +110,19 @@
                                         <td><label>Phương Thức Thanh Toán:</label></td>
                                         <td><label>${item.paymentMethod}</label></td>
                                     </tr>
-<%--                                    <tr>--%>
-<%--                                        <td><label>Danh Sách Sản Phẩm:</label></td>--%>
-<%--                                        <td><label>${item.listProduct}</label></td>--%>
-<%--                                    </tr>--%>
+                                    <tr>
+                                        <td style="vertical-align: top"><label>Danh Sách Sản Phẩm:</label></td>
+                                        <td>
+                                            <c:forEach var="lstItem" items="${lstItem}">
+                                                <label>${lstItem.productName} * ${lstItem.amount}</label><br/>
+                                            </c:forEach>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Thành Tiền:</label></td>
+                                        <td><label><fmt:formatNumber value="${item.totalPrice}"
+                                                                     type="number"></fmt:formatNumber>đ</label></td>
+                                    </tr>
                                 </table>
                             </div>
 

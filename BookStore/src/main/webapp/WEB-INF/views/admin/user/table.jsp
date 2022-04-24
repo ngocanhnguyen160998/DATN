@@ -76,9 +76,10 @@
                         <div class="col-12">
                             <div class="card">
                                 <!-- /.card-header -->
-
-
                                 <div class="card-body">
+                                    <c:if test="${not empty message}">
+                                        <label style="color: red; font-size: 17px">${message}</label>
+                                    </c:if>
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                         <tr style="text-align: center">

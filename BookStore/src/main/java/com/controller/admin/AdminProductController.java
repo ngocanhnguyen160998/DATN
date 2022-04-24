@@ -34,6 +34,7 @@ public class AdminProductController {
     private DataAccess dataAccess;
 
     public String searchInput = "";
+    public String message = "";
 
     @GetMapping("/table")
     public ModelAndView product(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search){
@@ -58,6 +59,8 @@ public class AdminProductController {
         model.addAttribute("page", pageResponse);
         model.addAttribute("input", search);
         model.addAttribute("search", new Search());
+        model.addAttribute("message", message);
+        message = "";
         return new ModelAndView("admin/product/table");
     }
 
@@ -83,7 +86,12 @@ public class AdminProductController {
 
     @PostMapping("/edit")
     public ModelAndView submitFormEdit(@ModelAttribute("product") Product product){
-        productService.updateById(product.getId(), product);
+        try {
+            productService.updateById(product.getId(), product);
+            message = "Thông báo: Chỉnh sửa thông tin sản phẩm thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Chỉnh sửa thông tin sản phẩm thất bại!";
+        }
         return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 
@@ -98,13 +106,23 @@ public class AdminProductController {
 
     @PostMapping("/insert")
     public ModelAndView submitFormInsert(@ModelAttribute("product") Product product){
-        productService.insert(product);
+        try {
+            productService.insert(product);
+            message = "Thông báo: Thêm mới thông tin sản phẩm thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Thêm mới thông tin sản phẩm thất bại!";
+        }
         return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 
     @RequestMapping(value = "/delete")
     public ModelAndView productDelete(@RequestParam(value = "id") Long id){
-        productService.deleteById(id);
+        try {
+            productService.deleteById(id);
+            message = "Thông báo: Xóa thông tin sản phẩm thành công!";
+        } catch (Exception ex) {
+            message = "Thông báo: Xóa thông tin sản phẩm thất bại!";
+        }
         return new ModelAndView("redirect:/admin/product/table?page=1&search=all");
     }
 }

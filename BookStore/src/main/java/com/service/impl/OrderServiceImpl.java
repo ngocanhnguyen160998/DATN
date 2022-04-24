@@ -26,12 +26,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Orders updateById(Long id) {
+    public Orders updateFinishById(Long id) {
+        Orders tmp = orderRepository.findById(id).get();
+        if (tmp == null) {
+            return null;
+        }
+        tmp.setStatus(3l);
+        return orderRepository.save(tmp);
+    }
+
+    @Override
+    public Orders updateConfirmById(Long id) {
         Orders tmp = orderRepository.findById(id).get();
         if (tmp == null) {
             return null;
         }
         tmp.setStatus(1l);
+        return orderRepository.save(tmp);
+    }
+
+    @Override
+    public Orders updateCancelById(Long id) {
+        Orders tmp = orderRepository.findById(id).get();
+        if (tmp == null) {
+            return null;
+        }
+        tmp.setStatus(2l);
         return orderRepository.save(tmp);
     }
 

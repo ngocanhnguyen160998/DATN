@@ -11,7 +11,11 @@ public interface OrderService {
 
     long count();
 
-    Orders updateById(Long id);
+    Orders updateConfirmById(Long id);
+
+    Orders updateCancelById(Long id);
+
+    Orders updateFinishById(Long id);
 
     long countByFullNameAndPhone(String input);
 

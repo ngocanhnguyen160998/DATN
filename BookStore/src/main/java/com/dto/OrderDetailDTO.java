@@ -2,7 +2,7 @@ package com.dto;
 
 import java.util.Date;
 
-public class OrderDTO {
+public class OrderDetailDTO {
     private Long id;
     private String firstName;
     private String lastName;
@@ -18,12 +18,14 @@ public class OrderDTO {
     private String paymentMethod;
     private String userName;
     private String productName;
+    private Long unitPrice;
+    private Integer amount;
     private Long status;
 
-    public OrderDTO() {
+    public OrderDetailDTO() {
     }
 
-    public OrderDTO(Long id, String firstName, String lastName, String email, String phone, String address, String province, String district, String commune, String specialNotes, Date modefinedDate, Long totalPrice, String paymentMethod, String userName, String productName, Long status) {
+    public OrderDetailDTO(Long id, String firstName, String lastName, String email, String phone, String address, String province, String district, String commune, String specialNotes, Date modefinedDate, Long totalPrice, String paymentMethod, String userName, String productName, Long unitPrice, Integer amount, Long status) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -39,6 +41,8 @@ public class OrderDTO {
         this.paymentMethod = paymentMethod;
         this.userName = userName;
         this.productName = productName;
+        this.unitPrice = unitPrice;
+        this.amount = amount;
         this.status = status;
     }
 
@@ -168,5 +172,21 @@ public class OrderDTO {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Long getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(Long unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 }

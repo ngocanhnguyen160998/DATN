@@ -1,19 +1,8 @@
 package com.model.response;
 
-import java.util.Date;
-
-public class Search {
-    private String input;
+public class SearchDate {
     private String fromDate;
     private String toDate;
-
-    public String getInput() {
-        return input;
-    }
-
-    public void setInput(String input) {
-        this.input = input;
-    }
 
     public String getFromDate() {
         return fromDate;
