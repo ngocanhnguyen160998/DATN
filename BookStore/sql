@@ -8,10 +8,14 @@ create table ROLE
     id   int(11)      not null primary key auto_increment,
     name varchar(100) not null unique
 );
-insert into ROLE(id, name)
-VALUES (1, 'ADMIN');
-insert into ROLE(id, name)
-VALUES (2, 'USER');
+
+ALTER TABLE ROLE
+    AUTO_INCREMENT = 100001;
+
+insert into ROLE(name)
+VALUES ('ADMIN');
+insert into ROLE(name)
+VALUES ('USER');
 
 create table USER
 (
@@ -24,10 +28,14 @@ create table USER
     role_id   int,
     constraint fk_1 foreign key (role_id) references role (id) ON DELETE CASCADE
 );
+
+ALTER TABLE USER
+    AUTO_INCREMENT = 100001;
+
 insert into USER(user_name, password, full_name, phone, email, role_id)
-values ('admin', 'admin', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 1);
+values ('admin', 'admin', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 100001);
 insert into USER(user_name, password, full_name, phone, email, role_id)
-values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 2);
+values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 100002);
 
 create table CATEGORY
 (
@@ -35,6 +43,10 @@ create table CATEGORY
     name nvarchar(20) unique,
     note nvarchar(100)
 );
+
+ALTER TABLE CATEGORY
+    AUTO_INCREMENT = 100001;
+
 insert into CATEGORY(name)
 VALUES ('Văn Học');
 insert into CATEGORY(name)
@@ -58,21 +70,24 @@ create table PRODUCT
     constraint fk_2 foreign key (category_id) references CATEGORY (id) ON DELETE CASCADE
 );
 
+ALTER TABLE PRODUCT
+    AUTO_INCREMENT = 100001;
+
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
 values ('Vượt Qua Sợ Hãi', '', 'Âm vang đồng quê là một chương trình nghệ thuật mới do Nhà hát Múa rối Việt Nam tổ chức, ra mắt vào tối 2-4 nhằm phục vụ các khán giả trong nước và quốc tế. Đến với chương trình, khán giả được thưởng thức sự kết hợp hài hòa giữa múa rối cạn và múa rối nước cùng những nét văn hóa đặc trưng của các dân tộc, vùng miền đất nước Việt Nam.
 
 Bên cạnh múa rối, nhiều tiết mục đậm chất văn hóa truyền thống dân tộc được trình diễn như trống hội, hát văn, hầu đồng... đan xen cùng những con rối mô phỏng các trò chơi dân gian như đánh đu, chọi gà, múa rồng... khiến các khán giả nhí vô cùng thích thú và chăm chú theo dõi. ',
-        'Truyện hay', 269000, 269000, 1, 'Anhnn');
+        'Truyện hay', 269000, 269000, 100001, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
-values ('Vượt Qua Sợ Hãi1', '', '', 'Truyện hay', 269000, 269000, 1, 'Anhnn');
+values ('Vượt Qua Sợ Hãi1', '', '', 'Truyện hay', 269000, 269000, 100001, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
-values ('Vượt Qua Sợ Hãi2', '', '', 'Truyện hay', 269000, 269000, 2, 'Anhnn');
+values ('Vượt Qua Sợ Hãi2', '', '', 'Truyện hay', 269000, 269000, 100002, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
-values ('Vượt Qua Sợ Hãi3', '', '', 'Truyện hay', 269000, 269000, 3, 'Anhnn');
+values ('Vượt Qua Sợ Hãi3', '', '', 'Truyện hay', 269000, 269000, 100003, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
-values ('Vượt Qua Sợ Hãi4', '', '', 'Truyện hay', 269000, 269000, 2, 'Anhnn');
+values ('Vượt Qua Sợ Hãi4', '', '', 'Truyện hay', 269000, 269000, 100002, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
-values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 1, 'Anhnn');
+values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 100001, 'Anhnn');
 
 create table WAREHOUSE
 (
@@ -85,18 +100,19 @@ create table WAREHOUSE
     constraint fk_22 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
 );
 
-insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (1, 15, 50, 100000, 'Sản phẩm tốt');
-insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (2, 22, 59, 50000, 'Sản phẩm xấu');
-insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (3, 24, 50, 60000, 'Sản phẩm đẹp');
-insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (4, 26, 50, 170000, 'Sản phẩm chất lượng');
-insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (5, 29, 50, 10000, 'Sản phẩm không phù hợp');
+ALTER TABLE WAREHOUSE
+    AUTO_INCREMENT = 100001;
 
-
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100001, 15, 50, 100000, 'Sản phẩm tốt');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100002, 22, 59, 50000, 'Sản phẩm xấu');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100003, 24, 50, 60000, 'Sản phẩm đẹp');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100004, 26, 50, 170000, 'Sản phẩm chất lượng');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100005, 29, 50, 10000, 'Sản phẩm không phù hợp');
 
 create table WHITELIST
 (
@@ -106,6 +122,9 @@ create table WHITELIST
     constraint fk_23 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE,
     constraint fk_24 foreign key (user_id) references USER (id) ON DELETE CASCADE
 );
+
+ALTER TABLE WHITELIST
+    AUTO_INCREMENT = 100001;
 
 create table CART
 (
@@ -119,6 +138,8 @@ create table CART
     constraint fk_6 foreign key (product_id) references PRODUCT (id) ON DELETE CASCADE
 );
 
+ALTER TABLE CART
+    AUTO_INCREMENT = 100001;
 
 create table ORDERS
 (
@@ -126,7 +147,7 @@ create table ORDERS
     first_name     nvarchar(100),
     last_name      nvarchar(100),
     email          varchar(100),
-    phone          varchar(100),
+    phone          nvarchar(100),
     address        nvarchar(100),
     province       nvarchar(100),
     district       nvarchar(100),
@@ -136,23 +157,67 @@ create table ORDERS
     total_price    int,
     payment_method varchar(20),
     user_id        int(100),
-    product_id     int(100),
     status         int(100) not null,
     constraint fk1232 foreign key (user_id) references user (id) ON DELETE CASCADE
 );
 
+ALTER TABLE ORDERS
+    AUTO_INCREMENT = 100001;
+
 insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
-                   special_notes, modefined_date, total_price, payment_method, user_id, product_id, status)
+                   special_notes, modefined_date, total_price, payment_method, user_id, status)
 values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
         'Thanh Trì', 'Văn Điển',
-        'Đặc biệt', '20220405', 500000, 'COD', 1, 1, 0);
+        'Đặc biệt', '20220405', 500000, 'COD', 100001, 0);
+insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
+                   special_notes, modefined_date, total_price, payment_method, user_id, status)
+values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
+        'Thanh Trì', 'Văn Điển',
+        'Đặc biệt', '20220405', 500000, 'COD', 100002, 0);
 
+create table ORDERS_DETAILS
+(
+    id         int(100) not null primary key auto_increment,
+    product_id int(100) not null,
+    order_id   int(100) not null,
+    unit_price int(100) not null,
+    amount     int(10)  not null,
+    constraint fk1233 foreign key (product_id) references product (id) ON DELETE CASCADE,
+    constraint fk1234 foreign key (order_id) references orders (id) ON DELETE CASCADE
+);
 
-# create table statistic
-# (
-#     id int(100) not null primary key auto_increment,
-#     product_id int(11) not null,
-#
-#
-# );
+INSERT INTO orders_details(product_id, order_id, unit_price, amount)
+VALUES (100001, 100001, 269000, 1);
+INSERT INTO orders_details(product_id, order_id, unit_price, amount)
+VALUES (100001, 100002, 269000, 2);
+INSERT INTO orders_details(product_id, order_id, unit_price, amount)
+VALUES (100002, 100002, 269000, 1);
+
+ALTER TABLE ORDERS_DETAILS
+    AUTO_INCREMENT = 100001;
+
+CREATE VIEW V_STATISTIC
+AS
+SELECT p.id,
+       p.name,
+       input_price * input_amount                                   input_money,
+       (input_amount - amount) * price                              output_money,
+       (input_amount - amount) * price - input_price * input_amount profit
+FROM product p,
+     warehouse w
+WHERE p.id = w.product_id;
+
+CREATE VIEW V_STATISTIC_PRODUCT
+AS
+    SELECT p.id,
+       p.name,
+       sum(od.amount * od.unit_price) total_price,
+        o.modefined_date
+FROM product p,
+     orders o,
+     orders_details od
+WHERE p.id = od.product_id
+AND o.id = od.order_id
+GROUP BY p.id;
+
 
