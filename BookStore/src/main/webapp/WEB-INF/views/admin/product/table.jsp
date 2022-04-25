@@ -78,18 +78,18 @@
                                     <c:if test="${not empty message}">
                                         <label style="color: red; font-size: 17px">${message}</label>
                                     </c:if>
-                                    <table id="example2" class="table table-bordered table-hover" >
+                                    <table id="example2" class="table table-bordered table-hover" style="width: 1900px" >
                                         <thead>
                                         <tr style="text-align: center">
                                             <th style="width: 70px">Mã SP</th>
-                                            <th style="width: 150px">Tên SP</th>
+                                            <th style="width: 250px">Tên SP</th>
                                             <th style="width: 200px">Hình Ảnh</th>
-                                            <th style="width: 300px">Thông Tin</th>
-                                            <th style="width: 100px">Mô tả</th>
-                                            <th style="width: 50px">Giá</th>
-                                            <th style="width: 50px">Giá KM</th>
-                                            <th style="width: 140px">Thể Loại</th>
-                                            <th style="width: 160px">Tác Giả</th>
+                                            <th style="width: 400px">Thông Tin</th>
+                                            <th style="width: 400px">Mô tả</th>
+                                            <th style="width: 100px">Giá</th>
+                                            <th style="width: 100px">Giá KM</th>
+                                            <th style="width: 180px">Thể Loại</th>
+                                            <th style="width: 200px">Tác Giả</th>
                                         </tr>
                                         </thead>
                                         <c:forEach var="item" items="${item}">
@@ -98,7 +98,7 @@
                                             <td>${item.id}</td>
                                             <td>${item.name}</td>
                                             <td><img src="<c:url value="${item.image}" />"> </td>
-                                            <td>${item.info}</td>
+                                            <td style="text-align: justify">${item.info}</td>
                                             <td>${item.descriptions}</td>
                                             <td><fmt:formatNumber value="${item.price}"
                                                                   type="number"></fmt:formatNumber>đ</td>
@@ -124,7 +124,7 @@
                                         </c:forEach>
                                     </table>
                                     <ul class="pagination" id="pagination"
-                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                        style="margin-top: 10px"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
                                     <input type="hidden" value="" id="search" name="search"/>
                                 </div>

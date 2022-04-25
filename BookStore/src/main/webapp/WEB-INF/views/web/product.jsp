@@ -103,7 +103,7 @@
                                                     class="fa fa-heart-o"></span></a>
                                         </div>
                                         <!-- product badge -->
-                                        <span class="aa-badge aa-sale" href="#">SALE!</span>
+<%--                                        <span class="aa-badge aa-sale" href="#">SALE!</span>--%>
                                     </li>
                                 </c:forEach>
                             </ul>

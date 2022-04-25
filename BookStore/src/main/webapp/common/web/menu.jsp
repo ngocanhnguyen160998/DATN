@@ -22,13 +22,13 @@
                     <!-- Left nav -->
                     <ul class="nav navbar-nav">
                         <li><a href="/">Trang chủ</a></li>
-                        <li><a href="/product?page=1&category-id=1">Văn Học </a></li>
-                        <li><a href="/product?page=1&category-id=2">Kinh Tế </a></li>
-                        <li><a href="/product?page=1&category-id=3">Kỹ Năng Sống </a></li>
-                        <li><a href="/product?page=1&category-id=4">Tâm Lý </a></li>
-                        <li><a href="/product?page=1&category-id=5">Giáo Dục </a></li>
-                        <li><a href="/product?page=1&category-id=6">Giới Trẻ </a></li>
-                        <li><a href="/product?page=1&category-id=7">Ngoại Ngữ </a></li>
+                        <li><a href="/product?page=1&category-id=100001">Văn Học </a></li>
+                        <li><a href="/product?page=1&category-id=100002">Kinh Tế </a></li>
+                        <li><a href="/product?page=1&category-id=100003">Kỹ Năng Sống </a></li>
+                        <li><a href="/product?page=1&category-id=100004">Giáo Dục </a></li>
+                        <li><a href="/product?page=1&category-id=100005">Tâm Lý </a></li>
+                        <li><a href="/product?page=1&category-id=100006">Giới Trẻ </a></li>
+                        <li><a href="/product?page=1&category-id=100007">Ngoại Ngữ </a></li>
                         <li><a href="/product?page=1">Xem Thêm <span class="caret"></span></a></li>
                         <li><a href="/contact">Liên hệ</a></li>
                     </ul>

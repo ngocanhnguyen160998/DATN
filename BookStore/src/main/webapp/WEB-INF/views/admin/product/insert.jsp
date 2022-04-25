@@ -182,7 +182,9 @@
             document.getElementById("categoryValidate").innerHTML = "";
         }
 
-
+        if (x === false) {
+            alert("Kiểm tra lại lỗi!")
+        }
 
         return x;
     }

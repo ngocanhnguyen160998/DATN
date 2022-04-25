@@ -122,7 +122,7 @@
                                         </c:forEach>
                                     </table>
                                     <ul class="pagination" id="pagination"
-                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                        style="margin-top: 10px"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
                                     <input type="hidden" value="" id="search" name="search"/>
                                 </div>
@@ -138,13 +138,6 @@
         </form>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

@@ -141,7 +141,9 @@
         } else {
             document.getElementById("inputPriceValidate").innerHTML = "";
         }
-
+        if (x === false) {
+            alert("Kiểm tra lại lỗi!")
+        }
         return x;
     }
 </script>

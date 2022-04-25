@@ -111,11 +111,15 @@
 <!-- Page specific script -->
 <script>
     function validate() {
+        let x = true;
         if (document.getElementById("name").value.trim() === "") {
             document.getElementById("nameValidate").innerHTML = "* Tên không không được để trống!";
-            return false;
+            x = false;
         }
-        return true;
+        if (x === false) {
+            alert("Kiểm tra lại lỗi!")
+        }
+        return x;
     }
 </script>
 </body>

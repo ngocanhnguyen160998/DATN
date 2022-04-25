@@ -53,7 +53,7 @@
                                 <div class="aa-promo-banner">
                                     <img src="<c:url value="/template/web/img/vanhoc/vanhoc1.jpg" />" alt="img">
                                     <div class="aa-prom-content">
-                                        <h4><a href="#">Văn Học</a></h4>
+                                        <h4><a href="/product?page=1&category-id=100001">Văn Học</a></h4>
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="aa-promo-banner">
                                         <img src="<c:url value="/template/web/img/kinhte/kinhte1.jpg" />" alt="img">
                                         <div class="aa-prom-content">
-                                            <h4><a href="#">Kinh Tế</a></h4>
+                                            <h4><a href="/product?page=1&category-id=100002">Kinh Tế</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                         <img src="<c:url value="/template/web/img/kynangsong/kynangsong1.jpg" />"
                                              alt="img">
                                         <div class="aa-prom-content">
-                                            <h4><a href="#">Kỹ Năng Sống</a></h4>
+                                            <h4><a href="/product?page=1&category-id=100003">Kỹ Năng Sống</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         <img src="<c:url value="/template/web/img/ngoaingu/ngoaingu1.jpg" />" alt="img"
                                              title="Ngoại Ngữ">
                                         <div class="aa-prom-content">
-                                            <h4><a href="#">Ngoại Ngữ</a></h4>
+                                            <h4><a href="/product?page=1&category-id=100007">Ngoại Ngữ</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                     <div class="aa-promo-banner">
                                         <img src="<c:url value="/template/web/img/tamly/tamly1.jpg" />" alt="img">
                                         <div class="aa-prom-content">
-                                            <h4><a href="#">Tâm Lý</a></h4>
+                                            <h4><a href="/product?page=1&category-id=100005">Tâm Lý</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -127,9 +127,8 @@
                                         <c:forEach var="item" items="${lstProductVanHoc}">
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                            src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                            alt="polo shirt img"></a>
+                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                            src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                     <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
@@ -173,7 +172,7 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                    <a class="aa-browse-btn" href="/product?page=1&category-id=100001" style="margin-left: 44%">Xem Thêm <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / men product category -->
@@ -183,9 +182,8 @@
                                         <c:forEach var="item" items="${lstProductKyNangSong}">
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                            src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                            alt="polo shirt img"></a>
+                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                            src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                     <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
@@ -229,7 +227,7 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                    <a class="aa-browse-btn" href="/product?page=1&category-id=100003" style="margin-left: 44%">Xem Thêm <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / women product category -->
@@ -239,9 +237,8 @@
                                         <c:forEach var="item" items="${lstProductGiaoDuc}">
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                            src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                            alt="polo shirt img"></a>
+                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                            src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                     <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
@@ -285,7 +282,7 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                    <a class="aa-browse-btn" href="/product?page=1&category-id=100004" style="margin-left: 44%">Xem Thêm <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / sports product category -->
@@ -295,9 +292,8 @@
                                         <c:forEach var="item" items="${lstProductKinhTe}">
                                             <li>
                                                 <figure>
-                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                            src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                            alt="polo shirt img"></a>
+                                                    <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                            src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                     <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
@@ -341,7 +337,7 @@
                                             </li>
                                         </c:forEach>
                                     </ul>
-                                    <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                    <a class="aa-browse-btn" href="/product?page=1&category-id=100002" style="margin-left: 44%">Xem Thêm <span
                                             class="fa fa-long-arrow-right"></span></a>
                                 </div>
                                 <!-- / electronic product category -->
@@ -391,9 +387,8 @@
                                     <c:forEach var="item" items="${lstProductHot}">
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                        src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                        alt="polo shirt img"></a>
+                                                <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                        src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                 <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
@@ -450,9 +445,8 @@
                                     <c:forEach var="item" items="${lstProductSale}">
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                        src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"
-                                                        alt="polo shirt img"></a>
+                                                <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                        src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                 <a class="aa-add-card-btn" href="#"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
@@ -509,8 +503,8 @@
                                     <c:forEach var="item" items="${lstProductNew}">
                                         <li>
                                             <figure>
-                                                <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                        src="<c:url value="/template/web/img/man/polo-shirt-2.png" />"></a>
+                                                <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
+                                                        src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
                                                 <a class="aa-add-card-btn" href="#"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>

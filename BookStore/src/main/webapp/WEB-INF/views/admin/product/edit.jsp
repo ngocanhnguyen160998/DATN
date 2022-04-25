@@ -52,43 +52,47 @@
                         <!-- jquery validation -->
                         <div class="card card-primary">
                             <!-- form start -->
-                            <form:form id="formSubmit" action="/admin/product/edit" modelAttribute="product" method="post" onsubmit = "return(validate());">
+                            <form:form id="formSubmit" action="/admin/product/edit" modelAttribute="product"
+                                       method="post" onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
                                         <form:label path="id">Mã SP</form:label>
-                                        <form:input path="id" class="form-control" value="${item.id}" readonly="true" />
+                                        <form:input path="id" class="form-control" value="${item.id}" readonly="true"/>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="name">Tên SP</form:label>
-                                        <form:input path="name" class="form-control" value="${item.name}" />
+                                        <form:input path="name" class="form-control" value="${item.name}"/>
                                         <label id="nameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="image">Hình Ảnh</form:label>
-                                        <form:input path="image" class="form-control" value="${item.image}" />
+                                        <form:input path="image" class="form-control" value="${item.image}"/>
                                         <label id="imageValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="info">Thông tin</form:label>
-                                        <form:input path="info" class="form-control" value="${item.info}" />
+                                        <form:input type="hidden" path="info" class="form-control" value="${item.info}"/>
+                                        <textarea id="infoTmp" class="form-control" onchange="textarea_info();" rows="5">${item.info}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="descriptions">Mô tả</form:label>
-                                        <form:input path="descriptions" class="form-control" value="${item.descriptions}" />
+                                        <form:input type="hidden" path="descriptions" value="${item.descriptions}"/>
+                                        <textarea id="descriptionsTmp" class="form-control" onchange="textarea_descriptions();" rows="5">${item.descriptions}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="price">Giá</form:label>
-                                        <form:input path="price" class="form-control" value="${item.price}" />
+                                        <form:input path="price" class="form-control" value="${item.price}"/>
                                         <label id="priceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="salePrice">Giá KM</form:label>
-                                        <form:input path="salePrice" class="form-control" value="${item.salePrice}" />
+                                        <form:input path="salePrice" class="form-control" value="${item.salePrice}"/>
                                         <label id="salePriceValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
                                         <form:label path="categoryId">Thể Loại</form:label>
-                                        <form:select path="categoryId" class="form-control" name="category" id="category">
+                                        <form:select path="categoryId" class="form-control" name="category"
+                                                     id="category">
                                             <option value="${chooseCategory.id}">${chooseCategory.name}</option>
                                             <c:forEach var="categoryItem" items="${categoryItem}">
                                                 <option value="${categoryItem.id}">${categoryItem.name}</option>
@@ -97,13 +101,14 @@
                                     </div>
                                     <div class="form-group">
                                         <form:label path="author">Tác Giả</form:label>
-                                        <form:input path="author" class="form-control" value="${item.author}" />
+                                        <form:input path="author" class="form-control" value="${item.author}"/>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" href="">Chỉnh Sửa</button>
-                                    <a href="/admin/product/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                    <a href="/admin/product/table?page=1&search=all" class="btn btn-primary"
+                                       title="Trở về">
                                         Trở về
                                     </a>
                                 </div>
@@ -138,16 +143,28 @@
 <script src="<c:url value="/template/admin/dist/js/demo.js" />"></script>
 <!-- Page specific script -->
 <script>
+    let descriptionsTmp = document.getElementById('descriptionsTmp').value;
+    function textarea_descriptions() {
+        descriptionsTmp = document.getElementById('descriptionsTmp').value;
+        document.getElementById("descriptions").value = descriptionsTmp;
+    }
+
+    let infoTmp = document.getElementById('infoTmp').value;
+    function textarea_info() {
+        infoTmp = document.getElementById('infoTmp').value;
+        document.getElementById("info").value = infoTmp;
+    }
+
     function validate() {
         let x = true;
-        if(document.getElementById("name").value.trim() === "" ) {
+        if (document.getElementById("name").value.trim() === "") {
             document.getElementById("nameValidate").innerHTML = "* Tên không hợp lệ!";
             x = false;
         } else {
             document.getElementById("nameValidate").innerHTML = "";
         }
 
-        if(document.getElementById("image").value.trim() === "" ) {
+        if (document.getElementById("image").value.trim() === "") {
             document.getElementById("imageValidate").innerHTML = "* Hình ảnh không hợp lệ!";
             x = false;
         } else {
@@ -155,7 +172,7 @@
         }
 
         let regexPrice = /^\d{1,15}$/;
-        if(document.getElementById("price").value.trim() === "" ) {
+        if (document.getElementById("price").value.trim() === "") {
             document.getElementById("priceValidate").innerHTML = "* Giá không được để trống!";
             x = false;
         } else if (!document.getElementById("price").value.trim().match(regexPrice)) {
@@ -171,6 +188,10 @@
             x = false;
         } else {
             document.getElementById("salePriceValidate").innerHTML = "";
+        }
+
+        if (x === false) {
+            alert("Kiểm tra lại lỗi!")
         }
 
         return x;

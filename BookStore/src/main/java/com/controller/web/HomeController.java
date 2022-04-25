@@ -32,10 +32,10 @@ public class HomeController {
         List<Product> lstProductSale = productService.get8ProductSale();
         List<Product> lstProductNew = productService.get8ProductNew();
         List<Product> lstProductHot = productService.get8ProductHot();
-        List<Product> lstProductVanHoc = productService.get8ProductByCategory("1");
-        List<Product> lstProductKyNangSong = productService.get8ProductByCategory("2");
-        List<Product> lstProductGiaoDuc = productService.get8ProductByCategory("3");
-        List<Product> lstProductKinhTe = productService.get8ProductByCategory("4");
+        List<Product> lstProductVanHoc = productService.get8ProductByCategory("100001");
+        List<Product> lstProductKinhTe = productService.get8ProductByCategory("100002");
+        List<Product> lstProductKyNangSong = productService.get8ProductByCategory("100003");
+        List<Product> lstProductGiaoDuc = productService.get8ProductByCategory("100004");
 
         model.addAttribute("lstProductSale", lstProductSale);
         model.addAttribute("lstProductNew", lstProductNew);
