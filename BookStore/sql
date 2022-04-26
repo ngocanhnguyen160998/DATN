@@ -54,7 +54,7 @@ VALUES ('Kinh Tế');
 insert into CATEGORY(name)
 VALUES ('Kỹ Năng Sống');
 insert into CATEGORY(name)
-VALUES ('Truyện Thiếu Nhi');
+VALUES ('Giáo Dục');
 
 create table PRODUCT
 (
@@ -88,6 +88,8 @@ insert into PRODUCT(name, image, info, descriptions, price, sale_price, category
 values ('Vượt Qua Sợ Hãi4', '', '', 'Truyện hay', 269000, 269000, 100002, 'Anhnn');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
 values ('Vượt Qua Sợ Hãi5', '', '', 'Truyện hay', 269000, 269000, 100001, 'Anhnn');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Vượt Qua Sợ Hãi6', '', '', 'Truyện hay', 269000, 269000, 100001, 'Anhnn');
 
 create table WAREHOUSE
 (
@@ -209,15 +211,17 @@ WHERE p.id = w.product_id;
 
 CREATE VIEW V_STATISTIC_PRODUCT
 AS
-    SELECT p.id,
+SELECT p.id,
        p.name,
-       sum(od.amount * od.unit_price) total_price,
-        o.modefined_date
+       od.amount * od.unit_price total_price,
+       o.modefined_date
 FROM product p,
      orders o,
      orders_details od
 WHERE p.id = od.product_id
-AND o.id = od.order_id
-GROUP BY p.id;
+  AND o.id = od.order_id
+  AND o.status = 3
+ORDER BY o.modefined_date DESC;
+
 
 

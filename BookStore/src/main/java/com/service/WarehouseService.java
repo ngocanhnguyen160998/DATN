@@ -23,4 +23,6 @@ public interface WarehouseService {
     long count();
 
     long countByLikeNameProduct(String name);
+
+    Optional<Warehouse> getByProductId(Long productId);
 }

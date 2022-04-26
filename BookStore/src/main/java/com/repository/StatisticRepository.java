@@ -16,4 +16,13 @@ public interface StatisticRepository extends JpaRepository<Statistic, Long> {
 
     @Query("SELECT count(s.id) FROM Statistic s WHERE s.name LIKE %?1% ORDER BY s.id DESC")
     Long countByNameProduct(String input);
+
+    @Query("SELECT SUM(s.inputMoney) FROM Statistic s")
+    Long sumInputMoney();
+
+    @Query("SELECT SUM(s.outputMoney) FROM Statistic s")
+    Long sumOutMoney();
+
+    @Query("SELECT SUM(s.profit) FROM Statistic s")
+    Long sumProfit();
 }

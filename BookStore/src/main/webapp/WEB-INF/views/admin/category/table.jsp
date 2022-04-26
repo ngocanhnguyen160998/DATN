@@ -108,7 +108,7 @@
                                     </tr>
                                     </c:forEach>
                                 </table>
-                                <ul class="pagination" id="pagination" style="margin-top: 10px"></ul>
+                                <ul class="pagination" id="pagination"></ul>
                                 <input type="hidden" value="" id="page" name="page"/>
                                 <input type="hidden" value="" id="search" name="search"/>
                             </div>

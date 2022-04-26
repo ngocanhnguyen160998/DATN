@@ -34,4 +34,19 @@ public class StatisticServiceImpl implements StatisticService {
     public Long countByNameProduct(String input) {
         return statisticRepository.countByNameProduct(input);
     }
+
+    @Override
+    public Long sumInputMoney() {
+        return statisticRepository.sumInputMoney();
+    }
+
+    @Override
+    public Long sumOutMoney() {
+        return statisticRepository.sumOutMoney();
+    }
+
+    @Override
+    public Long sumProfit() {
+        return statisticRepository.sumProfit();
+    }
 }

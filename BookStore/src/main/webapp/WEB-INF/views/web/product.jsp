@@ -64,7 +64,7 @@
                                     <li>
                                         <figure>
                                             <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
-                                                    src="<c:url value="/template/web/img/women/girl-1.png" />"></a>
+                                                    src="<c:url value="${item.image}" />"></a>
                                             <a class="aa-add-card-btn" href="#"><span
                                                     class="fa fa-shopping-cart"></span>Thêm
                                                 Giỏ Hàng</a>

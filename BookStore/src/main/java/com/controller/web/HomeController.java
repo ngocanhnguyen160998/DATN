@@ -70,12 +70,12 @@ public class HomeController {
     @PostMapping("/account")
     public ModelAndView submmitFormAccount(@ModelAttribute("user") User user){
         try{
-            user.setRoleId(2l);
+            user.setRoleId(100002l);
             userService.insert(user);
+            return new ModelAndView("redirect:/");
         } catch (Exception ex) {
-
+            return new ModelAndView("web/account");
         }
-        return new ModelAndView("redirect:/");
     }
 
     @RequestMapping("/checkout")

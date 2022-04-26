@@ -14,6 +14,16 @@ public class StatisticProduct {
     private Long totalPrice;
     private Date modefinedDate;
 
+    public StatisticProduct() {
+    }
+
+    public StatisticProduct(Long id, String name, Long totalPrice, Date modefinedDate) {
+        this.id = id;
+        this.name = name;
+        this.totalPrice = totalPrice;
+        this.modefinedDate = modefinedDate;
+    }
+
     public Long getId() {
         return id;
     }

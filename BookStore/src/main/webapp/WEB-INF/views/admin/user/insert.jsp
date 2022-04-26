@@ -56,7 +56,7 @@
                                        onsubmit="return(validate());">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <form:label path="userName">Tên Tài Khoản</form:label>
+                                        <form:label path="userName">Tài Khoản</form:label>
                                         <form:input path="userName" class="form-control"/>
                                         <label id="userNameValidate" style="color: red;"></label>
                                     </div>

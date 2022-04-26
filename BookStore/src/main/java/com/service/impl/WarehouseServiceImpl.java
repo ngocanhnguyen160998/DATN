@@ -87,4 +87,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     public long countByLikeNameProduct(String name) {
         return warehouseRepository.countByNameLike(name);
     }
+
+    @Override
+    public Optional<Warehouse> getByProductId(Long productId) {
+        return warehouseRepository.findByProductId(productId);
+    }
 }

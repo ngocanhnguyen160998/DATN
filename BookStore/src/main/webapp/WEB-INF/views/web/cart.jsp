@@ -62,7 +62,7 @@
                                         <td><a href="#"><img src="<c:url value="/template/web/img/man/polo-shirt-1.png" />" alt="img"></a></td>
                                         <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
                                         <td>$250</td>
-                                        <td><input class="aa-cart-quantity" type="number" value="1"></td>
+                                        <td><input class="aa-cart-quantity" type="number" value="1" min="1" max="20"></td>
                                         <td>$250</td>
                                     </tr>
                                     <tr>

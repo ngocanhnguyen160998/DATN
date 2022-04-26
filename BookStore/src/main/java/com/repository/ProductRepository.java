@@ -33,4 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query(value = "SELECT * FROM product WHERE category_id = :categoryId  ORDER BY id DESC LIMIT 8", nativeQuery = true)
     List<Product> find8ProductByCategoryId(@Param("categoryId") String categoryId);
+
+    @Query(value = "SELECT * FROM product WHERE category_id = :categoryId AND id <> :productId  ORDER BY RAND() DESC LIMIT 8", nativeQuery = true)
+    List<Product> find8ProductRandomByCategoryId(@Param("categoryId") String categoryId, @Param("productId") String productId);
 }

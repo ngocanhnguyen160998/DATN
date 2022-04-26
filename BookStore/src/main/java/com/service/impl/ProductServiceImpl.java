@@ -94,4 +94,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> get8ProductByCategory(String categoryId) {
         return productRepository.find8ProductByCategoryId(categoryId);
     }
+
+    @Override
+    public List<Product> get8ProductRandomByCategory(String categoryId, String productId) {
+        return productRepository.find8ProductRandomByCategoryId(categoryId, productId);
+    }
 }

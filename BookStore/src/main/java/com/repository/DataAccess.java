@@ -5,6 +5,8 @@ import com.dto.ProductDTO;
 import com.dto.UserDTO;
 import com.dto.WarehouseDTO;
 import com.model.Category;
+import com.model.StatisticProduct;
+import com.model.response.Search;
 import com.model.response.SearchDate;
 import com.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DataAccess {
@@ -76,6 +79,28 @@ public class DataAccess {
             ex.getMessage();
         }
         return new PageImpl<>(lst, pageable, productService.count());
+    }
+
+    public ProductDTO findProductDTOById(Long id) {
+        ProductDTO productDTO = null;
+        try {
+            String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.id = ?";
+            productDTO = jdbcTemplate.queryForObject(sql, new Object[]{id}, (rs, rowNum) -> new ProductDTO(
+                            rs.getLong("id"),
+                            rs.getString("name"),
+                            rs.getString("image"),
+                            rs.getString("info"),
+                            rs.getString("descriptions"),
+                            rs.getLong("price"),
+                            rs.getLong("sale_price"),
+                            rs.getString("c.name"),
+                            rs.getString("author")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return productDTO;
     }
 
     public WarehouseDTO findWarehouseById(Long id) {
@@ -321,6 +346,69 @@ public class DataAccess {
             ex.getMessage();
         }
         return orderDetailDTO;
+    }
+
+    public Page<StatisticProduct> getStatisticProductByCondition(Search search, Pageable pageable) {
+        List<StatisticProduct> lst = null;
+        String sql = "";
+        try {
+            if (!"".equals(search.getInput()) && "".equals(search.getFromDate())) {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{"%" + search.getInput() + "%"}, (rs, rowNum) -> new StatisticProduct(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getLong("total_price"),
+                                rs.getDate("modefined_date")
+                        )
+                );
+            } else if ("".equals(search.getInput()) && !"".equals(search.getFromDate())) {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{search.getFromDate(), search.getToDate()}, (rs, rowNum) -> new StatisticProduct(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getLong("total_price"),
+                                rs.getDate("modefined_date")
+                        )
+                );
+            } else {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, (rs, rowNum) -> new StatisticProduct(
+                                rs.getLong("id"),
+                                rs.getString("name"),
+                                rs.getLong("total_price"),
+                                rs.getDate("modefined_date")
+                        )
+                );
+            }
+
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, countStatisticProductByCondition(search));
+    }
+
+    public Long countStatisticProductByCondition(Search search) {
+        List<Long> tmp = null;
+        Long count = 0l;
+        String sql = "";
+        try {
+            if (!"".equals(search.getInput()) && "".equals(search.getFromDate())) {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ?";
+                tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%"}, Long.class);
+            } else if ("".equals(search.getInput()) && !"".equals(search.getFromDate())) {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ?";
+                tmp = jdbcTemplate.queryForList(sql, new Object[]{search.getFromDate(), search.getToDate()}, Long.class);
+            } else {
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ?";
+                tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, Long.class);
+            }
+            if(tmp != null && tmp.size() == 1) {
+                count = tmp.get(0);
+            }
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return count;
     }
 
 //    public List<String> getListProductOder(){

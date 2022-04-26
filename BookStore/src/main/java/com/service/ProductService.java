@@ -32,4 +32,6 @@ public interface ProductService {
     List<Product> get8ProductNew();
 
     List<Product> get8ProductByCategory(String categoryId);
+
+    List<Product> get8ProductRandomByCategory(String categoryId, String productId);
 }

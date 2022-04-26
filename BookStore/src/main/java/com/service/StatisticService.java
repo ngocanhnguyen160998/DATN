@@ -13,4 +13,10 @@ public interface StatisticService {
     List<Statistic> getByNameProduct(String input, Pageable pageable);
 
     Long countByNameProduct(String input);
+
+    Long sumInputMoney();
+
+    Long sumOutMoney();
+
+    Long sumProfit();
 }

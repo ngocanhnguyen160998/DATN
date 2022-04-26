@@ -73,7 +73,7 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <label>* Thống kê doanh thu tổng</label>
+                                    <label>Thống kê doanh thu tổng</label>
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                         <tr style="text-align: center">
@@ -98,10 +98,15 @@
                                         </tr>
                                         </c:forEach>
                                     </table>
-                                    <ul class="pagination" id="pagination"
-                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                    <ul class="pagination" id="pagination"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
                                     <input type="hidden" value="" id="search" name="search"/>
+                                    <label>* Tổng số tiền nhập hàng: <fmt:formatNumber value="${inputMoney}"
+                                                                                       type="number"></fmt:formatNumber>đ</label><br/>
+                                    <label>* Tổng số tiền thu được: <fmt:formatNumber value="${outputMoney}"
+                                                                                      type="number"></fmt:formatNumber>đ</label><br/>
+                                    <label>* Tổng lợi nhuận: <fmt:formatNumber value="${profit}"
+                                                                               type="number"></fmt:formatNumber>đ</label>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

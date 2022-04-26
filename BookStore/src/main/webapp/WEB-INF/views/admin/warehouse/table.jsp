@@ -73,11 +73,11 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body">
+                                <div class="card-body" style="overflow: auto">
                                     <c:if test="${not empty message}">
                                         <label style="color: red; font-size: 17px">${message}</label>
                                     </c:if>
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="example2" class="table table-bordered table-hover" style="width: 150%">
                                         <thead>
                                         <tr style="text-align: center">
                                             <th style="width: 80px">Mã Kho</th>
@@ -121,8 +121,7 @@
                                         </tr>
                                         </c:forEach>
                                     </table>
-                                    <ul class="pagination" id="pagination"
-                                        style="margin-top: 10px"></ul>
+                                    <ul class="pagination" id="pagination"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
                                     <input type="hidden" value="" id="search" name="search"/>
                                 </div>

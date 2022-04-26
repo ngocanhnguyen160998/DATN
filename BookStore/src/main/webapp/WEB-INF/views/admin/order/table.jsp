@@ -67,7 +67,6 @@
                         <button class="btn btn-primary" type="submit">
                             Xuất Excel
                         </button>
-                        <label id="validateSearchDate" style="color: red; margin-left: 15px"></label>
                     </div>
                 </form:form>
             </div>
@@ -83,6 +82,7 @@
                     </div>
                 </form:form>
             </div>
+            <label id="validateSearchDate" style="color: red; margin-top: 10px"></label>
         </div>
         <form action="<c:url value='/admin/order/table'/>" id="formSubmit" method="get">
             <!-- Main content -->
@@ -92,15 +92,14 @@
                         <div class="col-12">
                             <div class="card">
                                 <!-- /.card-header -->
-                                <div class="card-body">
-
-                                    <table id="example2" class="table table-bordered table-hover">
+                                <div class="card-body" style="overflow: auto">
+                                    <table id="example2" class="table table-bordered table-hover" style="width: 150%">
                                         <thead>
                                         <tr style="text-align: center">
                                             <th style="width: 75px">Mã ĐH</th>
                                             <th style="width: 180px">Họ Tên</th>
                                             <th style="width: 110px">SĐT</th>
-                                            <th>Địa Chỉ</th>
+                                            <th style="width: 400px">Địa Chỉ</th>
                                             <th style="width: 160px">Ngày Tạo</th>
                                             <th style="width: 150px">Tổng Tiền</th>
                                             <th style="width: 130px">Tình trạng</th>
@@ -122,7 +121,7 @@
                                                 <c:if test="${item.status == 1}">Đã xác nhận</c:if>
                                                 <c:if test="${item.status == 0}">Chưa xác nhận</c:if>
                                             </td>
-                                            <td style="width: 270px; text-align: right">
+                                            <td style="width: 240px; text-align: right">
                                                 <c:if test="${item.status == 1}">
                                                     <c:url var="confirm" value="/admin/order/finish">
                                                         <c:param name="id" value="${item.id}"/>

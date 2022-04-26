@@ -4,6 +4,7 @@ import com.model.StatisticProduct;
 import com.model.response.PageResponse;
 import com.model.response.Search;
 import com.model.response.SearchDate;
+import com.repository.DataAccess;
 import com.service.StatisticProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +23,9 @@ public class AdminStatisticProductController {
     @Autowired
     private StatisticProductService statisticProductService;
 
+    @Autowired
+    private DataAccess dataAccess;
+
     public String searchInput = "";
     public Search search = new Search();
 
@@ -35,17 +39,8 @@ public class AdminStatisticProductController {
         List<StatisticProduct> lst;
 
         if (!"all".equals(search)) {
-            lst = null;
-//            if (!"".equals(this.search.getInput()) && "".equals(this.search.getFromDate())) {
-//                lst = statisticProductService.getByNameProduct(this.search, pageable);
-//                pageResponse.setTotalItem(statisticProductService.countByNameProduct(this.search));
-//            } else if (!"".equals(this.search.getFromDate()) && !"".equals(this.search.getToDate()) && "".equals(this.search.getInput())) {
-//                lst = statisticProductService.getByDate(this.search, pageable);
-//                pageResponse.setTotalItem(statisticProductService.countByDate(this.search));
-//            } else {
-//                lst = statisticProductService.getByNameProductAndDate(this.search, pageable);
-//                pageResponse.setTotalItem(statisticProductService.countByNameProduct(this.search));
-//            }
+            lst = dataAccess.getStatisticProductByCondition(this.search, pageable).getContent();
+            pageResponse.setTotalItem(dataAccess.countStatisticProductByCondition(this.search));
         } else {
             lst = statisticProductService.getAll(pageable);
             pageResponse.setTotalItem(statisticProductService.count());

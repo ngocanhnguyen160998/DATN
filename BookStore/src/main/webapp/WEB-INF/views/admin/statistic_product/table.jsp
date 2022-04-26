@@ -68,11 +68,10 @@
                         <button class="btn btn-navbar" type="submit">
                             <i class="fas fa-search fa-fw"></i>
                         </button>
-                        <label id="validateSearchDate" style="color: red; margin-left: 15px;"></label>
                     </div>
-
                 </form:form>
             </div>
+            <label id="validateSearchDate" style="color: red; margin-top: 10px; float: left"></label>
         </div>
         <form action="<c:url value='/admin/statistic-product/table'/>" id="formSubmit" method="get">
             <!-- Main content -->
@@ -102,8 +101,7 @@
                                         </tr>
                                         </c:forEach>
                                     </table>
-                                    <ul class="pagination" id="pagination"
-                                        style="margin-left: 30%; margin-top: 10px"></ul>
+                                    <ul class="pagination" id="pagination"></ul>
                                     <input type="hidden" value="" id="page" name="page"/>
                                     <input type="hidden" value="" id="search" name="search"/>
                                 </div>
@@ -119,13 +117,6 @@
         </form>
         <!-- /.content -->
     </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

@@ -40,8 +40,15 @@ public class AdminStatisticController {
             lst = statisticService.getAll(pageable);
             pageResponse.setTotalItem(statisticService.count());
         }
-
         pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+
+        Long inputMoney = statisticService.sumInputMoney();
+        Long outputMoney = statisticService.sumOutMoney();
+        Long profit = statisticService.sumProfit();
+
+        model.addAttribute("inputMoney", inputMoney);
+        model.addAttribute("outputMoney", outputMoney);
+        model.addAttribute("profit", profit);
         model.addAttribute("item", lst);
         model.addAttribute("page", pageResponse);
         model.addAttribute("input", search);
