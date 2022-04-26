@@ -14,6 +14,13 @@ public class Warehouse {
     private Integer inputAmount;
     private String note;
 
+    public Warehouse() {
+    }
+
+    public Warehouse(Integer amount) {
+        this.amount = amount;
+    }
+
     public Long getId() {
         return id;
     }

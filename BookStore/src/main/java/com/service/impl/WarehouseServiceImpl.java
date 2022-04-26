@@ -20,6 +20,11 @@ public class WarehouseServiceImpl implements WarehouseService {
     private WarehouseRepository warehouseRepository;
 
     @Override
+    public List<Warehouse> getAll() {
+        return warehouseRepository.findAll();
+    }
+
+    @Override
     public List<Warehouse> getAll(Pageable pageable) {
         return warehouseRepository.findAll(pageable).getContent();
     }

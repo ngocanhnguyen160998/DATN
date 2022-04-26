@@ -39,12 +39,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Thống kê doanh thu theo sản phẩm</h1>
+                        <h1>Thống kê doanh thu theo ngày</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="/admin/home">Trang chủ</a></li>
-                            <li class="breadcrumb-item active">Thống kê doanh thu theo sản phẩm</li>
+                            <li class="breadcrumb-item active">Thống kê doanh thu theo ngày</li>
                         </ol>
                     </div>
                 </div>
@@ -82,12 +82,13 @@
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <label>* Thống kê doanh thu tổng</label>
+                                    <label>Thống kê doanh thu theo ngày</label>
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
                                         <tr style="text-align: center">
                                             <th style="width: 75px">Mã SP</th>
                                             <th style="width: 180px">Tên SP</th>
+                                            <th style="width: 180px">Ngày Lập</th>
                                             <th style="width: 160px">Số Tiền Thu Được</th>
                                         </tr>
                                         </thead>
@@ -96,6 +97,7 @@
                                         <tr>
                                             <td>${item.id}</td>
                                             <td>${item.name}</td>
+                                            <td><fmt:formatDate value="${item.modefinedDate}" pattern="dd-MM-yyyy HH:mm:ss"></fmt:formatDate></td>
                                             <td><fmt:formatNumber value="${item.totalPrice}"
                                                                   type="number"></fmt:formatNumber>đ</td>
                                         </tr>

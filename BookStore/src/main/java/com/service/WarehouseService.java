@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WarehouseService {
+    List<Warehouse> getAll();
+
     List<Warehouse> getAll(Pageable pageable);
 
     Optional<Warehouse> getById(Long id);

@@ -1,11 +1,9 @@
 package com.controller.web;
 
-import com.dto.ProductDTO;
 import com.model.Category;
 import com.model.Product;
 import com.model.Warehouse;
 import com.model.response.Search;
-import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
 import com.service.WarehouseService;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ProductDetailController {
@@ -35,7 +32,7 @@ public class ProductDetailController {
     public ModelAndView product(Model model, @RequestParam("id") Long id) {
         Product product = productService.getById(id).get();
         Category category = categoryService.getById(product.getCategoryId()).get();
-        Warehouse warehouse = warehouseService.getByProductId(product.getId()).get();
+        Warehouse warehouse = warehouseService.getByProductId(product.getId()).orElse(new Warehouse(0));
         List<Product> productRelated = productService.get8ProductRandomByCategory(String.valueOf(product.getCategoryId()), String.valueOf(product.getId()));
         model.addAttribute("item", product);
         model.addAttribute("category", category);
