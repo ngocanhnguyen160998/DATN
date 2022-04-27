@@ -65,8 +65,8 @@
                                         <label id="nameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="image">Hình Ảnh</form:label>
-                                        <form:input path="image" class="form-control" value="${item.image}"/>
+                                        <form:label path="image">Hình Ảnh</form:label><br/>
+                                        <div style="vertical-align: top"><form:input path="image" type="file" value="${item.image}"/></div>
                                         <label id="imageValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">

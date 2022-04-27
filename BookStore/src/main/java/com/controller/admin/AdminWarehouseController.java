@@ -32,6 +32,7 @@ public class AdminWarehouseController {
 
     public String searchInput = "";
     public String message = "";
+    public String alert = "";
 
     @GetMapping("/table")
     public ModelAndView warehouse(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
@@ -58,7 +59,9 @@ public class AdminWarehouseController {
         model.addAttribute("input", search);
         model.addAttribute("search", new Search());
         model.addAttribute("message", message);
+        model.addAttribute("alert", alert);
         message = "";
+        alert = "";
         return new ModelAndView("admin/warehouse/table");
     }
 
@@ -84,8 +87,10 @@ public class AdminWarehouseController {
         try {
             warehouseService.updateById(warehouseDTO.getId(), warehouseDTO);
             message = "Thông báo: Chỉnh sửa thông tin kho hàng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Chỉnh sửa thông tin kho hàng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
@@ -106,8 +111,10 @@ public class AdminWarehouseController {
         try {
             warehouseService.inputWarehouseById(warehouseDTO.getId(), warehouseDTO);
             message = "Thông báo: Nhập số lượng sản phẩm thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Nhập số lượng sản phẩm thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
@@ -126,8 +133,10 @@ public class AdminWarehouseController {
         try {
             warehouseService.insert(warehouse);
             message = "Thông báo: Thêm mới thông tin kho hàng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Thêm mới thông tin kho hàng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }
@@ -137,8 +146,10 @@ public class AdminWarehouseController {
         try {
             warehouseService.deleteById(id);
             message = "Thông báo: Xóa thông tin kho hàng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Xóa thông tin kho hàng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/warehouse/table?page=1&search=all");
     }

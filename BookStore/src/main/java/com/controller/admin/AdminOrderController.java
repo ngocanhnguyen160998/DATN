@@ -2,11 +2,14 @@ package com.controller.admin;
 
 import com.dto.OrderDetailDTO;
 import com.model.Orders;
+import com.model.OrdersDetails;
 import com.model.response.PageResponse;
 import com.model.response.Search;
 import com.model.response.SearchDate;
 import com.repository.DataAccess;
 import com.service.OrderService;
+import com.service.OrdersDetailsService;
+import com.service.WarehouseService;
 import com.util.ExportExcel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +31,12 @@ public class AdminOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrdersDetailsService ordersDetailsService;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Autowired
     private DataAccess dataAccess;
@@ -78,6 +87,10 @@ public class AdminOrderController {
 
     @RequestMapping("/cancel")
     public ModelAndView cancel(@RequestParam(value = "id") Long id){
+        List<OrdersDetails> lst = ordersDetailsService.getAllByOrderId(id);
+        for (OrdersDetails od : lst) {
+            warehouseService.updateAmountByProductId(od.getProductId(), od.getAmount());
+        }
         orderService.updateCancelById(id);
         return new ModelAndView("redirect:/admin/order/table?page=1&search=all");
     }

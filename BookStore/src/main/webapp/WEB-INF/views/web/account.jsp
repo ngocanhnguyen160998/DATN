@@ -51,8 +51,8 @@
                                             <form:label path="userName">Tên Tài Khoản</form:label><label id="userNameValidate" style="color: red;"></label>
                                             <form:input path="userName" class="form-control"/>
                                         </div>
-                                        <div class="form-group">
-                                            <form:label path="password">Mật Khẩu</form:label><label id="passwordValidate" style="color: red;"></label>
+                                        <div class="form-group">red
+                                            <form:label path="password">Mật Khẩu</form:label><label id="passwordValidate" style="color: ;"></label>
                                             <form:password path="password" class="form-control"/>
                                         </div>
                                         <div class="form-group">

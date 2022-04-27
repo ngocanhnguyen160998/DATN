@@ -97,4 +97,19 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Optional<Warehouse> getByProductId(Long productId) {
         return warehouseRepository.findByProductId(productId);
     }
+
+    @Override
+    public Warehouse updateAmountByProductId(Long id, int amountAdd) {
+        Warehouse warehouse = warehouseRepository.findByProductId(id).get();
+
+        if (warehouse == null) {
+            return null;
+        }
+
+        warehouse.setAmount(warehouse.getAmount() + amountAdd);
+        warehouse.setInputAmount(warehouse.getInputAmount());
+        warehouse.setInputPrice(warehouse.getInputPrice());
+        warehouse.setNote(warehouse.getNote());
+        return warehouse;
+    }
 }

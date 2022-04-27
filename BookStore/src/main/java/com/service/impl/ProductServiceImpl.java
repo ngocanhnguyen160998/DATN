@@ -11,6 +11,8 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    private final String UPLOAD = "/image/";
+
     @Autowired
     private ProductRepository productRepository;
 
@@ -31,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
             return null;
         }
         tmp.setName(product.getName());
-        tmp.setImage(product.getImage());
+        tmp.setImage(UPLOAD + product.getImage());
         tmp.setInfo(product.getInfo());
         tmp.setDescriptions(product.getDescriptions());
         tmp.setPrice(product.getPrice());
@@ -49,6 +51,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product insert(Product product) {
+        product.setImage(UPLOAD + product.getImage());
         return productRepository.save(product);
     }
 
@@ -69,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public long countByCategoryId(String categoryId) {
-        if("".equals(categoryId)) {
+        if ("".equals(categoryId)) {
             return productRepository.count();
         }
         return productRepository.countByCategoryId(categoryId);

@@ -50,48 +50,34 @@
                     <div class="panel panel-default aa-checkout-billaddress">
                       <div class="panel-heading">
                         <h4 class="panel-title">
-                          <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                            Shippping Address
+                          <a>
+                            Địa Chỉ Giao Hàng
                           </a>
                         </h4>
                       </div>
-                      <div id="collapseFour" class="panel-collapse collapse">
+                      <div id="collapseFour">
                         <div class="panel-body">
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="First Name*">
+                                <input type="text" placeholder="Họ Đệm*">
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Last Name*">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Company name">
+                                <input type="text" placeholder="Tên*">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="email" placeholder="Email Address*">
+                                <input type="email" placeholder="Email*">
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="tel" placeholder="Phone*">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="aa-checkout-single-bill">
-                                <textarea cols="8" rows="3">Address*</textarea>
+                                <input type="tel" placeholder="Số Điện Thoại*">
                               </div>
                             </div>
                           </div>
@@ -121,33 +107,30 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Appartment, Suite etc.">
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="City / Town*">
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="District*">
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Postcode / ZIP*">
+                                <input type="text" placeholder="Quận/Huyện*">
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <textarea cols="8" rows="3">Special Notes</textarea>
+                                <input type="text" placeholder="Xã/Phường*">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="aa-checkout-single-bill">
+                                <input type="text" placeholder="Địa Chỉ*">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <div class="aa-checkout-single-bill">
+                                <textarea cols="8" rows="3">Ghi Chú</textarea>
                               </div>
                             </div>
                           </div>
@@ -164,8 +147,8 @@
                     <table class="table table-responsive">
                       <thead>
                       <tr>
-                        <th>Product</th>
-                        <th>Total</th>
+                        <th>Sản Phẩm</th>
+                        <th>Thành Tiền</th>
                       </tr>
                       </thead>
                       <tbody>
@@ -174,36 +157,18 @@
                         <td>$150</td>
                       </tr>
                       <tr>
-                        <td>Polo T-Shirt <strong> x  1</strong></td>
-                        <td>$250</td>
-                      </tr>
-                      <tr>
-                        <td>Shoes <strong> x  1</strong></td>
-                        <td>$350</td>
-                      </tr>
-                      </tbody>
-                      <tfoot>
-                      <tr>
-                        <th>Subtotal</th>
-                        <td>$750</td>
-                      </tr>
-                      <tr>
-                        <th>Tax</th>
-                        <td>$35</td>
-                      </tr>
-                      <tr>
-                        <th>Total</th>
+                        <th>Tổng</th>
                         <td>$785</td>
                       </tr>
                       </tfoot>
                     </table>
                   </div>
-                  <h4>Payment Method</h4>
+                  <h4>Phương Thức Thanh Toán</h4>
                   <div class="aa-payment-method">
-                    <label for="cashdelivery"><input type="radio" id="cashdelivery" name="optionsRadios"> Cash on Delivery </label>
-                    <label for="paypal"><input type="radio" id="paypal" name="optionsRadios" checked> Via Paypal </label>
+                    <label for="cashdelivery"><input type="radio" id="cashdelivery" name="optionsRadios" checked> Tiền Mặt </label>
+                    <label for="paypal"><input type="radio" id="paypal" name="optionsRadios" > Paypal </label>
                     <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" border="0" alt="PayPal Acceptance Mark">
-                    <input type="submit" value="Place Order" class="aa-browse-btn">
+                    <input type="submit" value="Đặt Hàng" class="aa-browse-btn">
                   </div>
                 </div>
               </div>

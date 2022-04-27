@@ -3,8 +3,8 @@ package com.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "whitelist")
-public class WhiteList {
+@Table(name = "wishlist")
+public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -50,37 +50,23 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th>Product</th>
-                                        <th>Price</th>
-                                        <th>Stock Status</th>
+                                        <th>Sản Phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Tình Trạng</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                        <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
-                                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                        <td>$250</td>
-                                        <td>In Stock</td>
-                                        <td><a href="#" class="aa-add-to-cart-btn">Add To Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                        <td><a href="#"><img src="img/man/polo-shirt-2.png" alt="img"></a></td>
-                                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                        <td>$150</td>
-                                        <td>In Stock</td>
-                                        <td><a href="#" class="aa-add-to-cart-btn">Add To Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                        <td><a href="#"><img src="img/man/polo-shirt-3.png" alt="img"></a></td>
-                                        <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                        <td>$50</td>
-                                        <td>In Stock</td>
-                                        <td><a href="#" class="aa-add-to-cart-btn">Add To Cart</a></td>
-                                    </tr>
+<%--                                    <c:forEach var="item" items="">--%>
+                                        <tr>
+                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="#"><img src="<c:url value="/image/hai-van-dam-duoi-bien.png" />" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="#">OK CON DE</a></td>
+                                            <td>$250</td>
+                                            <td>In Stock</td>
+                                            <td><a href="#" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
+                                        </tr>
+<%--                                    </c:forEach>--%>
                                     </tbody>
                                 </table>
                             </div>

@@ -33,13 +33,13 @@ public class AdminUserController {
 
     public String searchInput = "";
     public String message = "";
+    public String alert = "";
 
     @GetMapping("/table")
     public ModelAndView user(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
         PageResponse pageResponse = new PageResponse();
         pageResponse.setLimit(9);
         pageResponse.setPage(page);
-
 
         Pageable pageable = PageRequest.of(page - 1, 9);
         List<UserDTO> lst;
@@ -60,7 +60,9 @@ public class AdminUserController {
         model.addAttribute("search", new Search());
         model.addAttribute("input", search);
         model.addAttribute("message", message);
+        model.addAttribute("alert", alert);
         message = "";
+        alert = "";
         return new ModelAndView("admin/user/table");
     }
 
@@ -90,8 +92,10 @@ public class AdminUserController {
         try {
             userService.updateById(user.getId(), user);
             message = "Thông báo: Chỉnh sửa thông tin người dùng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Chỉnh sửa thông tin người dùng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
@@ -109,8 +113,10 @@ public class AdminUserController {
         try{
             userService.insert(user);
             message = "Thông báo: Thêm mới thông tin người dùng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Thêm mới thông tin người dùng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }
@@ -120,8 +126,10 @@ public class AdminUserController {
         try{
             userService.deleteById(id);
             message = "Thông báo: Xóa thông tin người dùng thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Xóa thông tin người dùng thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/user/table?page=1&search=all");
     }

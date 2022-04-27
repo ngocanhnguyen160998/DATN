@@ -27,6 +27,7 @@ public class AdminCategoryController {
 
     public String searchInput = "";
     public String message = "";
+    public String alert = "";
 
     @GetMapping("/table")
     public ModelAndView category(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
@@ -50,7 +51,9 @@ public class AdminCategoryController {
         model.addAttribute("input", search);
         model.addAttribute("search", new Search());
         model.addAttribute("message", message);
+        model.addAttribute("alert", alert);
         message = "";
+        alert = "";
         return new ModelAndView("admin/category/table");
     }
 
@@ -74,8 +77,10 @@ public class AdminCategoryController {
         try {
             categoryService.updateById(category.getId(), category);
             message = "Thông báo: Chỉnh sửa thông tin thể loại thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Chỉnh sửa thông tin thể loại thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }
@@ -91,8 +96,10 @@ public class AdminCategoryController {
         try {
             categoryService.insert(category);
             message = "Thông báo: Thêm mới thông tin thể loại thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Thêm mới thông tin thể loại thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }
@@ -102,8 +109,10 @@ public class AdminCategoryController {
         try {
             categoryService.deleteById(id);
             message = "Thông báo: Xóa thông tin thể loại thành công!";
+            alert = "success";
         } catch (Exception ex) {
             message = "Thông báo: Xóa thông tin thể loại thất bại!";
+            alert = "danger";
         }
         return new ModelAndView("redirect:/admin/category/table?page=1&search=all");
     }

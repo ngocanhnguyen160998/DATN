@@ -16,18 +16,19 @@
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4>Login or Register</h4>
-                <form class="aa-login-form" action="">
-                    <label for="">Tài khoản<span>*</span></label>
-                    <input type="text" placeholder="Tài khoản">
-                    <label for="">Mật khẩu<span>*</span></label>
-                    <input type="password" placeholder="Mật khẩu">
-                    <button class="aa-browse-btn" type="submit">Đăng nhập</button>
+                <h4>Đăng Nhập</h4>
+<%--                <form:form class="aa-login-form" modelAttribute="login" action=""--%>
+<%--                           method="post">--%>
+<%--                    <form:label path="userName">Tài khoản<span>*</span></form:label>--%>
+<%--                    <form:input path="userName" type="text" ></form:input>--%>
+<%--                    <form:label path="password">Mật khẩu<span>*</span></form:label>--%>
+<%--                    <form:input path="password" type="password" ></form:input>--%>
+<%--                    <button class="aa-browse-btn" type="submit">Đăng nhập</button>--%>
 
-                    <div class="aa-register-now">
-                        Don't have an account?<a href="account.html">Đăng ký!</a>
-                    </div>
-                </form>
+<%--                    <div class="aa-register-now">--%>
+<%--                        <a href="/account">Đăng ký!</a>--%>
+<%--                    </div>--%>
+<%--                </form:form>--%>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -98,10 +98,10 @@
                                 <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary" id="btnUpdate">Chỉnh Sửa</button>
+                                    <a href="/admin/user/table?page=1&search=all" class="btn btn-primary" title="Trở về">
+                                        Trở về
+                                    </a>
                                 </div>
-                                <a href="/admin/user/table?page=1&search=all" class="btn btn-primary" title="Trở về">
-                                    Trở về
-                                </a>
                             </form:form>
                         </div>
                         <!-- /.card -->

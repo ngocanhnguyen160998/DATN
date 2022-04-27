@@ -27,4 +27,6 @@ public interface WarehouseService {
     long countByLikeNameProduct(String name);
 
     Optional<Warehouse> getByProductId(Long productId);
+
+    Warehouse updateAmountByProductId(Long id, int amountAdd);
 }

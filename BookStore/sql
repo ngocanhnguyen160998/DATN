@@ -176,7 +176,7 @@ values (100004, 26, 50, 170000, 'Sản phẩm chất lượng');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
 values (100005, 29, 50, 10000, 'Sản phẩm không phù hợp');
 
-create table WHITELIST
+create table WISHLIST
 (
     id         int(10) not null auto_increment primary key,
     product_id int(11) not null,
@@ -185,7 +185,7 @@ create table WHITELIST
     constraint fk_24 foreign key (user_id) references USER (id) ON DELETE CASCADE
 );
 
-ALTER TABLE WHITELIST
+ALTER TABLE WISHLIST
     AUTO_INCREMENT = 100001;
 
 create table CART

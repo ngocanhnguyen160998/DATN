@@ -76,7 +76,9 @@
                             <div class="card" >
                                 <div class="card-body" style="overflow: auto">
                                     <c:if test="${not empty message}">
-                                        <label style="color: red; font-size: 17px">${message}</label>
+                                        <div class="alert alert-${alert}" style=" width: 1900px">
+                                            <div style="font-size: 17px;">${message}</div>
+                                        </div>
                                     </c:if>
                                     <table id="example2" class="table table-bordered table-hover" style="width: 1900px" >
                                         <thead>
@@ -99,7 +101,7 @@
                                             <td>${item.name}</td>
                                             <td><img src="<c:url value="${item.image}" />"> </td>
                                             <td style="text-align: justify">${item.info}</td>
-                                            <td>${item.descriptions}</td>
+                                            <td style="text-align: justify">${item.descriptions}</td>
                                             <td><fmt:formatNumber value="${item.price}"
                                                                   type="number"></fmt:formatNumber>đ</td>
                                             <td><fmt:formatNumber value="${item.salePrice}"

@@ -78,7 +78,9 @@
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <c:if test="${not empty message}">
-                                        <label style="color: red; font-size: 17px">${message}</label>
+                                        <div class="alert alert-${alert}" style=" width: 100%px">
+                                            <div style="font-size: 17px;">${message}</div>
+                                        </div>
                                     </c:if>
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>

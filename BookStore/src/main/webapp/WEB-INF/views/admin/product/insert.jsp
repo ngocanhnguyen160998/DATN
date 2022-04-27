@@ -61,9 +61,8 @@
                                         <label id="nameValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">
-                                        <form:label path="image">Hình Ảnh</form:label>
-                                        <form:input path="image" class="form-control" type="file"/>
-                                            <%--                                        <input  type="file" class="col-xs-10 col-sm-5" id="image" onchange="uploadFileImage()"  />--%>
+                                        <form:label path="image">Hình Ảnh</form:label><br/>
+                                        <form:input path="image" type="file" accept="image/*"/><br/>
                                         <label id="imageValidate" style="color: red;"></label>
                                     </div>
                                     <div class="form-group">

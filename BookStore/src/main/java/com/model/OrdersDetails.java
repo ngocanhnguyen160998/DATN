@@ -3,13 +3,13 @@ package com.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "orders_details")
 public class OrdersDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String productId;
-    private String orderId;
+    private Long productId;
+    private Long orderId;
     private Long unitPrice;
     private Integer amount;
 
@@ -21,19 +21,19 @@ public class OrdersDetails {
         this.id = id;
     }
 
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public String getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(String orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

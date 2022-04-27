@@ -56,6 +56,10 @@ public class HomeController {
 
     @RequestMapping("/wishlist")
     public ModelAndView wishlist(Model model){
+        
+
+
+
         model.addAttribute("search", new Search());
         return new ModelAndView("web/wishlist");
     }
