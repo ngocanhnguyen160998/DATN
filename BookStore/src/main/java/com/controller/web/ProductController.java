@@ -2,11 +2,14 @@ package com.controller.web;
 
 import com.dto.ProductDTO;
 import com.model.Category;
+import com.model.User;
+import com.model.request.AuthRequest;
 import com.model.response.PageResponse;
 import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
+import com.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -32,8 +36,9 @@ public class ProductController {
     public String searchInput = "";
 
     @GetMapping("/product")
-    public ModelAndView product(Model model, @RequestParam(value = "category-id", required = false) String categoryId, @RequestParam(value = "search", required = false) String search, @RequestParam("page") int page) {
+    public ModelAndView product(Model model, HttpServletRequest request, @RequestParam(value = "category-id", required = false) String categoryId, @RequestParam(value = "search", required = false) String search, @RequestParam("page") int page) {
         try {
+            User user = (User) SessionUtil.getSession(request, "USER");
             PageResponse pageResponse = new PageResponse();
             pageResponse.setLimit(9);
             pageResponse.setPage(page);
@@ -55,6 +60,8 @@ public class ProductController {
             }
             pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
+            model.addAttribute("userSession", user);
+            model.addAttribute("authRequest", new AuthRequest());
             model.addAttribute("item", lst);
             model.addAttribute("itemCategory", lstCategory);
             model.addAttribute("search", new Search());
@@ -67,7 +74,7 @@ public class ProductController {
 
     }
 
-    @PostMapping({"/product","/", "/contact"})
+    @PostMapping("/product")
     public ModelAndView submitFormSearch(@ModelAttribute("search") Search search) {
         searchInput = search.getInput().trim();
         return new ModelAndView("redirect:/product?page=1&search=" + ("".equals(search.getInput().trim()) ? "all" : search.getInput().trim()));

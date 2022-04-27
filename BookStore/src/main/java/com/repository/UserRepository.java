@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT COUNT(u.id) FROM USER u WHERE user_name LIKE %:userName%", nativeQuery = true)
     Long countByUserNameLike(@Param("userName") String userName);
+
+    Optional<User> findByUserNameAndPassword(String userName, String password);
 }

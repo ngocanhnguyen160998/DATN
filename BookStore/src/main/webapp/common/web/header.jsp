@@ -50,11 +50,21 @@
                         <!-- / header top left -->
                         <div class="aa-header-top-right">
                             <ul class="aa-head-top-nav-right">
-                                <li><a href="/account">Đăng Ký</a></li>
-                                <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
-                                <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
-                                <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
-                                <li><a href="/login-modal" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                                <c:if test="${userSession == null}">
+                                    <li><a href="/account">Đăng Ký</a></li>
+                                    <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
+                                    <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
+                                    <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
+                                    <li><a href="/login-modal" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                                </c:if>
+                                <c:if test="${userSession != null}">
+<%--                                    <li><a href="/account">Đăng Ký</a></li>--%>
+                                    <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
+                                    <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
+                                    <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
+                                    <li><a href="/" data-toggle="modal" data-target="#login-modal">Đăng xuất</a></li>
+                                    <li><a data-toggle="modal" data-target="">Hello, ${userSession.userName}</a></li>
+                                </c:if>
                             </ul>
                         </div>
                     </div>

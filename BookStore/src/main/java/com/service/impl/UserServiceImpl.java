@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
     public Long countByUserNameLike(String userName) {
         return userRepository.countByUserNameLike(userName);
     }
+
+    @Override
+    public Optional<User> getByUserNameAndPassword(String userName, String password) {
+        return userRepository.findByUserNameAndPassword(userName, password);
+    }
 }

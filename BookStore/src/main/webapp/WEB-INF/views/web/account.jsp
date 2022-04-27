@@ -43,6 +43,11 @@
                 <div class="aa-myaccount-area">
                     <div class="row">
                         <div class="col-md-6">
+                            <c:if test="${not empty message}">
+                                <div class="alert alert-danger" style=" width: 100%">
+                                    <div style="font-size: 17px;">${message}</div>
+                                </div>
+                            </c:if>
                             <div class="aa-myaccount-register">
                                 <h4 style="text-align: center">Đăng Ký Tài Khoản</h4>
                                 <form:form id="formSubmit" action="/account" modelAttribute="user" method="post" onsubmit = "return(validate());">
@@ -51,8 +56,8 @@
                                             <form:label path="userName">Tên Tài Khoản</form:label><label id="userNameValidate" style="color: red;"></label>
                                             <form:input path="userName" class="form-control"/>
                                         </div>
-                                        <div class="form-group">red
-                                            <form:label path="password">Mật Khẩu</form:label><label id="passwordValidate" style="color: ;"></label>
+                                        <div class="form-group">
+                                            <form:label path="password">Mật Khẩu</form:label><label id="passwordValidate" style="color: red;"></label>
                                             <form:password path="password" class="form-control"/>
                                         </div>
                                         <div class="form-group">
