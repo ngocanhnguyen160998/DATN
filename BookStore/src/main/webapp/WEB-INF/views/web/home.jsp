@@ -166,7 +166,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="#" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -221,7 +221,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="#" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -276,7 +276,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="#" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -331,7 +331,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="#" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -426,7 +426,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="#" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
@@ -484,7 +484,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="#" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
@@ -542,7 +542,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="#" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->

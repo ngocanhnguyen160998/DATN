@@ -21,6 +21,12 @@ public class Warehouse {
         this.amount = amount;
     }
 
+    public Warehouse(Long productId, Integer inputPrice, Integer inputAmount) {
+        this.productId = productId;
+        this.inputPrice = inputPrice;
+        this.inputAmount = inputAmount;
+    }
+
     public Long getId() {
         return id;
     }

@@ -41,4 +41,13 @@ public class LoginController {
         }
         return new ModelAndView("redirect:" + url);
     }
+
+    @RequestMapping("/logout")
+    public ModelAndView logout(HttpServletRequest request) {
+        User user = (User) SessionUtil.getSession(request, "USER");
+        if (user != null) {
+            SessionUtil.removeSession(request, "USER");
+        }
+        return new ModelAndView("redirect:/");
+    }
 }

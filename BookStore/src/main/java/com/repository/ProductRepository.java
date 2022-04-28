@@ -7,11 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     List<Product> findAllByOrderByIdAsc();
+
+    @Query(value = "SELECT * FROM PRODUCT WHERE name = :name", nativeQuery = true)
+    Optional<Product> findByName(@Param("name") String name);
 
     @Query(value = "SELECT p.* FROM PRODUCT p LEFT JOIN WAREHOUSE w ON p.id = w.product_id WHERE w.id IS NULL", nativeQuery = true)
     List<Product> getAllProductNotExistWarehouse();

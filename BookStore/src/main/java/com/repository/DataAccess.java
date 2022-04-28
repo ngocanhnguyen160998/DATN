@@ -1,9 +1,6 @@
 package com.repository;
 
-import com.dto.OrderDetailDTO;
-import com.dto.ProductDTO;
-import com.dto.UserDTO;
-import com.dto.WarehouseDTO;
+import com.dto.*;
 import com.model.Category;
 import com.model.StatisticProduct;
 import com.model.response.Search;
@@ -402,7 +399,7 @@ public class DataAccess {
                 sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ?";
                 tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, Long.class);
             }
-            if(tmp != null && tmp.size() == 1) {
+            if (tmp != null && tmp.size() == 1) {
                 count = tmp.get(0);
             }
         } catch (Exception ex) {
@@ -411,8 +408,37 @@ public class DataAccess {
         return count;
     }
 
-//    public List<String> getListProductOder(){
-//
-//    }
+    public Long countWishlistByUserId(String userId) {
+        List<Long> tmp = null;
+        Long count = 0l;
+        try {
+            String sql = "SELECT COUNT(p.id) FROM wishlist w, product p, warehouse wh WHERE w.product_id = p.id AND p.id = wh.product_id AND w.user_id = ?";
+            tmp = jdbcTemplate.queryForList(sql, new Object[]{userId}, Long.class);
+            if (tmp != null && tmp.size() == 1) {
+                count = tmp.get(0);
+            }
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return count;
+    }
 
+    public Page<WishlistDTO> getListWishlistByUserId(String userId, Pageable pageable) {
+        List<WishlistDTO> lst = null;
+        try {
+            String sql = "SELECT p.id, p.name, p.image, wh.amount, p.price, p.sale_price FROM wishlist w, product p, warehouse wh WHERE w.product_id = p.id AND p.id = wh.product_id AND w.user_id = ? ORDER BY w.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            lst = jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> new WishlistDTO(
+                            rs.getLong("p.id"),
+                            rs.getString("p.name"),
+                            rs.getString("p.image"),
+                            rs.getInt("wh.amount"),
+                            rs.getLong("p.price"),
+                            rs.getLong("p.sale_price")
+                    )
+            );
+        } catch (Exception ex) {
+            ex.getMessage();
+        }
+        return new PageImpl<>(lst, pageable, countWishlistByUserId(userId));
+    }
 }

@@ -1,4 +1,4 @@
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +7,15 @@
     <title>Admin Page</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<c:url value="/template/admin/plugins/fontawesome-free/css/all.min.css" />">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="<c:url value="/template/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />">
+    <link rel="stylesheet"
+          href="<c:url value="/template/admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css" />">
     <!-- iCheck -->
     <link rel="stylesheet" href="<c:url value="/template/admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css"/>">
     <!-- JQVMap -->
@@ -21,7 +23,8 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<c:url value="/template/admin/dist/css/adminlte.min.css" />">
     <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="<c:url value="/template/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />">
+    <link rel="stylesheet"
+          href="<c:url value="/template/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="<c:url value="/template/admin/plugins/daterangepicker/daterangepicker.css" />">
     <!-- summernote -->
@@ -32,7 +35,8 @@
 
     <!-- Preloader -->
     <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__shake" src="<c:url value="/template/admin/dist/img/AdminLTELogo.png" />" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__shake" src="<c:url value="/template/admin/dist/img/AdminLTELogo.png" />"
+             alt="AdminLTELogo" height="60" width="60">
     </div>
 
     <!-- Navbar -->
@@ -42,12 +46,12 @@
     <!-- Main Sidebar Container -->
     <%@ include file="/common/admin/menu.jsp" %>
 
-        <!-- /.content -->
-    </div>
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+    <!-- /.content -->
+</div>
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 

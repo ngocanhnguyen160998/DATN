@@ -48,12 +48,11 @@
                         </ol>
                     </div>
                 </div>
-            </div><!-- /.container-fluid -->
+            </div>
         </section>
         <div class="card-footer">
             <div class="form-inline" style="float: left">
                 <form:form id="formSearch" action="/admin/order/export-excel" modelAttribute="searchDate" method="post" onsubmit = "return(validate());">
-
                     Từ ngày:
                     <form:input path="fromDate" class="form-control form-control-sidebar" type="date" title="Từ ngày"
                                 placeholder="Tìm kiếm" value=""

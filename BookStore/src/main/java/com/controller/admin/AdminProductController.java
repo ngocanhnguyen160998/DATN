@@ -3,11 +3,13 @@ package com.controller.admin;
 import com.dto.ProductDTO;
 import com.model.Category;
 import com.model.Product;
+import com.model.Warehouse;
 import com.model.response.PageResponse;
 import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.CategoryService;
 import com.service.ProductService;
+import com.service.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +33,9 @@ public class AdminProductController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Autowired
     private DataAccess dataAccess;
@@ -115,6 +120,8 @@ public class AdminProductController {
     public ModelAndView submitFormInsert(@ModelAttribute("product") Product product) {
         try {
             productService.insert(product);
+            Product tmp = productService.getByName(product.getName()).get();
+            warehouseService.insert(new Warehouse(tmp.getId(), 999999, 0));
             message = "Thông báo: Thêm mới thông tin sản phẩm thành công!";
             alert = "success";
         } catch (Exception ex) {

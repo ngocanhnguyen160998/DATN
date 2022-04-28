@@ -75,7 +75,7 @@
                             <div class="card">
                                 <div class="card-body" style="overflow: auto">
                                     <c:if test="${not empty message}">
-                                        <div class="alert alert-${alert}" style=" width: 150%px">
+                                        <div class="alert alert-${alert}" style=" width: 150%">
                                             <div style="font-size: 17px;">${message}</div>
                                         </div>
                                     </c:if>

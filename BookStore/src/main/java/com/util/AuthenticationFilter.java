@@ -4,6 +4,7 @@ import com.model.Role;
 import com.model.User;
 import com.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/admin/home"})
+@Component
 public class AuthenticationFilter implements Filter {
 
     @Autowired
@@ -35,14 +36,15 @@ public class AuthenticationFilter implements Filter {
                 role = roleService.getById(user.getRoleId()).get();
                 if ("ADMIN".equals(role.getName())) {
                     filterChain.doFilter(servletRequest, servletResponse);
-                } else if ("USER".equals(role.getName())) {
+                }
+                else if ("USER".equals(role.getName())) {
                     response.sendRedirect((request.getContextPath() + "/"));
                 }
             } else {
                 filterChain.doFilter(servletRequest, servletResponse);
             }
         } else {
-            response.sendRedirect((request.getContextPath() + "/account"));
+            response.sendRedirect((request.getContextPath() + "/"));
         }
     }
 

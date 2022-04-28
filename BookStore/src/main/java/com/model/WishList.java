@@ -11,6 +11,14 @@ public class WishList {
     private Long productId;
     private Long userId;
 
+    public WishList() {
+    }
+
+    public WishList(Long productId, Long userId) {
+        this.productId = productId;
+        this.userId = userId;
+    }
+
     public Long getId() {
         return id;
     }

@@ -43,32 +43,65 @@
             <div class="col-md-12">
                 <div class="cart-view-area">
                     <div class="cart-view-table aa-wishlist-table">
-                        <form action="">
+                        <form action="<c:url value='/wishlist'/>" id="formSubmit" method="get">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th>Sản Phẩm</th>
-                                        <th>Giá</th>
-                                        <th>Tình Trạng</th>
-                                        <th></th>
+                                        <th style="width: 50px"></th>
+                                        <th style="width: 200px"></th>
+                                        <th style="width: 350px">Sản Phẩm</th>
+                                        <th style="width: 200px">Giá</th>
+                                        <th style="width: 120px">Tình Trạng</th>
+                                        <th style="width: 200px"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-<%--                                    <c:forEach var="item" items="">--%>
+                                    <c:forEach var="item" items="${item}">
                                         <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="<c:url value="/image/hai-van-dam-duoi-bien.png" />" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">OK CON DE</a></td>
-                                            <td>$250</td>
-                                            <td>In Stock</td>
+                                            <td><a class="remove" href="/wishlist?page=1&id=${item.productId}&action=delete"><fa class="fa fa-close"></fa></a></td>
+                                            <td><a href="product-detail?id=${item.productId}"><img src="<c:url value="${item.image}" />" alt="img"></a></td>
+                                            <td><a class="aa-cart-title" href="product-detail?id=${item.productId}">${item.productName}</a></td>
+                                            <td>
+                                                <c:if test="${item.salePrice == 0}">
+                                                        <span class="aa-product-price">
+                                                            <fmt:formatNumber
+                                                                    value="${item.price}"
+                                                                    type="number"></fmt:formatNumber>đ</span>
+                                                </c:if>
+                                                <c:if test="${item.salePrice == null}">
+                                                        <span class="aa-product-price">
+                                                            <fmt:formatNumber
+                                                                    value="${item.price}"
+                                                                    type="number"></fmt:formatNumber>đ</span>
+                                                </c:if>
+                                                <c:if test="${item.price <= item.salePrice}">
+                                                        <span class="aa-product-price">
+                                                            <fmt:formatNumber
+                                                                    value="${item.price}"
+                                                                    type="number"></fmt:formatNumber>đ</span>
+                                                </c:if>
+                                                <c:if test="${item.salePrice > 0}">
+                                                    <c:if test="${item.price > item.salePrice}">
+                                                        <span class="aa-product-price">
+                                                            <fmt:formatNumber
+                                                                    value="${item.salePrice}"
+                                                                    type="number"></fmt:formatNumber>đ</span>
+                                                    </c:if>
+                                                </c:if>
+
+                                            </td>
+                                            <td>
+                                                <c:if test="${item.amount > 0}">Còn hàng</c:if>
+                                                <c:if test="${item.amount <= 0}">Hết hàng</c:if>
+                                            </td>
                                             <td><a href="#" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
                                         </tr>
-<%--                                    </c:forEach>--%>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
+                                <ul class="pagination" id="pagination"></ul>
+                                <input type="hidden" value="" id="page" name="page"/>
                             </div>
                         </form>
                     </div>
@@ -85,6 +118,23 @@
 <!-- / footer -->
 <%@ include file="/WEB-INF/views/web/login_modal.jsp" %>
 
+<script>
+    var totalPages = ${page.totalPage};
+    var currentPage = ${page.page};
+    $(function () {
+        window.pagObj = $('#pagination').twbsPagination({
+            totalPages: totalPages,
+            visiblePages: 3,
+            startPage: currentPage,
+            onPageClick: function (event, page) {
+                if (currentPage != page) {
+                    $('#page').val(page);
+                    $('#formSubmit').submit();
+                }
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

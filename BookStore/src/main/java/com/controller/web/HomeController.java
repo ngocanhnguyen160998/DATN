@@ -23,9 +23,6 @@ public class HomeController {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/")
     public ModelAndView home(Model model, HttpServletRequest request) {
         User user = (User) SessionUtil.getSession(request, "USER");
@@ -50,65 +47,5 @@ public class HomeController {
         model.addAttribute("userSession", user);
 
         return new ModelAndView("web/home");
-    }
-
-    @RequestMapping("/contact")
-    public ModelAndView contact(Model model, HttpServletRequest request) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        model.addAttribute("userSession", user);
-        model.addAttribute("search", new Search());
-        model.addAttribute("authRequest", new AuthRequest());
-        return new ModelAndView("web/contact");
-    }
-
-    @RequestMapping("/wishlist")
-    public ModelAndView wishlist(Model model, HttpServletRequest request) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        if (user == null) {
-            return new ModelAndView("redirect:/account");
-        }
-
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        return new ModelAndView("web/wishlist");
-    }
-
-    @GetMapping("/account")
-    public ModelAndView account(Model model, HttpServletRequest request, @RequestParam(value = "action", required = false) String action, @RequestParam(value = "message", required = false) String message) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("user", new User());
-        if (!"".equals(message) && message != null) {
-            model.addAttribute("message", "Tài khoản hoặc mật khẩu không hợp lệ!");
-        }
-        return new ModelAndView("web/account");
-    }
-
-    @PostMapping("/account")
-    public ModelAndView submmitFormAccount(@ModelAttribute("user") User user) {
-        try {
-            user.setRoleId(100002l);
-            userService.insert(user);
-            return new ModelAndView("redirect:/");
-        } catch (Exception ex) {
-            return new ModelAndView("web/account");
-        }
-    }
-
-    @RequestMapping("/checkout")
-    public ModelAndView checkout(Model model, HttpServletRequest request) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        if (user == null) {
-            return new ModelAndView("redirect:/account");
-        }
-
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        return new ModelAndView("web/checkout");
     }
 }
