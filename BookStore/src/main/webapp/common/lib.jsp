@@ -60,5 +60,7 @@
 <!-- Custom js -->
 <script src="<c:url value="/template/web/js/custom.js" />"></script>
 
+<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>"></script>
+
 </body>
 </html>

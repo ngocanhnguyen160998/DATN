@@ -1,4 +1,4 @@
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -44,9 +44,14 @@
                 <div class="cart-view-area">
                     <div class="cart-view-table aa-wishlist-table">
                         <form action="<c:url value='/wishlist'/>" id="formSubmit" method="get">
-                            <div class="table-responsive">
+                            <div>
                                 <table class="table">
                                     <thead>
+                                    <tr>
+                                        <td colspan="6" style="text-align: center">
+                                            <h2>DANH SÁCH YÊU THÍCH</h2>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <th style="width: 50px"></th>
                                         <th style="width: 200px"></th>
@@ -59,9 +64,15 @@
                                     <tbody>
                                     <c:forEach var="item" items="${item}">
                                         <tr>
-                                            <td><a class="remove" href="/wishlist?page=1&id=${item.productId}&action=delete"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="product-detail?id=${item.productId}"><img src="<c:url value="${item.image}" />" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="product-detail?id=${item.productId}">${item.productName}</a></td>
+                                            <td><a class="remove"
+                                                   href="/wishlist?page=1&id=${item.productId}&action=delete">
+                                                <fa class="fa fa-close"></fa>
+                                            </a></td>
+                                            <td><a href="product-detail?id=${item.productId}"><img
+                                                    src="<c:url value="${item.image}" />" alt="img"></a></td>
+                                            <td><a class="aa-cart-title"
+                                                   href="product-detail?id=${item.productId}">${item.productName}</a>
+                                            </td>
                                             <td>
                                                 <c:if test="${item.salePrice == 0}">
                                                         <span class="aa-product-price">
@@ -95,13 +106,18 @@
                                                 <c:if test="${item.amount > 0}">Còn hàng</c:if>
                                                 <c:if test="${item.amount <= 0}">Hết hàng</c:if>
                                             </td>
-                                            <td><a href="#" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
+                                            <td><a href="/cart?page=1&id=${item.productId}&amount=1&action=insert" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
                                         </tr>
+
                                     </c:forEach>
+                                    <tr>
+                                        <td colspan="6">
+                                            <ul class="pagination" id="pagination"></ul>
+                                            <input type="hidden" value="" id="page" name="page"/>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
-                                <ul class="pagination" id="pagination"></ul>
-                                <input type="hidden" value="" id="page" name="page"/>
                             </div>
                         </form>
                     </div>
@@ -117,6 +133,7 @@
 
 <!-- / footer -->
 <%@ include file="/WEB-INF/views/web/login_modal.jsp" %>
+
 
 <script>
     var totalPages = ${page.totalPage};

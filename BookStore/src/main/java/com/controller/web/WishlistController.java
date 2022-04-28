@@ -46,7 +46,7 @@ public class WishlistController {
         }
 
         if ("insert".equals(action)) {
-            if(wishlistService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
+            if (wishlistService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
                 wishlistService.insert(new WishList(Long.parseLong(id), user.getId()));
             }
         } else if ("delete".equals(action)) {
@@ -59,7 +59,7 @@ public class WishlistController {
         Pageable pageable = PageRequest.of(page - 1, 3);
 
         List<WishlistDTO> lst = dataAccess.getListWishlistByUserId(String.valueOf(user.getId()), pageable).getContent();
-        pageRespone.setTotalItem(dataAccess.countWishlistByUserId(id));
+        pageRespone.setTotalItem(dataAccess.countWishlistByUserId(String.valueOf(user.getId())));
         pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
 
         model.addAttribute("item", lst);

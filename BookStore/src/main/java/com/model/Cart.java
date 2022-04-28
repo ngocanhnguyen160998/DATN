@@ -14,6 +14,17 @@ public class Cart {
     private Long total;
     private Integer status;
 
+    public Cart() {
+    }
+
+    public Cart(Integer amount, Long productId, Long userId, Long total, Integer status) {
+        this.amount = amount;
+        this.productId = productId;
+        this.userId = userId;
+        this.total = total;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

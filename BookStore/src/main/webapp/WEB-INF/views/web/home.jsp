@@ -129,7 +129,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
+                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -184,7 +184,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
+                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -239,7 +239,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
+                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -294,7 +294,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
+                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -358,7 +358,7 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="aa-banner-area">
-                        <a href="#"><img src="<c:url value="/template/web/img/slider/banner2.jpg" />"
+                        <a><img src="<c:url value="/template/web/img/slider/banner2.jpg" />"
                                          alt="fashion banner img"></a>
                     </div>
                 </div>
@@ -389,7 +389,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="/product-detail?id=${item.id}"><span
+                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -447,7 +447,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="#"><span
+                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/product-detail?id=${item.id}">${item.name}</a></h4>
@@ -505,7 +505,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="#"><span
+                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/product-detail?id=${item.id}">${item.name}</a></h4>

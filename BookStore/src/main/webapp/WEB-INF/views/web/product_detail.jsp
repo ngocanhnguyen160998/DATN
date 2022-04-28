@@ -113,7 +113,7 @@
                                         </span>
                                     </div>
                                     <div class="aa-prod-view-bottom" style="color: #313894">
-                                        <a class="aa-add-to-cart-btn" href="/cart?page=1&id=${item.id}&action=insert">Thêm Giỏ Hàng</a>
+                                        <a class="aa-add-to-cart-btn" href="/cart?page=1&id=${item.productId}&amount=1&action=insert">Thêm Giỏ Hàng</a>
                                         <a class="aa-add-to-cart-btn" href="/wishlist?page=1&id=${item.id}&action=insert">Yêu Thích</a>
                                     </div>
                                 </div>
