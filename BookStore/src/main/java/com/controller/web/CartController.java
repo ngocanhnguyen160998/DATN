@@ -49,8 +49,6 @@ public class CartController {
             return new ModelAndView("redirect:/account");
         }
 
-
-
         if ("insert".equals(action)) {
             Product product = productService.getById(Long.parseLong(id)).get();
             Long price = product.getPrice();

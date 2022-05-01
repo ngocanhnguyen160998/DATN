@@ -93,9 +93,12 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <form:select path="provinceId" id="provinceId" cssStyle="height: 50px"
+                                                                <form:select path="provinceId" id="provinceId"
+                                                                             cssStyle="height: 50px"
                                                                              onchange="changeProvince()">
-                                                                    <option value="0" selected disabled hidden>-- Chọn Tỉnh/TP --</option>
+                                                                    <option value="0" selected disabled hidden>-- Chọn
+                                                                        Tỉnh/TP --
+                                                                    </option>
                                                                     <form:options items="${province}"/>
                                                                 </form:select>
                                                             </div>
@@ -104,9 +107,12 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <form:select path="districtId" id="districtId" cssStyle="height: 50px"
+                                                                <form:select path="districtId" id="districtId"
+                                                                             cssStyle="height: 50px"
                                                                              onchange="changeDistrict()">
-                                                                    <option value="0" selected disabled hidden>-- Chọn Quận/Huyện --</option>
+                                                                    <option value="0" selected disabled hidden>-- Chọn
+                                                                        Quận/Huyện --
+                                                                    </option>
                                                                     <form:options items="${district}"/>
                                                                 </form:select>
                                                             </div>
@@ -115,8 +121,11 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <form:select path="communeId" id="communeId" cssStyle="height: 50px">
-                                                                    <option value="0" selected disabled hidden>-- Chọn Phường/Xã --</option>
+                                                                <form:select path="communeId" id="communeId"
+                                                                             cssStyle="height: 50px">
+                                                                    <option value="0" selected disabled hidden>-- Chọn
+                                                                        Phường/Xã --
+                                                                    </option>
                                                                     <form:options items="${commune}"/>
                                                                 </form:select>
                                                             </div>
@@ -133,7 +142,8 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <form:textarea path="note" cols="8" rows="3" placeholder="Ghi Chú"/>
+                                                                <form:textarea path="note" cols="8" rows="3"
+                                                                               placeholder="Ghi Chú"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -145,7 +155,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="checkout-right">
-                                    <h4>Order Summary</h4>
+                                    <h4>Tóm Tắt Đơn Hàng</h4>
                                     <div class="aa-order-summary-area">
                                         <table class="table table-responsive">
                                             <thead>
@@ -155,13 +165,20 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>T-Shirt <strong> x 1</strong></td>
-                                                <td>$150</td>
-                                            </tr>
+                                            <c:forEach var="item" items="${lstCartAll}">
+                                                <tr>
+                                                    <td>${item.productName} <strong> x ${item.amount}</strong></td>
+                                                    <td><fmt:formatNumber
+                                                            value="${item.total}"
+                                                            type="number"></fmt:formatNumber>đ</td>
+                                                </tr>
+                                            </c:forEach>
                                             <tr>
                                                 <th>Tổng</th>
-                                                <td>$785</td>
+                                                <td><fmt:formatNumber
+                                                        value="${totalPrice}"
+                                                        type="number"></fmt:formatNumber>đ
+                                                </td>
                                             </tr>
                                             </tfoot>
                                         </table>
@@ -169,7 +186,8 @@
                                     <h4>Phương Thức Thanh Toán</h4>
                                     <div class="aa-payment-method">
                                         <label for="cashdelivery"><input type="radio" id="cashdelivery"
-                                                                         name="optionsRadios" checked> Thanh toán khi nhận hàng </label>
+                                                                         name="optionsRadios" checked> Thanh toán khi
+                                            nhận hàng </label>
                                         <label for="paypal"><input type="radio" id="paypal" name="optionsRadios"> Paypal
                                         </label>
                                         <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"

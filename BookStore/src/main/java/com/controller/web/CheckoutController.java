@@ -1,11 +1,13 @@
 package com.controller.web;
 
+import com.dto.CartDTO;
 import com.model.Cart;
 import com.model.Orders;
 import com.model.User;
 import com.model.request.AuthRequest;
 import com.model.Checkout;
 import com.model.response.Search;
+import com.repository.DataAccess;
 import com.service.*;
 import com.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class CheckoutController {
     @Autowired
     private CartService cartService;
 
+    @Autowired
+    private DataAccess dataAccess;
+
     private Checkout checkout = null;
     private User user = null;
 
@@ -54,6 +59,15 @@ public class CheckoutController {
             model.addAttribute("district", districtService.findById(checkout.getProvinceId()));
             model.addAttribute("commune", communeService.findAllByDistrictId(checkout.getDistrictId()));
         }
+
+        List<CartDTO> lstCartAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
+        Long totalPrice = 0l;
+        for (CartDTO cartDTO : lstCartAll) {
+            totalPrice += cartDTO.getTotal();
+        }
+
+        model.addAttribute("lstCartAll", lstCartAll);
+        model.addAttribute("totalPrice", totalPrice);
         model.addAttribute("userSession", user);
         model.addAttribute("authRequest", new AuthRequest());
         model.addAttribute("search", new Search());

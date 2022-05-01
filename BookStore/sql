@@ -283,5 +283,34 @@ WHERE p.id = od.product_id
   AND o.status = 3
 ORDER BY o.modefined_date DESC;
 
+create table provinces
+(
+    id           varchar(255) not null
+        primary key,
+    name         varchar(255) null,
+    type         varchar(255) null
+);
 
+create table districts
+(
+    id           varchar(255) not null
+        primary key,
+    name         varchar(255) null,
+    type         varchar(255) null,
+    province_id  varchar(255) null,
+    constraint FK_1aoqj8kevgxwuimsdkt1jwuhc
+        foreign key (province_id) references provinces (id)
+);
+
+create table commune
+(
+    id            varchar(255) not null
+        primary key,
+    name          varchar(255) null,
+    transport_fee bigint       null,
+    type          varchar(255) null,
+    district_id   varchar(255) null,
+    constraint FK_oqaytsw51ty0l31ra6b24i7x3
+        foreign key (district_id) references districts (id)
+);
 
