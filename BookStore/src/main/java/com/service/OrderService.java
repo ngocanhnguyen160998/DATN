@@ -22,4 +22,6 @@ public interface OrderService {
     List<Orders> getByFullNameAndPhone(String input, Pageable pageable);
 
     Optional<Orders> getById(Long id);
+
+    Orders insert(Orders orders);
 }

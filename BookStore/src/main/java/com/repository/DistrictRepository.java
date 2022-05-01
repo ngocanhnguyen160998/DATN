@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface DistrictRepository extends JpaRepository<District, String> {
-    @Query("select e from District e where e.province.id = :provinceId")
+    @Query("select e from District e where e.province.id = :provinceId order by e.name asc")
     List<District> findAllByProvinceId(@Param("provinceId") String provinceId);
 }

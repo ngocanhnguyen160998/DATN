@@ -51,7 +51,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <h4 style="margin-top: 10px; font-style: italic; color: #313894;">Tác giả: ${item.author}</h4>
+                                    <h4 style="margin-top: 10px; font-style: italic; color: #313894;">Tác
+                                        giả: ${item.author}</h4>
                                 </div>
                             </div>
                             <!-- Modal view content -->
@@ -70,16 +71,18 @@
                                         </p>
                                     </div>
                                     <p style="text-align: justify; color: #313894">${item.info}</p>
-                                    <div class="aa-prod-quantity" style="color: #313894; font-weight: bold">
-                                        Số lượng: &nbsp;
-                                        <form action="">
-                                            <input class="aa-cart-quantity" type="number" value="1" min="1" max="${warehouse.amount}">
-                                        </form>
-                                        <p class="aa-prod-category">
-                                            Thể loại: ${category.name}
-                                        </p><br/>
-                                        <span class="aa-product-view-price"
-                                              style="color: red; font-weight: bold; font-size: x-large">
+                                    <form:form id="formSubmit" action="/product-detail" modelAttribute="ordersDetails"
+                                          method="post">
+                                        <div class="aa-prod-quantity" style="color: #313894; font-weight: bold">
+                                            Số lượng: &nbsp;
+
+                                            <form:input path="amount" class="aa-cart-quantity" type="number" value="1" min="1"
+                                                   max="${warehouse.amount}" />
+                                            <p class="aa-prod-category">
+                                                Thể loại: ${category.name}
+                                            </p><br/>
+                                            <span class="aa-product-view-price"
+                                                  style="color: red; font-weight: bold; font-size: x-large">
                                             <c:if test="${item.salePrice == 0}">
                                                         <span class="aa-product-price">
                                                             <fmt:formatNumber
@@ -104,18 +107,20 @@
                                                             <fmt:formatNumber
                                                                     value="${item.salePrice}"
                                                                     type="number"></fmt:formatNumber>đ</span>
-                                                        <span class="aa-product-price" style="margin-left: 20px"><del>
+                                                    <span class="aa-product-price" style="margin-left: 20px"><del>
                                                             <fmt:formatNumber
                                                                     value="${item.price}"
                                                                     type="number"></fmt:formatNumber>đ</del></span>
                                                 </c:if>
                                             </c:if>
                                         </span>
-                                    </div>
-                                    <div class="aa-prod-view-bottom" style="color: #313894">
-                                        <a class="aa-add-to-cart-btn" href="/cart?page=1&id=${item.productId}&amount=1&action=insert">Thêm Giỏ Hàng</a>
-                                        <a class="aa-add-to-cart-btn" href="/wishlist?page=1&id=${item.id}&action=insert">Yêu Thích</a>
-                                    </div>
+                                        </div>
+                                        <div class="aa-prod-view-bottom" style="color: #313894">
+                                            <button type="submit" class="aa-add-to-cart-btn" style="background-color: white">Thêm Giỏ Hàng</button>
+                                            <a class="aa-add-to-cart-btn"
+                                               href="/wishlist?page=1&id=${item.id}&action=insert">Yêu Thích</a>
+                                        </div>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
@@ -139,10 +144,13 @@
                                 <c:forEach var="productRelated" items="${productRelated}">
                                     <li>
                                         <figure>
-                                            <a class="aa-product-img" href="/product-detail?id=${productRelated.id}" style="text-align: center"><img
-                                                    src="<c:url value="${productRelated.image}" />" style="display: inline-block"
+                                            <a class="aa-product-img" href="/product-detail?id=${productRelated.id}"
+                                               style="text-align: center"><img
+                                                    src="<c:url value="${productRelated.image}" />"
+                                                    style="display: inline-block"
                                                     alt="polo shirt img"></a>
-                                            <a class="aa-add-card-btn" href="/product-detail?id=${productRelated.id}"><span
+                                            <a class="aa-add-card-btn"
+                                               href="/product-detail?id=${productRelated.id}"><span
                                                     class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                             <figcaption>
                                                 <h4 class="aa-product-title"><a href="#">${productRelated.name}</a></h4>

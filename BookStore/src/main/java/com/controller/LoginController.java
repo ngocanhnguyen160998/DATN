@@ -3,6 +3,7 @@ package com.controller;
 import com.model.User;
 import com.model.request.AuthRequest;
 import com.util.Authen;
+import com.util.PasswordHasher;
 import com.util.SessionUtil;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class LoginController {
     public ModelAndView submitFormlogin(@ModelAttribute("authRequest") AuthRequest authRequest, HttpServletRequest request) {
         String url = "";
         try {
+            authRequest.setPassword(PasswordHasher.hash(authRequest.getPassword()));
             url = authen.auth(authRequest, request);
             if("".equals(url)) {
                 return new ModelAndView("redirect:/account?action=login&message=wrong_account_or_password");

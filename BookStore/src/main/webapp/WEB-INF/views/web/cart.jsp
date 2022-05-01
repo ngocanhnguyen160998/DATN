@@ -106,7 +106,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <a href="#" class="aa-cart-view-btn">Đặt Hàng</a>
+                            <a href="/checkout" class="aa-cart-view-btn">Đặt Hàng</a>
                         </div>
                     </div>
                 </div>

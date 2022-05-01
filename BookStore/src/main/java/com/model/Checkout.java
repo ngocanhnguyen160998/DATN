@@ -1,4 +1,4 @@
-package com.model.request;
+package com.model;
 
 public class Checkout {
     private String firstName;

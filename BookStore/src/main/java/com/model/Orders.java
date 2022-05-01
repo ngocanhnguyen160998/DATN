@@ -24,6 +24,26 @@ public class Orders {
     private String userId;
     private Long status;
 
+    public Orders() {
+    }
+
+    public Orders(String firstName, String lastName, String email, String phone, String address, String province, String district, String commune, String specialNotes, Date modefinedDate, Long totalPrice, String paymentMethod, String userId, Long status) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.province = province;
+        this.district = district;
+        this.commune = commune;
+        this.specialNotes = specialNotes;
+        this.modefinedDate = modefinedDate;
+        this.totalPrice = totalPrice;
+        this.paymentMethod = paymentMethod;
+        this.userId = userId;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }

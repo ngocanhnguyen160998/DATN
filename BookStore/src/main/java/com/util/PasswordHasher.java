@@ -21,6 +21,6 @@ public class PasswordHasher {
     }
 
     public static void main(String[] args){
-        System.out.println(hash("ty"));
+        System.out.println(hash("user"));
     }
 }

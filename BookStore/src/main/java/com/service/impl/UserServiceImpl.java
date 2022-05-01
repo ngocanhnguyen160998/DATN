@@ -4,6 +4,7 @@ import com.model.Product;
 import com.model.User;
 import com.repository.UserRepository;
 import com.service.UserService;
+import com.util.PasswordHasher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         tmp.setUserName(user.getUserName());
-        tmp.setPassword(user.getPassword());
+        tmp.setPassword(PasswordHasher.hash(user.getPassword()));
         tmp.setFullName(user.getFullName());
         tmp.setPhone(user.getPhone());
         tmp.setEmail(user.getEmail());
@@ -47,6 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User insert(User user) {
+        user.setPassword(PasswordHasher.hash(user.getPassword()));
         return userRepository.save(user);
     }
 

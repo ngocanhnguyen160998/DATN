@@ -6,6 +6,8 @@ import com.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CartServiceImpl implements CartService {
 
@@ -25,5 +27,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart findByProductIdAndUserId(Long productId, Long userId) {
         return cartRepository.findByProductIdAndUserId(productId, userId);
+    }
+
+    @Override
+    public Cart updateStatus(Cart cart) {
+        cart.setStatus(1);
+        return cartRepository.save(cart);
+    }
+
+    @Override
+    public List<Cart> findByUserId(Long userId) {
+        return cartRepository.findByUserId(userId);
     }
 }

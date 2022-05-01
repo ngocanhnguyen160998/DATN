@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface CommuneRepository extends JpaRepository<Commune, String> {
-    @Query("select c from Commune c where c.district.id = :districtId")
+    @Query("select c from Commune c where c.district.id = :districtId order by c.name asc")
     List<Commune> findAllByDistrictId(@Param("districtId") String districtId);
 
     Commune findOneById(String id);
