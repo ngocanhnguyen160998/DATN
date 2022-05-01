@@ -1,5 +1,8 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:url value="/api/province" var="provinceApi"/>
+<c:url value="/api/district" var="districtApi"/>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,7 +44,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="checkout-area">
-          <form action="">
+          <form:form action="/checkout" modelAttribute="checkout" method="post">
             <div class="row">
               <div class="col-md-8">
                 <div class="checkout-left">
@@ -60,77 +63,68 @@
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Họ Đệm*">
+                                <form:input path="firstName" type="text" placeholder="Họ Đệm*" />
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Tên*">
+                                <form:input path="lastName" type="text" placeholder="Tên*" />
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="email" placeholder="Email*">
+                                <form:input path="email" type="email" placeholder="Email*" />
                               </div>
                             </div>
                             <div class="col-md-6">
                               <div class="aa-checkout-single-bill">
-                                <input type="tel" placeholder="Số Điện Thoại*">
+                                <form:input path="phone" type="tel" placeholder="Số Điện Thoại*" />
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <select>
-                                  <option value="0">Select Your Country</option>
-                                  <option value="1">Australia</option>
-                                  <option value="2">Afganistan</option>
-                                  <option value="3">Bangladesh</option>
-                                  <option value="4">Belgium</option>
-                                  <option value="5">Brazil</option>
-                                  <option value="6">Canada</option>
-                                  <option value="7">China</option>
-                                  <option value="8">Denmark</option>
-                                  <option value="9">Egypt</option>
-                                  <option value="10">India</option>
-                                  <option value="11">Iran</option>
-                                  <option value="12">Israel</option>
-                                  <option value="13">Mexico</option>
-                                  <option value="14">UAE</option>
-                                  <option value="15">UK</option>
-                                  <option value="16">USA</option>
-                                </select>
+                                <form:select path="provinceId" id="provinceId" onchange="changeProvince()">
+                                  <form:option value="" label="-- Chọn Tỉnh/TP--"/>
+                                  <form:options items="${province}"/>
+                                </form:select>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Quận/Huyện*">
+                                <form:select path="districtId" id="districtId" onchange="changeDistrict()">
+                                  <form:option value="" label="-- Chọn quận/huyện--"/>
+                                  <form:options items="${district}"/>
+                                </form:select>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Xã/Phường*">
+                                <form:select path="communeId" id="communeId">
+                                  <form:option value="" label="-- Chọn phường/xã--"/>
+                                  <form:options items="${commune}"/>
+                                </form:select>
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <input type="text" placeholder="Địa Chỉ*">
+                                <form:input path="address" type="text" placeholder="Địa Chỉ*" />
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-12">
                               <div class="aa-checkout-single-bill">
-                                <textarea cols="8" rows="3">Ghi Chú</textarea>
+                                <form:textarea path="note" cols="8" rows="3" />
                               </div>
                             </div>
                           </div>
@@ -173,7 +167,7 @@
                 </div>
               </div>
             </div>
-          </form>
+          </form:form>
         </div>
       </div>
     </div>
@@ -187,6 +181,50 @@
 <!-- Login Modal -->
 <%@ include file="/WEB-INF/views/web/login_modal.jsp" %>
 
+<script>
+  function changeProvince() {
+    var id = $('#provinceId').val();
+    var data = {
+      provinceId: id
+    };
+    $.ajax({
+      url: '${provinceApi}',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'html',
+      success: function (result) {
+        var input = document.getElementById("districtId");
+        input.innerHTML = result;
+      },
+      error: function (error) {
+        alert(error);
+      }
+    });
+  }
+
+  function changeDistrict() {
+    var id = $('#districtId').val();
+    var data = {
+      districtId: id
+    };
+    $.ajax({
+      url: '${districtApi}',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(data),
+      dataType: 'html',
+      success: function (result) {
+        var input = document.getElementById("wardId");
+        input.innerHTML = result;
+
+      },
+      error: function (error) {
+        alert(error);
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
