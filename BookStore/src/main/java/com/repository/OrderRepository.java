@@ -8,6 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.Optional;
+
 
 @Repository
 public interface OrderRepository extends JpaRepository<Orders, Long> {
@@ -18,4 +21,7 @@ public interface OrderRepository extends JpaRepository<Orders, Long> {
 
     @Query("SELECT o FROM Orders o WHERE concat(o.firstName, ' ',o.lastName, o.phone) LIKE %?1% ORDER BY o.id DESC")
     Page<Orders> findByFullNameAndPhone(String input, Pageable pageable);
+
+    @Query("SELECT o FROM Orders o WHERE o.userId = :userId AND o.modefinedDate >= :fromDate AND o.modefinedDate <= :toDate")
+    Optional<Orders> findByUserIdAndDate(@Param("userId") String userId, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 }

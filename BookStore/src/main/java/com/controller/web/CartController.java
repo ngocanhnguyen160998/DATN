@@ -44,46 +44,50 @@ public class CartController {
                              @RequestParam(value = "id", required = false) String id,
                              @RequestParam(value = "amount", required = false) String amount,
                              @RequestParam(value = "action", required = false) String action) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        if (user == null) {
-            return new ModelAndView("redirect:/account");
-        }
-
-        if ("insert".equals(action)) {
-            Product product = productService.getById(Long.parseLong(id)).get();
-            Long price = product.getPrice();
-            if (product.getSalePrice() < product.getPrice() && product.getSalePrice() != 0) {
-                price = product.getSalePrice();
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
+            if (user == null) {
+                return new ModelAndView("redirect:/account");
             }
-            Long totalPrice = price * Long.parseLong(amount);
-            if (cartService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
-                cartService.insert(new Cart(Integer.parseInt(amount), Long.parseLong(id), user.getId(), totalPrice, 0));
+
+            if ("insert".equals(action)) {
+                Product product = productService.getById(Long.parseLong(id)).get();
+                Long price = product.getPrice();
+                if (product.getSalePrice() < product.getPrice() && product.getSalePrice() != 0) {
+                    price = product.getSalePrice();
+                }
+                Long totalPrice = price * Long.parseLong(amount);
+                if (cartService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
+                    cartService.insert(new Cart(Integer.parseInt(amount), Long.parseLong(id), user.getId(), totalPrice, 0));
+                }
+            } else if ("delete".equals(action)) {
+                cartService.deleteByProductIdAndUserId(Long.parseLong(id), user.getId());
             }
-        } else if ("delete".equals(action)) {
-            cartService.deleteByProductIdAndUserId(Long.parseLong(id), user.getId());
+
+            PageResponse pageRespone = new PageResponse();
+            pageRespone.setLimit(3);
+            pageRespone.setPage(page);
+            Pageable pageable = PageRequest.of(page - 1, 3);
+
+            List<CartDTO> lst = dataAccess.getListCartByUserId(String.valueOf(user.getId()), pageable).getContent();
+            List<CartDTO> lstAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
+            pageRespone.setTotalItem(dataAccess.countCartByUserId(String.valueOf(user.getId())));
+            pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
+
+            Long totalPrice = 0l;
+            for(CartDTO cartDTO : lstAll) {
+                totalPrice += cartDTO.getTotal();
+            }
+
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("item", lst);
+            model.addAttribute("userSession", user);
+            model.addAttribute("authRequest", new AuthRequest());
+            model.addAttribute("search", new Search());
+            model.addAttribute("page", pageRespone);
+            return new ModelAndView("web/cart");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
         }
-
-        PageResponse pageRespone = new PageResponse();
-        pageRespone.setLimit(3);
-        pageRespone.setPage(page);
-        Pageable pageable = PageRequest.of(page - 1, 3);
-
-        List<CartDTO> lst = dataAccess.getListCartByUserId(String.valueOf(user.getId()), pageable).getContent();
-        List<CartDTO> lstAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
-        pageRespone.setTotalItem(dataAccess.countCartByUserId(String.valueOf(user.getId())));
-        pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
-
-        Long totalPrice = 0l;
-        for(CartDTO cartDTO : lstAll) {
-            totalPrice += cartDTO.getTotal();
-        }
-
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("item", lst);
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("page", pageRespone);
-        return new ModelAndView("web/cart");
     }
 }

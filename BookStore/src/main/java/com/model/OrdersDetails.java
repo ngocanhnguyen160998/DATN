@@ -13,6 +13,16 @@ public class OrdersDetails {
     private Long unitPrice;
     private Integer amount;
 
+    public OrdersDetails() {
+    }
+
+    public OrdersDetails(Long productId, Long orderId, Long unitPrice, Integer amount) {
+        this.productId = productId;
+        this.orderId = orderId;
+        this.unitPrice = unitPrice;
+        this.amount = amount;
+    }
+
     public Long getId() {
         return id;
     }

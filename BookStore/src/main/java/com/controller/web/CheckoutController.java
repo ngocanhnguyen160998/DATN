@@ -1,11 +1,8 @@
 package com.controller.web;
 
 import com.dto.CartDTO;
-import com.model.Cart;
-import com.model.Orders;
-import com.model.User;
+import com.model.*;
 import com.model.request.AuthRequest;
-import com.model.Checkout;
 import com.model.response.Search;
 import com.repository.DataAccess;
 import com.service.*;
@@ -19,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -38,45 +37,63 @@ public class CheckoutController {
     private OrderService orderService;
 
     @Autowired
+    private OrdersDetailsService ordersDetailsService;
+
+    @Autowired
     private CartService cartService;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Autowired
     private DataAccess dataAccess;
 
     private Checkout checkout = null;
     private User user = null;
+    private Long totalPrice = 0l;
 
     @GetMapping("/checkout")
     public ModelAndView checkout(Model model, HttpServletRequest request) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        if (user == null) {
-            return new ModelAndView("redirect:/account");
-        }
-        this.user = user;
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
+            if (user == null) {
+                return new ModelAndView("redirect:/account");
+            }
+            this.user = user;
 
-        model.addAttribute("province", provinceService.findAll());
-        if (checkout != null) {
-            model.addAttribute("district", districtService.findById(checkout.getProvinceId()));
-            model.addAttribute("commune", communeService.findAllByDistrictId(checkout.getDistrictId()));
-        }
+            List<CartDTO> lstCartAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
+            if(lstCartAll == null  || lstCartAll.size() == 0) {
+                return new ModelAndView("redirect:/product?page=1");
+            }
 
-        List<CartDTO> lstCartAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
-        Long totalPrice = 0l;
-        for (CartDTO cartDTO : lstCartAll) {
-            totalPrice += cartDTO.getTotal();
-        }
+            model.addAttribute("province", provinceService.findAll());
+            if (checkout != null) {
+                model.addAttribute("district", districtService.findById(checkout.getProvinceId()));
+                model.addAttribute("commune", communeService.findAllByDistrictId(checkout.getDistrictId()));
+            }
 
-        model.addAttribute("lstCartAll", lstCartAll);
-        model.addAttribute("totalPrice", totalPrice);
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("checkout", new Checkout());
-        return new ModelAndView("web/checkout");
+            Long totalPrice = 0l;
+            for (CartDTO cartDTO : lstCartAll) {
+                totalPrice += cartDTO.getTotal();
+            }
+
+            this.totalPrice = totalPrice;
+            model.addAttribute("lstCartAll", lstCartAll);
+            model.addAttribute("totalPrice", totalPrice);
+            model.addAttribute("userSession", user);
+            model.addAttribute("authRequest", new AuthRequest());
+            model.addAttribute("search", new Search());
+            model.addAttribute("checkout", new Checkout());
+            return new ModelAndView("web/checkout");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
+        }
     }
 
     @PostMapping("/checkout")
     public ModelAndView submmitFormCheckout(@ModelAttribute("checkout") Checkout checkout) {
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
         try {
             this.checkout = checkout;
             String provinceName = provinceService.findAll().get(checkout.getProvinceId());
@@ -93,21 +110,29 @@ public class CheckoutController {
             orders.setDistrict(districtName);
             orders.setCommune(communeName);
             orders.setSpecialNotes(checkout.getNote());
-            orders.setModefinedDate(new Date());
-//            orders.setTotalPrice(0l);
-            orders.setPaymentMethod("");
+            orders.setTotalPrice(totalPrice);
+            orders.setPaymentMethod(checkout.getPaymentMethod());
             orders.setUserId(String.valueOf(user.getId()));
             orders.setStatus(0l);
+            orders.setModefinedDate(new Date());
+            orderService.insert(orders);
 
             List<Cart> lst = cartService.findByUserId(user.getId());
+
+            String fromDate = dateFormatter.format(orders.getModefinedDate());
+            String toDate = dateFormatter.format(new Date());
+            Orders tmp = orderService.getByUserIdAndDate(user.getId(), dateFormatter.parse(fromDate), dateFormatter.parse(toDate)).get();
+
             for (Cart cart : lst) {
+                OrdersDetails ordersDetails = new OrdersDetails(cart.getProductId(), tmp.getId(), cart.getTotal()/cart.getAmount(), cart.getAmount());
                 cartService.updateStatus(cart);
+                ordersDetailsService.insert(ordersDetails);
+                warehouseService.minusAmountByProductId(cart.getProductId(), cart.getAmount());
             }
 
-            orderService.insert(orders);
             return new ModelAndView("redirect:/");
         } catch (Exception ex) {
-            return new ModelAndView("web/account");
+            return new ModelAndView("redirect:/404");
         }
     }
 }

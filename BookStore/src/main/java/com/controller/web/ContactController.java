@@ -16,10 +16,14 @@ public class ContactController {
 
     @RequestMapping("/contact")
     public ModelAndView contact(Model model, HttpServletRequest request) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        model.addAttribute("userSession", user);
-        model.addAttribute("search", new Search());
-        model.addAttribute("authRequest", new AuthRequest());
-        return new ModelAndView("web/contact");
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
+            model.addAttribute("userSession", user);
+            model.addAttribute("search", new Search());
+            model.addAttribute("authRequest", new AuthRequest());
+            return new ModelAndView("web/contact");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
+        }
     }
 }

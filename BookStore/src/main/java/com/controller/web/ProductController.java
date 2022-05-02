@@ -69,9 +69,8 @@ public class ProductController {
             model.addAttribute("page", pageResponse);
             return new ModelAndView("web/product");
         } catch (Exception e) {
-            return new ModelAndView("web/404");
+            return new ModelAndView("redirect:/404");
         }
-
     }
 
     @PostMapping("/product")

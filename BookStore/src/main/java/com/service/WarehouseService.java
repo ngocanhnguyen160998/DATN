@@ -28,5 +28,7 @@ public interface WarehouseService {
 
     Optional<Warehouse> getByProductId(Long productId);
 
-    Warehouse updateAmountByProductId(Long id, int amountAdd);
+    Warehouse addAmountByProductId(Long id, int amountAdd);
+
+    Warehouse minusAmountByProductId(Long id, int amountMinus);
 }

@@ -18,4 +18,9 @@ public class OrdersDetailsServiceImpl implements OrdersDetailsService {
     public List<OrdersDetails> getAllByOrderId(Long id) {
         return ordersDetailsRepository.findAllByOrderId(id);
     }
+
+    @Override
+    public OrdersDetails insert(OrdersDetails ordersDetails) {
+        return ordersDetailsRepository.save(ordersDetails);
+    }
 }

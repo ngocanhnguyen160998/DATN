@@ -40,34 +40,38 @@ public class WishlistController {
                                  @RequestParam("page") int page,
                                  @RequestParam(value = "id", required = false) String id,
                                  @RequestParam(value = "action", required = false) String action) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        if (user == null) {
-            return new ModelAndView("redirect:/account");
-        }
-
-        if ("insert".equals(action)) {
-            if (wishlistService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
-                wishlistService.insert(new WishList(Long.parseLong(id), user.getId()));
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
+            if (user == null) {
+                return new ModelAndView("redirect:/account");
             }
-        } else if ("delete".equals(action)) {
-            wishlistService.deleteByProductIdAndUserId(Long.parseLong(id), user.getId());
+
+            if ("insert".equals(action)) {
+                if (wishlistService.findByProductIdAndUserId(Long.parseLong(id), user.getId()) == null) {
+                    wishlistService.insert(new WishList(Long.parseLong(id), user.getId()));
+                }
+            } else if ("delete".equals(action)) {
+                wishlistService.deleteByProductIdAndUserId(Long.parseLong(id), user.getId());
+            }
+
+            PageResponse pageRespone = new PageResponse();
+            pageRespone.setLimit(3);
+            pageRespone.setPage(page);
+            Pageable pageable = PageRequest.of(page - 1, 3);
+
+            List<WishlistDTO> lst = dataAccess.getListWishlistByUserId(String.valueOf(user.getId()), pageable).getContent();
+            pageRespone.setTotalItem(dataAccess.countWishlistByUserId(String.valueOf(user.getId())));
+            pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
+
+            model.addAttribute("item", lst);
+            model.addAttribute("userSession", user);
+            model.addAttribute("authRequest", new AuthRequest());
+            model.addAttribute("search", new Search());
+            model.addAttribute("page", pageRespone);
+            return new ModelAndView("web/wishlist");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
         }
-
-        PageResponse pageRespone = new PageResponse();
-        pageRespone.setLimit(3);
-        pageRespone.setPage(page);
-        Pageable pageable = PageRequest.of(page - 1, 3);
-
-        List<WishlistDTO> lst = dataAccess.getListWishlistByUserId(String.valueOf(user.getId()), pageable).getContent();
-        pageRespone.setTotalItem(dataAccess.countWishlistByUserId(String.valueOf(user.getId())));
-        pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
-
-        model.addAttribute("item", lst);
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("page", pageRespone);
-        return new ModelAndView("web/wishlist");
     }
 
 }

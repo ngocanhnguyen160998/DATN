@@ -20,8 +20,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT c FROM Cart c WHERE c.userId = :userId AND c.productId = :productId AND c.status = 0")
     Cart findByProductIdAndUserId(@Param("productId") Long productId, @Param("userId") Long userId);
 
-    List<Cart> findByUserId(Long userId);
+    @Query("SELECT c FROM Cart c WHERE c.userId = :userId AND c.status = 0")
+    List<Cart> findByUserId(@Param("userId") Long userId);
 
-    @Query("UPDATE Cart c SET c.status = 1 WHERE c.userId = :userId")
-    Cart updateStatus(@Param("userId") Long userId);
 }

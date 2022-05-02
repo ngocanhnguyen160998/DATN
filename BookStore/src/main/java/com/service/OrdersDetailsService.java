@@ -7,4 +7,6 @@ import java.util.List;
 public interface OrdersDetailsService {
 
     List<OrdersDetails> getAllByOrderId(Long id);
+
+    OrdersDetails insert(OrdersDetails ordersDetails);
 }

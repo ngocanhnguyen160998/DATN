@@ -166,12 +166,13 @@
                                             </thead>
                                             <tbody>
                                             <c:forEach var="item" items="${lstCartAll}">
-                                                <tr>
-                                                    <td>${item.productName} <strong> x ${item.amount}</strong></td>
-                                                    <td><fmt:formatNumber
-                                                            value="${item.total}"
-                                                            type="number"></fmt:formatNumber>đ</td>
-                                                </tr>
+                                            <tr>
+                                                <td>${item.productName} <strong> x ${item.amount}</strong></td>
+                                                <td><fmt:formatNumber
+                                                        value="${item.total}"
+                                                        type="number"></fmt:formatNumber>đ
+                                                </td>
+                                            </tr>
                                             </c:forEach>
                                             <tr>
                                                 <th>Tổng</th>
@@ -185,14 +186,17 @@
                                     </div>
                                     <h4>Phương Thức Thanh Toán</h4>
                                     <div class="aa-payment-method">
-                                        <label for="cashdelivery"><input type="radio" id="cashdelivery"
-                                                                         name="optionsRadios" checked> Thanh toán khi
-                                            nhận hàng </label>
-                                        <label for="paypal"><input type="radio" id="paypal" name="optionsRadios"> Paypal
+                                        <label for="cod">
+                                            <input type="radio" id="cod"
+                                                        name="optionsRadios" checked value="COD"> Thanh toán khi nhận hàng
                                         </label>
+                                        <label for="paypal">
+                                            <input type="radio" id="paypal" name="optionsRadios" value="Paypal"> Paypal
+                                        </label>
+                                        <form:input path="paymentMethod" type="hidden"></form:input>
                                         <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"
                                              border="0" alt="PayPal Acceptance Mark">
-                                        <input type="submit" value="Đặt Hàng" class="aa-browse-btn">
+                                        <input type="submit" value="Đặt Hàng" onclick="getPaymentMethod()" class="aa-browse-btn">
                                     </div>
                                 </div>
                             </div>
@@ -212,6 +216,16 @@
 <%@ include file="/WEB-INF/views/web/login_modal.jsp" %>
 
 <script>
+
+    function getPaymentMethod() {
+        var checkbox = document.getElementsByName("optionsRadios");
+        for (var i = 0; i < checkbox.length; i++){
+            if (checkbox[i].checked === true){
+                document.getElementById("paymentMethod").value = checkbox[i].value;
+            }
+        }
+    }
+
     function changeProvince() {
         var id = $('#provinceId').val();
         var data = {

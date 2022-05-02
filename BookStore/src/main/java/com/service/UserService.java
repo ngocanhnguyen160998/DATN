@@ -23,4 +23,6 @@ public interface UserService {
     Long countByUserNameLike(String userName);
 
     Optional<User> getByUserNameAndPassword(String userName, String password);
+
+    Optional<User> getByUserName(String userName);
 }

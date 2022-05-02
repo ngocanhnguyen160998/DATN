@@ -10,6 +10,7 @@ public class Checkout {
     private String communeId;
     private String address;
     private String note;
+    private String paymentMethod;
 
     public String getFirstName() {
         return firstName;
@@ -81,5 +82,13 @@ public class Checkout {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

@@ -3,7 +3,10 @@ package com.util;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
+import java.util.Date;
 
 public class PasswordHasher {
     private static final String HASH_ALGORITHM = "SHA-256";
@@ -21,6 +24,9 @@ public class PasswordHasher {
     }
 
     public static void main(String[] args){
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String date = dateFormatter.format(new Date());
+        System.out.println(date);
         System.out.println(hash("user"));
     }
 }

@@ -32,22 +32,26 @@ public class ProductDetailController {
 
     @GetMapping("/product-detail")
     public ModelAndView product(Model model, HttpServletRequest request, @RequestParam("id") Long id) {
-        User user = (User) SessionUtil.getSession(request, "USER");
-        Product product = productService.getById(id).get();
-        Category category = categoryService.getById(product.getCategoryId()).get();
-        Warehouse warehouse = warehouseService.getByProductId(product.getId()).orElse(new Warehouse(0));
-        List<Product> productRelated = productService.get8ProductRandomByCategory(String.valueOf(product.getCategoryId()), String.valueOf(product.getId()));
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
+            Product product = productService.getById(id).get();
+            Category category = categoryService.getById(product.getCategoryId()).get();
+            Warehouse warehouse = warehouseService.getByProductId(product.getId()).orElse(new Warehouse(0));
+            List<Product> productRelated = productService.get8ProductRandomByCategory(String.valueOf(product.getCategoryId()), String.valueOf(product.getId()));
 
-        productId = id;
-        model.addAttribute("userSession", user);
-        model.addAttribute("item", product);
-        model.addAttribute("category", category);
-        model.addAttribute("warehouse", warehouse);
-        model.addAttribute("productRelated", productRelated);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("ordersDetails", new OrdersDetails());
-        return new ModelAndView("web/product_detail");
+            productId = id;
+            model.addAttribute("userSession", user);
+            model.addAttribute("item", product);
+            model.addAttribute("category", category);
+            model.addAttribute("warehouse", warehouse);
+            model.addAttribute("productRelated", productRelated);
+            model.addAttribute("authRequest", new AuthRequest());
+            model.addAttribute("search", new Search());
+            model.addAttribute("ordersDetails", new OrdersDetails());
+            return new ModelAndView("web/product_detail");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
+        }
     }
 
     @PostMapping("/product-detail")
@@ -55,7 +59,7 @@ public class ProductDetailController {
         try {
             return new ModelAndView("redirect:/cart?page=1&id=" + productId + "&amount=" + ordersDetails.getAmount() + "&action=insert");
         } catch (Exception ex) {
-            return new ModelAndView("web/account");
+            return new ModelAndView("redirect:/404");
         }
     }
 }

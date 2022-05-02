@@ -99,7 +99,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Warehouse updateAmountByProductId(Long id, int amountAdd) {
+    public Warehouse addAmountByProductId(Long id, int amountAdd) {
         Warehouse warehouse = warehouseRepository.findByProductId(id).get();
 
         if (warehouse == null) {
@@ -110,6 +110,21 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse.setInputAmount(warehouse.getInputAmount());
         warehouse.setInputPrice(warehouse.getInputPrice());
         warehouse.setNote(warehouse.getNote());
-        return warehouse;
+        return warehouseRepository.save(warehouse);
     }
+
+    @Override
+    public Warehouse minusAmountByProductId(Long id, int amountMinus) {
+        Warehouse warehouse = warehouseRepository.findByProductId(id).get();
+
+        if (warehouse == null) {
+            return null;
+        }
+        if (warehouse.getAmount() >= amountMinus) {
+            warehouse.setAmount(warehouse.getAmount() - amountMinus);
+        }
+        return warehouseRepository.save(warehouse);
+    }
+
+
 }

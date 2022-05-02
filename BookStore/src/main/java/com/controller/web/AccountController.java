@@ -22,28 +22,47 @@ public class AccountController {
     @Autowired
     private UserService userService;
 
+    private String message = "";
+
     @GetMapping("/account")
     public ModelAndView account(Model model, HttpServletRequest request, @RequestParam(value = "action", required = false) String action, @RequestParam(value = "message", required = false) String message) {
-        User user = (User) SessionUtil.getSession(request, "USER");
+        try {
+            User user = (User) SessionUtil.getSession(request, "USER");
 
-        model.addAttribute("userSession", user);
-        model.addAttribute("authRequest", new AuthRequest());
-        model.addAttribute("search", new Search());
-        model.addAttribute("user", new User());
-        if (!"".equals(message) && message != null) {
-            model.addAttribute("message", "Tài khoản hoặc mật khẩu không hợp lệ!");
+            model.addAttribute("userSession", user);
+            model.addAttribute("authRequest", new AuthRequest());
+            model.addAttribute("search", new Search());
+            model.addAttribute("user", new User());
+            if (!"".equals(message) && message != null) {
+                model.addAttribute("message", "Tài khoản hoặc mật khẩu không hợp lệ!");
+            } else {
+                model.addAttribute("message", this.message);
+            }
+            this.message = "";
+            return new ModelAndView("web/account");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/404");
         }
-        return new ModelAndView("web/account");
     }
 
     @PostMapping("/account")
     public ModelAndView submmitFormAccount(@ModelAttribute("user") User user) {
         try {
+            int x = 12/0;
+            System.out.println(x);
             user.setRoleId(100002l);
-            userService.insert(user);
-            return new ModelAndView("redirect:/");
+            User tmp = userService.getByUserName(user.getUserName()).orElse(null);
+
+            if (tmp == null) {
+                userService.insert(user);
+                return new ModelAndView("redirect:/");
+            } else {
+                message = "Tài khoản đã tồn tại, vui lòng nhập lại!";
+                return new ModelAndView("redirect:/account");
+            }
         } catch (Exception ex) {
-            return new ModelAndView("web/account");
+            message = "Có lỗi xảy ra, vui lòng thử lại sau!";
+            return new ModelAndView("redirect:/account");
         }
     }
 }

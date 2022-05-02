@@ -89,7 +89,7 @@ public class AdminOrderController {
     public ModelAndView cancel(@RequestParam(value = "id") Long id){
         List<OrdersDetails> lst = ordersDetailsService.getAllByOrderId(id);
         for (OrdersDetails od : lst) {
-            warehouseService.updateAmountByProductId(od.getProductId(), od.getAmount());
+            warehouseService.addAmountByProductId(od.getProductId(), od.getAmount());
         }
         orderService.updateCancelById(id);
         return new ModelAndView("redirect:/admin/order/table?page=1&search=all");
