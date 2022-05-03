@@ -33,7 +33,9 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         tmp.setUserName(user.getUserName());
-        tmp.setPassword(PasswordHasher.hash(user.getPassword()));
+        if (!tmp.getPassword().equals(user.getPassword())) {
+            tmp.setPassword(PasswordHasher.hash(user.getPassword()));
+        }
         tmp.setFullName(user.getFullName());
         tmp.setPhone(user.getPhone());
         tmp.setEmail(user.getEmail());

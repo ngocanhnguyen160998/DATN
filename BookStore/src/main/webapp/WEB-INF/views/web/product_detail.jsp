@@ -118,7 +118,7 @@
                                         <div class="aa-prod-view-bottom" style="color: #313894">
                                             <button type="submit" class="aa-add-to-cart-btn" style="background-color: white">Thêm Giỏ Hàng</button>
                                             <a class="aa-add-to-cart-btn"
-                                               href="/wishlist?page=1&id=${item.id}&action=insert">Yêu Thích</a>
+                                               href="/wishlist?id=${item.id}&action=insert">Yêu Thích</a>
                                         </div>
                                     </form:form>
                                 </div>

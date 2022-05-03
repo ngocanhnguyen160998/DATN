@@ -44,18 +44,6 @@
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
                 <div class="aa-product-catg-content">
-                    <div class="aa-product-catg-head">
-                        <div class="aa-product-catg-head-left">
-                            <form action="" class="aa-sort-form">
-                                <label for="">Sắp xếp</label>
-                                <select name="">
-                                    <option value="1" selected="Default">Mặc định</option>
-                                    <option value="2">Giá tăng dần</option>
-                                    <option value="3">Giá giảm dần</option>
-                                </select>
-                            </form>
-                        </div>
-                    </div>
                     <form action="<c:url value='/product'/>" id="formSubmit" method="get">
                         <div class="aa-product-catg-body">
                             <ul class="aa-product-catg">
@@ -65,7 +53,8 @@
                                         <figure>
                                             <a class="aa-product-img" href="/product-detail?id=${item.id}"><img
                                                     src="<c:url value="${item.image}" />"></a>
-                                            <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                            <a class="aa-add-card-btn"
+                                               href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                     class="fa fa-shopping-cart"></span>Thêm
                                                 Giỏ Hàng</a>
                                             <figcaption>
@@ -98,12 +87,13 @@
                                             </figcaption>
                                         </figure>
                                         <div class="aa-product-hvr-content">
-                                            <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                            <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip"
+                                               data-placement="top"
                                                title="Yêu Thích"><span
                                                     class="fa fa-heart-o"></span></a>
                                         </div>
                                         <!-- product badge -->
-<%--                                        <span class="aa-badge aa-sale" href="#">SALE!</span>--%>
+                                            <%--                                        <span class="aa-badge aa-sale" href="#">SALE!</span>--%>
                                     </li>
                                 </c:forEach>
                             </ul>
@@ -112,18 +102,29 @@
                             style="margin-left: 15%; margin-top: 10px"></ul>
                         <input type="hidden" value="" id="page" name="page"/>
                         <input type="hidden" value="" id="category-id" name="category-id"/>
-                        <input type="hidden" value="" id="search" name="search"/>
+                        <input type="hidden" value="" id="sort" name="sort"/>
                     </form>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
                 <aside class="aa-sidebar">
+                    <div class="aa-sidebar-widget">
+                        <h3>Sắp Xếp</h3>
+                        <ul class="aa-catg-nav">
+                            <li><a href="/product?page=1&category-id=${categoryId}&sort=" class="tag-cloud">Mặc Định</a></li>
+                            <li><a href="/product?page=1&category-id=${categoryId}&sort=asc" class="tag-cloud">Giá Tăng
+                                Dần</a></li>
+                            <li><a href="/product?page=1&category-id=${categoryId}&sort=desc" class="tag-cloud">Giá Giảm
+                                Dần</a></li>
+                        </ul>
+                    </div>
                     <!-- single sidebar -->
                     <div class="aa-sidebar-widget">
                         <h3>Thể Loại</h3>
                         <ul class="aa-catg-nav">
                             <c:forEach var="itemCategory" items="${itemCategory}">
-                                <li><a href="/product?page=1&category-id=${itemCategory.id}">${itemCategory.name}</a></li>
+                                <li><a href="/product?page=1&category-id=${itemCategory.id}">${itemCategory.name}</a>
+                                </li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -147,21 +148,26 @@
     var totalPages = ${page.totalPage};
     var currentPage = ${page.page};
     var categoryId = "${categoryId}";
+    var sortPrice = "${sortPrice}";
+
     $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 9,
-            startPage: currentPage,
-            categoryId: categoryId,
-            onPageClick: function (event, page) {
-                if (currentPage != page) {
-                    $('#page').val(page);
-                    $('#category-id').val(categoryId),
+            window.pagObj = $('#pagination').twbsPagination({
+                totalPages: totalPages,
+                visiblePages: 9,
+                startPage: currentPage,
+                categoryId: categoryId,
+                sort: sortPrice,
+                onPageClick: function (event, page) {
+                    if (currentPage != page) {
+                        $('#page').val(page);
+                        $('#category-id').val(categoryId),
+                        $('#sort').val(sortPrice),
                         $('#formSubmit').submit();
+                    }
                 }
-            }
+            });
         });
-    });
+
 </script>
 
 </body>

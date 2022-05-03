@@ -65,7 +65,7 @@
                                     <c:forEach var="item" items="${item}">
                                         <tr>
                                             <td><a class="remove"
-                                                   href="/wishlist?page=1&id=${item.productId}&action=delete">
+                                                   href="/wishlist?id=${item.productId}&action=delete">
                                                 <fa class="fa fa-close"></fa>
                                             </a></td>
                                             <td><a href="product-detail?id=${item.productId}"><img
@@ -106,16 +106,16 @@
                                                 <c:if test="${item.amount > 0}">Còn hàng</c:if>
                                                 <c:if test="${item.amount <= 0}">Hết hàng</c:if>
                                             </td>
-                                            <td><a href="/cart?page=1&id=${item.productId}&amount=1&action=insert" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
+                                            <td><a href="/cart?id=${item.productId}&amount=1&action=insert" class="aa-add-to-cart-btn">Thêm Giỏ Hàng</a></td>
                                         </tr>
 
                                     </c:forEach>
-                                    <tr>
-                                        <td colspan="6">
-                                            <ul class="pagination" id="pagination"></ul>
-                                            <input type="hidden" value="" id="page" name="page"/>
-                                        </td>
-                                    </tr>
+<%--                                    <tr>--%>
+<%--                                        <td colspan="6">--%>
+<%--                                            <ul class="pagination" id="pagination"></ul>--%>
+<%--                                            <input type="hidden" value="" id="page" name="page"/>--%>
+<%--                                        </td>--%>
+<%--                                    </tr>--%>
                                     </tbody>
                                 </table>
                             </div>
@@ -136,21 +136,21 @@
 
 
 <script>
-    var totalPages = ${page.totalPage};
-    var currentPage = ${page.page};
-    $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 3,
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-                if (currentPage != page) {
-                    $('#page').val(page);
-                    $('#formSubmit').submit();
-                }
-            }
-        });
-    });
+    <%--var totalPages = ${page.totalPage};--%>
+    <%--var currentPage = ${page.page};--%>
+    <%--$(function () {--%>
+    <%--    window.pagObj = $('#pagination').twbsPagination({--%>
+    <%--        totalPages: totalPages,--%>
+    <%--        visiblePages: 3,--%>
+    <%--        startPage: currentPage,--%>
+    <%--        onPageClick: function (event, page) {--%>
+    <%--            if (currentPage != page) {--%>
+    <%--                $('#page').val(page);--%>
+    <%--                $('#formSubmit').submit();--%>
+    <%--            }--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--});--%>
 </script>
 
 </body>

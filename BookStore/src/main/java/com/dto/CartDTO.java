@@ -5,16 +5,18 @@ public class CartDTO {
     private String productName;
     private String image;
     private Integer amount;
+    private Integer warehouseAmount;
     private Long total;
 
     public CartDTO() {
     }
 
-    public CartDTO(Long productId, String productName, String image, Integer amount, Long total) {
+    public CartDTO(Long productId, String productName, String image, Integer amount, Integer warehouseAmount, Long total) {
         this.productId = productId;
         this.productName = productName;
         this.image = image;
         this.amount = amount;
+        this.warehouseAmount = warehouseAmount;
         this.total = total;
     }
 
@@ -56,5 +58,13 @@ public class CartDTO {
 
     public void setTotal(Long total) {
         this.total = total;
+    }
+
+    public Integer getWarehouseAmount() {
+        return warehouseAmount;
+    }
+
+    public void setWarehouseAmount(Integer warehouseAmount) {
+        this.warehouseAmount = warehouseAmount;
     }
 }

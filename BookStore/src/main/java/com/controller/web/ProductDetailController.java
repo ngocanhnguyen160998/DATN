@@ -57,7 +57,7 @@ public class ProductDetailController {
     @PostMapping("/product-detail")
     public ModelAndView submmitFormProductDetail(@ModelAttribute("ordersDetails") OrdersDetails ordersDetails) {
         try {
-            return new ModelAndView("redirect:/cart?page=1&id=" + productId + "&amount=" + ordersDetails.getAmount() + "&action=insert");
+            return new ModelAndView("redirect:/cart?id=" + productId + "&amount=" + ordersDetails.getAmount() + "&action=insert");
         } catch (Exception ex) {
             return new ModelAndView("redirect:/404");
         }

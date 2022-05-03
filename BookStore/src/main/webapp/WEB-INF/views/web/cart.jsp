@@ -35,7 +35,7 @@
 <!-- catg header banner section -->
 <%@ include file="/common/web/banner.jsp" %>
 <!-- / catg header banner section -->
-
+<%int i = 1;%>
 <!-- Cart view section -->
 <section id="cart-view">
     <div class="container">
@@ -45,8 +45,17 @@
                     <div class="cart-view-table">
                         <form action="<c:url value='/cart'/>" id="formSubmit" method="get">
                             <div class="table-responsive" style="width: 1000px">
-                                <table class="table" >
+                                <table class="table">
                                     <thead>
+                                    <c:if test="${not empty message}">
+                                        <tr>
+                                            <td colspan="6" style="text-align: center" class="alert alert-danger">
+                                                <h3>
+                                                        ${message}
+                                                </h3>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                     <tr>
                                         <td colspan="6" style="text-align: center">
                                             <h2>GIỎ HÀNG</h2>
@@ -64,29 +73,30 @@
                                     <tbody>
                                     <c:forEach var="item" items="${item}">
                                         <tr>
-                                            <td><a class="remove" href="/cart?page=1&id=${item.productId}&action=delete">
+                                            <td><a class="remove" href="/cart?id=${item.productId}&action=delete">
                                                 <fa class="fa fa-close"></fa>
                                             </a></td>
-                                            <td><a href="product-detail?id=${item.productId}"><img src="<c:url value="${item.image}" />"
-                                                                 alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="product-detail?id=${item.productId}">${item.productName}</a></td>
+                                            <td><a href="product-detail?id=${item.productId}"><img
+                                                    src="<c:url value="${item.image}" />"
+                                                    alt="img"></a></td>
+                                            <td><a class="aa-cart-title"
+                                                   href="product-detail?id=${item.productId}">${item.productName}</a>
+                                            </td>
                                             <td><fmt:formatNumber
                                                     value="${item.total/item.amount}"
-                                                    type="number"></fmt:formatNumber>đ</td>
+                                                    type="number"></fmt:formatNumber>đ
+                                            </td>
                                             <td>
-                                                <input class="aa-cart-quantity" type="number" value="${item.amount}" min="1" max="20">
+                                                <input class="aa-cart-quantity" type="number" value="${item.amount}"
+                                                       min="1" max="${item.warehouseAmount}" name="index<%=i%>">
                                             </td>
                                             <td><fmt:formatNumber
                                                     value="${item.total}"
-                                                    type="number"></fmt:formatNumber>đ</td>
+                                                    type="number"></fmt:formatNumber>đ
+                                            </td>
                                         </tr>
+                                        <%i++;%>
                                     </c:forEach>
-                                    <tr>
-                                        <td colspan="6">
-                                            <ul class="pagination" id="pagination"></ul>
-                                            <input type="hidden" value="" id="page" name="page"/>
-                                        </td>
-                                    </tr>
                                     </tbody>
                                 </table>
                                 <input class="aa-cart-view-btn" type="submit" value="Cập Nhập Giỏ Hàng">
@@ -102,7 +112,8 @@
                                     <th>Tổng Tiền</th>
                                     <td><fmt:formatNumber
                                             value="${totalPrice}"
-                                            type="number"></fmt:formatNumber>đ</td>
+                                            type="number"></fmt:formatNumber>đ
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -124,21 +135,7 @@
 
 
 <script>
-    var totalPages = ${page.totalPage};
-    var currentPage = ${page.page};
-    $(function () {
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: totalPages,
-            visiblePages: 3,
-            startPage: currentPage,
-            onPageClick: function (event, page) {
-                if (currentPage != page) {
-                    $('#page').val(page);
-                    $('#formSubmit').submit();
-                }
-            }
-        });
-    });
+
 </script>
 
 

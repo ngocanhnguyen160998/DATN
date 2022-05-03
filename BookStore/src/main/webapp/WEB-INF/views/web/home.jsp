@@ -91,7 +91,7 @@
                                     <div class="aa-promo-banner">
                                         <img src="<c:url value="/template/web/img/tamly/tamly1.jpg" />" alt="img">
                                         <div class="aa-prom-content">
-                                            <h4><a href="/product?page=1&category-id=100005">Tâm Lý</a></h4>
+                                            <h4><a href="/product?page=1">Xem Thêm</a></h4>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                    <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -166,7 +166,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -184,7 +184,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                    <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -221,7 +221,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -239,7 +239,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                    <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -276,7 +276,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -294,7 +294,7 @@
                                                 <figure>
                                                     <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                             src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                    <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                    <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                             class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -331,7 +331,7 @@
                                                     </figcaption>
                                                 </figure>
                                                 <div class="aa-product-hvr-content">
-                                                    <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                    <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                        title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                                 </div>
                                             </li>
@@ -389,7 +389,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="#">${item.name}</a></h4>
@@ -426,7 +426,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
@@ -447,7 +447,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/product-detail?id=${item.id}">${item.name}</a></h4>
@@ -484,7 +484,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
@@ -505,7 +505,7 @@
                                             <figure>
                                                 <a class="aa-product-img" href="/product-detail?id=${item.id}" style="text-align: center"><img
                                                         src="<c:url value="${item.image}"/>" style="display: inline-block"></a>
-                                                <a class="aa-add-card-btn" href="/cart?page=1&id=${item.id}&amount=1&action=insert"><span
+                                                <a class="aa-add-card-btn" href="/cart?id=${item.id}&amount=1&action=insert"><span
                                                         class="fa fa-shopping-cart"></span>Thêm Giỏ Hàng</a>
                                                 <figcaption>
                                                     <h4 class="aa-product-title"><a href="/product-detail?id=${item.id}">${item.name}</a></h4>
@@ -542,7 +542,7 @@
                                                 </figcaption>
                                             </figure>
                                             <div class="aa-product-hvr-content">
-                                                <a href="/wishlist?page=1&id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
+                                                <a href="/wishlist?id=${item.id}&action=insert" data-toggle="tooltip" data-placement="top"
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->

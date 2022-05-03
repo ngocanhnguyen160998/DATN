@@ -52,15 +52,15 @@
                             <ul class="aa-head-top-nav-right">
                                 <c:if test="${userSession == null}">
                                     <li><a href="/account">Đăng Ký</a></li>
-                                    <li class="hidden-xs"><a href="/wishlist?page=1">Yêu thích</a></li>
-                                    <li class="hidden-xs"><a href="/cart?page=1">Giỏ hàng</a></li>
+                                    <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
+                                    <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
                                     <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
                                     <li><a href="/login-modal" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
                                 </c:if>
                                 <c:if test="${userSession != null}">
 <%--                                    <li><a href="/account">Đăng Ký</a></li>--%>
-                                    <li class="hidden-xs"><a href="/wishlist?page=1">Yêu thích</a></li>
-                                    <li class="hidden-xs"><a href="/cart?page=1">Giỏ hàng</a></li>
+                                    <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
+                                    <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
                                     <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
                                     <li><a href="/logout">Đăng xuất</a></li>
                                     <li><a data-toggle="modal" data-target="">Hello, ${userSession.userName}</a></li>
@@ -112,5 +112,6 @@
     </div>
     <!-- / header bottom  -->
 </header>
+
 </body>
 </html>

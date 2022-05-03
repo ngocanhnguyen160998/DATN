@@ -175,10 +175,17 @@ public class DataAccess {
         return new PageImpl<>(lst, pageable, categoryService.countByNameLike(name));
     }
 
-    public Page<ProductDTO> getListProductDTOByName(String name, Pageable pageable) {
+    public Page<ProductDTO> getListProductDTOByName(String name, Pageable pageable, String sort) {
         List<ProductDTO> lst = null;
         try {
             String sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.name LIKE ?  ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+
+            if("asc".equals(sort)) {
+                sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.name LIKE ?  ORDER BY p.price ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            } else if("desc".equals(sort)) {
+                sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.name LIKE ?  ORDER BY p.price DESC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            }
+
             lst = jdbcTemplate.query(sql, new Object[]{"%" + name + "%"}, (rs, rowNum) -> new ProductDTO(
                             rs.getLong("id"),
                             rs.getString("name"),
@@ -216,12 +223,17 @@ public class DataAccess {
         return new PageImpl<>(lst, pageable, warehouseService.countByLikeNameProduct(name));
     }
 
-    public Page<ProductDTO> getListProductDTOByCategoryId(Pageable pageable, String idCategory) {
+    public Page<ProductDTO> getListProductDTOByCategoryId(Pageable pageable, String idCategory, String sort) {
         List<ProductDTO> lst = null;
         try {
             String sql = "";
             if ("".equals(idCategory) || idCategory == null) {
                 sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                if ("asc".equals(sort)) {
+                    sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY p.price ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                } else if("desc".equals(sort)) {
+                    sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id ORDER BY p.price DESC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                }
                 lst = jdbcTemplate.query(sql, (rs, rowNum) -> new ProductDTO(
                                 rs.getLong("id"),
                                 rs.getString("name"),
@@ -236,6 +248,11 @@ public class DataAccess {
                 );
             } else {
                 sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.category_id = ? ORDER BY ID ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                if ("asc".equals(sort)) {
+                    sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.category_id = ? ORDER BY p.price ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                } else if("desc".equals(sort)) {
+                    sql = "SELECT p.*, c.name FROM PRODUCT p, CATEGORY c WHERE p.category_id = c.id AND p.category_id = ? ORDER BY p.price DESC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                }
                 lst = jdbcTemplate.query(sql, new Object[]{idCategory}, (rs, rowNum) -> new ProductDTO(
                                 rs.getLong("id"),
                                 rs.getString("name"),
@@ -261,7 +278,7 @@ public class DataAccess {
         try {
             String sql = "";
             if (!"".equals(searchDate.getFromDate()) && !"".equals(searchDate.getToDate())) {
-                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id AND modefined_date BETWEEN ? AND ?";
+                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id AND modefined_date BETWEEN ? AND ? GROUP BY o.id";
                 orderDetailDTO = jdbcTemplate.query(sql, new Object[]{searchDate.getFromDate(), searchDate.getToDate()}, (rs, rowNum) -> new OrderDetailDTO(
                                 rs.getLong("id"),
                                 rs.getString("first_name"),
@@ -284,7 +301,7 @@ public class DataAccess {
                         )
                 );
             } else {
-                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id";
+                sql = "SELECT o.*, u.user_name, p.name, od.unit_price, od.amount  FROM PRODUCT p, ORDERS o, USER u, ORDERS_DETAILS od WHERE p.id = od.product_id AND u.id = o.user_id AND o.id = od.order_id GROUP BY o.id";
                 orderDetailDTO = jdbcTemplate.query(sql, (rs, rowNum) -> new OrderDetailDTO(
                                 rs.getLong("id"),
                                 rs.getString("first_name"),
@@ -408,25 +425,10 @@ public class DataAccess {
         return count;
     }
 
-    public Long countWishlistByUserId(String userId) {
-        List<Long> tmp = null;
-        Long count = 0l;
-        try {
-            String sql = "SELECT COUNT(w.id) FROM wishlist w, product p, warehouse wh WHERE w.product_id = p.id AND p.id = wh.product_id AND w.user_id = ?";
-            tmp = jdbcTemplate.queryForList(sql, new Object[]{userId}, Long.class);
-            if (tmp != null && tmp.size() == 1) {
-                count = tmp.get(0);
-            }
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return count;
-    }
-
-    public Page<WishlistDTO> getListWishlistByUserId(String userId, Pageable pageable) {
+    public List<WishlistDTO> getListWishlistByUserId(String userId) {
         List<WishlistDTO> lst = null;
         try {
-            String sql = "SELECT p.id, p.name, p.image, wh.amount, p.price, p.sale_price FROM wishlist w, product p, warehouse wh WHERE w.product_id = p.id AND p.id = wh.product_id AND w.user_id = ? ORDER BY w.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+            String sql = "SELECT p.id, p.name, p.image, wh.amount, p.price, p.sale_price FROM wishlist w, product p, warehouse wh WHERE w.product_id = p.id AND p.id = wh.product_id AND w.user_id = ? ORDER BY w.id ASC";
             lst = jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> new WishlistDTO(
                             rs.getLong("p.id"),
                             rs.getString("p.name"),
@@ -439,51 +441,19 @@ public class DataAccess {
         } catch (Exception ex) {
             ex.getMessage();
         }
-        return new PageImpl<>(lst, pageable, countWishlistByUserId(userId));
-    }
-
-    public Long countCartByUserId(String userId) {
-        List<Long> tmp = null;
-        Long count = 0l;
-        try {
-            String sql = "SELECT COUNT(c.id) FROM cart c, product p WHERE c.product_id = p.id AND c.status = 0 AND c.user_id = ?";
-            tmp = jdbcTemplate.queryForList(sql, new Object[]{userId}, Long.class);
-            if (tmp != null && tmp.size() == 1) {
-                count = tmp.get(0);
-            }
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return count;
-    }
-
-    public Page<CartDTO> getListCartByUserId(String userId, Pageable pageable) {
-        List<CartDTO> lst = null;
-        try {
-            String sql = "SELECT c.*, p.name, p.image FROM cart c, product p WHERE c.product_id = p.id AND c.status = 0 AND c.user_id = ? ORDER BY c.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
-            lst = jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> new CartDTO(
-                            rs.getLong("c.product_id"),
-                            rs.getString("p.name"),
-                            rs.getString("p.image"),
-                            rs.getInt("c.amount"),
-                            rs.getLong("c.total")
-                    )
-            );
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-        return new PageImpl<>(lst, pageable, countCartByUserId(userId));
+        return lst;
     }
 
     public List<CartDTO> getAllListCartByUserId(String userId) {
         List<CartDTO> lst = null;
         try {
-            String sql = "SELECT c.*, p.name, p.image FROM cart c, product p WHERE c.product_id = p.id AND c.status = 0 AND c.user_id = ?";
+            String sql = "SELECT c.*, p.name, p.image, w.amount FROM cart c, product p, warehouse w WHERE c.product_id = p.id AND w.product_id = p.id AND c.status = 0 AND c.user_id = ?";
             lst = jdbcTemplate.query(sql, new Object[]{userId}, (rs, rowNum) -> new CartDTO(
                             rs.getLong("c.product_id"),
                             rs.getString("p.name"),
                             rs.getString("p.image"),
                             rs.getInt("c.amount"),
+                            rs.getInt("w.amount"),
                             rs.getLong("c.total")
                     )
             );

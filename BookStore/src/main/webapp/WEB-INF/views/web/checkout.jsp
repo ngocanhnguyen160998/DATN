@@ -44,7 +44,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="checkout-area">
-                    <form:form action="/checkout" modelAttribute="checkout" method="post">
+                    <form:form action="/checkout" modelAttribute="checkout" method="post" onsubmit = "return(validate());">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="checkout-left">
@@ -64,13 +64,14 @@
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="firstName" type="text"
-                                                                            placeholder="Họ Đệm"/>
+                                                                            placeholder="Họ Đệm *" required="true"/>
+<%--                                                                <label id="nameValidate" style="color: red;">* Tên không được để trống</label>--%>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="lastName" type="text"
-                                                                            placeholder="Tên"/>
+                                                                            placeholder="Tên" required="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -78,15 +79,15 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="email" type="email"
-                                                                            placeholder="Email"/>
+                                                                            placeholder="Email" required="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
-                                                                <form:input path="phone" type="tel"
-                                                                            placeholder="SĐT"/>
+                                                                <form:input path="phone" type="phone"
+                                                                            placeholder="SĐT" required="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,7 +136,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="address" type="text"
-                                                                            placeholder="Địa Chỉ"/>
+                                                                            placeholder="Địa Chỉ" required="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -270,6 +271,48 @@
             }
         });
     }
+
+    function validate() {
+        let x = true;
+
+        let regexPhone = /^\d{10,15}$/
+        if (document.getElementById("phone").value.trim() === "") {
+            x = false;
+        } else if (!document.getElementById("phone").value.trim().match(regexPhone)) {
+            x = false;
+        }
+
+        let regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*$/;
+        if (document.getElementById("email").value.trim() === "") {
+            x = false;
+        } else if (!document.getElementById("email").value.trim().match(regexEmail)) {
+            x = false;
+        }
+
+        let selectProvince = document.getElementById('provinceId');
+        let valueProvince = selectProvince.options[selectProvince.selectedIndex].value;
+        if (valueProvince === "0") {
+            x = false;
+        }
+
+        let selectDistrict = document.getElementById('districtId');
+        let valueDistrict = selectDistrict.options[selectDistrict.selectedIndex].value;
+        if (valueDistrict === "0") {
+            x = false;
+        }
+
+        let selectCommune = document.getElementById('communeId');
+        let valueCommune = selectCommune.options[selectCommune.selectedIndex].value;
+        if (valueCommune === "0") {
+            x = false;
+        }
+
+        if (x === false) {
+            alert("Thông tin đặt hàng không hợp lệ, vui lòng nhập lại!")
+        }
+        return x;
+    }
+
 </script>
 
 </body>

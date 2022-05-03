@@ -55,7 +55,7 @@ public class AdminProductController {
         List<ProductDTO> lst;
 
         if (!"all".equals(search)) {
-            lst = dataAccess.getListProductDTOByName(searchInput, pageable).getContent();
+            lst = dataAccess.getListProductDTOByName(searchInput, pageable, "").getContent();
             pageResponse.setTotalItem(productService.countByNameLike(searchInput));
         } else {
             lst = dataAccess.getListProductDTO(pageable).getContent();

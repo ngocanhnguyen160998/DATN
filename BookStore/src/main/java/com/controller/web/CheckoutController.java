@@ -62,7 +62,7 @@ public class CheckoutController {
             this.user = user;
 
             List<CartDTO> lstCartAll = dataAccess.getAllListCartByUserId(String.valueOf(user.getId()));
-            if(lstCartAll == null  || lstCartAll.size() == 0) {
+            if (lstCartAll == null || lstCartAll.size() == 0) {
                 return new ModelAndView("redirect:/product?page=1");
             }
 
@@ -120,11 +120,12 @@ public class CheckoutController {
             List<Cart> lst = cartService.findByUserId(user.getId());
 
             String fromDate = dateFormatter.format(orders.getModefinedDate());
-            String toDate = dateFormatter.format(new Date());
+            String toDate = dateFormatter.format(System.currentTimeMillis() + 3000);
+            System.out.println("LOG TIME GET ORDER: " + fromDate + " - " + toDate);
             Orders tmp = orderService.getByUserIdAndDate(user.getId(), dateFormatter.parse(fromDate), dateFormatter.parse(toDate)).get();
 
             for (Cart cart : lst) {
-                OrdersDetails ordersDetails = new OrdersDetails(cart.getProductId(), tmp.getId(), cart.getTotal()/cart.getAmount(), cart.getAmount());
+                OrdersDetails ordersDetails = new OrdersDetails(cart.getProductId(), tmp.getId(), cart.getTotal() / cart.getAmount(), cart.getAmount());
                 cartService.updateStatus(cart);
                 ordersDetailsService.insert(ordersDetails);
                 warehouseService.minusAmountByProductId(cart.getProductId(), cart.getAmount());

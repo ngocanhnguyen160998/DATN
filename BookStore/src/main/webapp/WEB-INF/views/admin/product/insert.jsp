@@ -67,11 +67,11 @@
                                     </div>
                                     <div class="form-group">
                                         <form:label path="info">Thông tin</form:label>
-                                        <form:input path="info" class="form-control"/>
+                                        <form:textarea path="info" class="form-control" rows="5" />
                                     </div>
                                     <div class="form-group">
                                         <form:label path="descriptions">Mô tả</form:label>
-                                        <form:input path="descriptions" class="form-control"/>
+                                        <form:textarea path="descriptions" class="form-control" rows="5" />
                                     </div>
                                     <div class="form-group">
                                         <form:label path="price">Giá</form:label>

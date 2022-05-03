@@ -36,7 +36,11 @@ public class ProductController {
     public String searchInput = "";
 
     @GetMapping("/product")
-    public ModelAndView product(Model model, HttpServletRequest request, @RequestParam(value = "category-id", required = false) String categoryId, @RequestParam(value = "search", required = false) String search, @RequestParam("page") int page) {
+    public ModelAndView product(Model model, HttpServletRequest request,
+                                @RequestParam(value = "category-id", required = false) String categoryId,
+                                @RequestParam(value = "search", required = false) String search,
+                                @RequestParam("page") int page,
+                                @RequestParam(value = "sort", required = false) String sortPrice) {
         try {
             User user = (User) SessionUtil.getSession(request, "USER");
             PageResponse pageResponse = new PageResponse();
@@ -48,10 +52,10 @@ public class ProductController {
             List<ProductDTO> lst;
             List<Category> lstCategory = categoryService.getAll();
             if (!"all".equals(search) && search != null) {
-                lst = dataAccess.getListProductDTOByName(searchInput, pageable).getContent();
+                lst = dataAccess.getListProductDTOByName(searchInput, pageable, sortPrice).getContent();
                 pageResponse.setTotalItem(productService.countByNameLike(searchInput));
             } else {
-                lst = dataAccess.getListProductDTOByCategoryId(pageable, categoryId).getContent();
+                lst = dataAccess.getListProductDTOByCategoryId(pageable, categoryId, sortPrice).getContent();
                 if (categoryId != null && !"".equals(categoryId)) {
                     pageResponse.setTotalItem(productService.countByCategoryId(categoryId));
                 } else {
@@ -60,6 +64,7 @@ public class ProductController {
             }
             pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
+            model.addAttribute("sortPrice", sortPrice);
             model.addAttribute("userSession", user);
             model.addAttribute("authRequest", new AuthRequest());
             model.addAttribute("item", lst);

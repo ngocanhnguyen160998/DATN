@@ -37,7 +37,6 @@ public class WishlistController {
 
     @GetMapping("/wishlist")
     public ModelAndView wishlist(Model model, HttpServletRequest request,
-                                 @RequestParam("page") int page,
                                  @RequestParam(value = "id", required = false) String id,
                                  @RequestParam(value = "action", required = false) String action) {
         try {
@@ -54,20 +53,12 @@ public class WishlistController {
                 wishlistService.deleteByProductIdAndUserId(Long.parseLong(id), user.getId());
             }
 
-            PageResponse pageRespone = new PageResponse();
-            pageRespone.setLimit(3);
-            pageRespone.setPage(page);
-            Pageable pageable = PageRequest.of(page - 1, 3);
-
-            List<WishlistDTO> lst = dataAccess.getListWishlistByUserId(String.valueOf(user.getId()), pageable).getContent();
-            pageRespone.setTotalItem(dataAccess.countWishlistByUserId(String.valueOf(user.getId())));
-            pageRespone.setTotalPage((int) Math.ceil((double) pageRespone.getTotalItem() / pageRespone.getLimit()));
+            List<WishlistDTO> lst = dataAccess.getListWishlistByUserId(String.valueOf(user.getId()));
 
             model.addAttribute("item", lst);
             model.addAttribute("userSession", user);
             model.addAttribute("authRequest", new AuthRequest());
             model.addAttribute("search", new Search());
-            model.addAttribute("page", pageRespone);
             return new ModelAndView("web/wishlist");
         } catch (Exception e) {
             return new ModelAndView("redirect:/404");

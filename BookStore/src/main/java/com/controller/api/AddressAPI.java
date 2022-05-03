@@ -29,13 +29,12 @@ public class AddressAPI {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String> stringMap = districtService.findById(utilResponse.getProvinceId());
         PrintWriter printWriter = response.getWriter();
-        printWriter.println("<option>-- Chọn quận/huyện--</option>");
+        printWriter.println("<option value=\"0\">-- Chọn Quận/Huyện--</option>");
         for (Map.Entry<String, String> stringMap1 : stringMap.entrySet()
         ) {
             printWriter.println("<option value=\""+stringMap1.getKey()+"\">"+stringMap1.getValue()+"</option>");
 
         }
-
     }
 
     @PostMapping("/api/district")
@@ -43,7 +42,7 @@ public class AddressAPI {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String> stringMap = wardService.findAllByDistrictId(utilResponse.getDistrictId());
         PrintWriter printWriter = response.getWriter();
-        printWriter.println("<option>-- Chọn xã/phường--</option>");
+        printWriter.println("<option value=\"0\">-- Chọn Xã/Phường--</option>");
         for (Map.Entry<String, String> stringMap1 : stringMap.entrySet()) {
             printWriter.println("<option value=\""+stringMap1.getKey()+"\">"+stringMap1.getValue()+"</option>");
 

@@ -22,7 +22,7 @@
                     <!-- Left nav -->
                     <ul class="nav navbar-nav">
                         <li><a href="/">Trang chủ</a></li>
-                        <li><a href="/product?page=1&category-id=100001">Văn Học </a></li>
+                        <li><a href="/product?page=1&category-id=100001&sort=">Văn Học </a></li>
                         <li><a href="/product?page=1&category-id=100002">Kinh Tế </a></li>
                         <li><a href="/product?page=1&category-id=100003">Kỹ Năng Sống </a></li>
                         <li><a href="/product?page=1&category-id=100004">Giáo Dục </a></li>

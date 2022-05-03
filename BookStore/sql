@@ -55,6 +55,19 @@ insert into CATEGORY(name)
 VALUES ('Kỹ Năng Sống');
 insert into CATEGORY(name)
 VALUES ('Giáo Dục');
+insert into CATEGORY(name)
+VALUES ('Tâm Lý');
+insert into CATEGORY(name)
+VALUES ('Giới Trẻ');
+insert into CATEGORY(name)
+VALUES ('Ngoại Ngữ');
+insert into CATEGORY(name)
+VALUES ('Thiếu Nhi');
+insert into CATEGORY(name)
+VALUES ('Làm Đẹp');
+insert into CATEGORY(name)
+VALUES ('Thể Thao');
+
 
 create table PRODUCT
 (
@@ -166,15 +179,15 @@ ALTER TABLE WAREHOUSE
     AUTO_INCREMENT = 100001;
 
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100001, 15, 50, 100000, 'Sản phẩm tốt');
+values (100001, 50, 50, 10000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100002, 22, 59, 50000, 'Sản phẩm xấu');
+values (100002, 50, 59, 15000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100003, 24, 50, 60000, 'Sản phẩm đẹp');
+values (100003, 50, 50, 10000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100004, 26, 50, 170000, 'Sản phẩm chất lượng');
+values (100004, 50, 50, 17000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100005, 29, 50, 10000, 'Sản phẩm không phù hợp');
+values (100005, 50, 50, 10000, '');
 
 create table WISHLIST
 (
@@ -203,6 +216,7 @@ create table CART
 ALTER TABLE CART
     AUTO_INCREMENT = 100001;
 
+
 create table ORDERS
 (
     id             int(100) not null primary key auto_increment,
@@ -215,7 +229,7 @@ create table ORDERS
     district       nvarchar(100),
     commune        nvarchar(100),
     special_notes  nvarchar(100),
-    modefined_date date,
+    modefined_date datetime,
     total_price    int,
     payment_method varchar(20),
     user_id        int(100),
@@ -225,17 +239,6 @@ create table ORDERS
 
 ALTER TABLE ORDERS
     AUTO_INCREMENT = 100001;
-
-insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
-                   special_notes, modefined_date, total_price, payment_method, user_id, status)
-values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
-        'Thanh Trì', 'Văn Điển',
-        'Đặc biệt', '20220405', 500000, 'COD', 100001, 0);
-insert into ORDERS(first_name, last_name, email, phone, address, province, district, commune,
-                   special_notes, modefined_date, total_price, payment_method, user_id, status)
-values ('Nguyễn Ngọc', 'Anh', 'ngocanhnguyen160998@gmail.com', '0914663198', '69 ngõ 148 đường Ngọc Hồi', 'Hà Nội',
-        'Thanh Trì', 'Văn Điển',
-        'Đặc biệt', '20220405', 500000, 'COD', 100002, 0);
 
 create table ORDERS_DETAILS
 (
@@ -247,13 +250,6 @@ create table ORDERS_DETAILS
     constraint fk1233 foreign key (product_id) references product (id) ON DELETE CASCADE,
     constraint fk1234 foreign key (order_id) references orders (id) ON DELETE CASCADE
 );
-
-INSERT INTO orders_details(product_id, order_id, unit_price, amount)
-VALUES (100001, 100001, 269000, 1);
-INSERT INTO orders_details(product_id, order_id, unit_price, amount)
-VALUES (100001, 100002, 269000, 2);
-INSERT INTO orders_details(product_id, order_id, unit_price, amount)
-VALUES (100002, 100002, 269000, 1);
 
 ALTER TABLE ORDERS_DETAILS
     AUTO_INCREMENT = 100001;

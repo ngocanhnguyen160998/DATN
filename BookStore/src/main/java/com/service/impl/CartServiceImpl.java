@@ -39,4 +39,18 @@ public class CartServiceImpl implements CartService {
     public List<Cart> findByUserId(Long userId) {
         return cartRepository.findByUserId(userId);
     }
+
+    @Override
+    public Cart updateAmount(Long productId, Long userId, int amount) {
+        Cart cart = cartRepository.findByProductIdAndUserId(productId, userId);
+        if (cart == null) {
+            return null;
+        }
+
+        cart.setTotal(amount * (cart.getTotal() / cart.getAmount()));
+        cart.setAmount(amount);
+        return cartRepository.save(cart);
+    }
+
+
 }

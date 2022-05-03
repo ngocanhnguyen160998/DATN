@@ -15,4 +15,6 @@ public interface CartService {
     Cart updateStatus(Cart cart);
 
     List<Cart> findByUserId(Long userId);
+
+    Cart updateAmount(Long productId, Long userId, int amount);
 }
