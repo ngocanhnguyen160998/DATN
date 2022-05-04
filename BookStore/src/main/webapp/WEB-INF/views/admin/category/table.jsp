@@ -82,8 +82,8 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                     <tr style="text-align: center">
-                                        <th style="width: 150px">Mã thể loại</th>
-                                        <th style="width: 350px">Tên thể loại</th>
+                                        <th style="width: 150px">Mã Thể Loại</th>
+                                        <th style="width: 350px">Tên Thể Loại</th>
                                         <th>Ghi Chú</th>
                                     </tr>
                                     </thead>
