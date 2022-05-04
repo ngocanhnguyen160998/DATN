@@ -24,9 +24,6 @@ public class PasswordHasher {
     }
 
     public static void main(String[] args){
-        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String date = dateFormatter.format(new Date());
-        System.out.println(date);
-        System.out.println(hash("user"));
+        System.out.println(hash("admin"));
     }
 }
