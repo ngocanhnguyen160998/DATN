@@ -75,8 +75,12 @@
                                         <td><label>${item.email}</label></td>
                                     </tr>
                                     <tr>
-                                        <td><label>Tỉnh/TP:</label></td>
+                                        <td><label>Địa Chỉ:</label></td>
                                         <td><label>${item.address}</label></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Tỉnh/TP:</label></td>
+                                        <td><label>${item.province}</label></td>
                                     </tr>
                                     <tr>
                                         <td><label>Quận/Huyện:</label></td>

@@ -53,7 +53,7 @@
                                 <form:form id="formSubmit" action="/account" modelAttribute="user" method="post" onsubmit = "return(validate());">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <form:label path="userName">Tên Tài Khoản</form:label><label id="userNameValidate" style="color: red;"></label>
+                                            <form:label path="userName">Tài Khoản</form:label><label id="userNameValidate" style="color: red;"></label>
                                             <form:input path="userName" class="form-control"/>
                                         </div>
                                         <div class="form-group">
