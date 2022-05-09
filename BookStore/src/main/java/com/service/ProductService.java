@@ -36,4 +36,8 @@ public interface ProductService {
     List<Product> get8ProductByCategory(String categoryId);
 
     List<Product> get8ProductRandomByCategory(String categoryId, String productId);
+
+    long countByProductHot();
+
+    long countByProductSale();
 }

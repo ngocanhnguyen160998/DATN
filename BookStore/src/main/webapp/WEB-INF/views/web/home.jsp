@@ -430,11 +430,11 @@
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
-                                            <span class="aa-badge aa-hot" href="#">HOT!</span>
+<%--                                            <span class="aa-badge aa-hot" href="#">HOT!</span>--%>
                                         </li>
                                     </c:forEach>
                                 </ul>
-                                <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                <a class="aa-browse-btn" href="/product?page=1&category-id=hot&sort=" style="margin-left: 44%">Xem Thêm <span
                                         class="fa fa-long-arrow-right"></span></a>
                             </div>
                             <!-- / popular product category -->
@@ -488,11 +488,11 @@
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
-                                            <span class="aa-badge aa-sale" href="#">SALE!</span>
+<%--                                            <span class="aa-badge aa-sale" href="#">SALE!</span>--%>
                                         </li>
                                     </c:forEach>
                                 </ul>
-                                <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                <a class="aa-browse-btn" href="product?page=1&category-id=sale&sort=" style="margin-left: 44%">Xem Thêm <span
                                         class="fa fa-long-arrow-right"></span></a>
                             </div>
                             <!-- / featured product category -->
@@ -546,11 +546,11 @@
                                                    title="Yêu Thích"><span class="fa fa-heart-o"></span></a>
                                             </div>
                                             <!-- product badge -->
-                                            <span class="aa-badge aa-sold-out" href="#">New!</span>
+<%--                                            <span class="aa-badge aa-sold-out" href="#">New!</span>--%>
                                         </li>
                                     </c:forEach>
                                 </ul>
-                                <a class="aa-browse-btn" href="#" style="margin-left: 44%">Xem Thêm <span
+                                <a class="aa-browse-btn" href="product?page=1&category-id=new&sort=" style="margin-left: 44%">Xem Thêm <span
                                         class="fa fa-long-arrow-right"></span></a>
                             </div>
                             <!-- / latest product category -->

@@ -51,17 +51,30 @@ public class ProductController {
 
             List<ProductDTO> lst;
             List<Category> lstCategory = categoryService.getAll();
-            if (!"all".equals(search) && search != null) {
-                lst = dataAccess.getListProductDTOByName(searchInput, pageable, sortPrice).getContent();
-                pageResponse.setTotalItem(productService.countByNameLike(searchInput));
+
+            if ("hot".equals(categoryId)) {
+                lst = dataAccess.getListProductDTOByTypeHot(pageable, sortPrice).getContent();
+                pageResponse.setTotalItem(productService.countByProductHot());
+            } else if ("sale".equals(categoryId)) {
+                lst = dataAccess.getListProductDTOByTypeSale(pageable, sortPrice).getContent();
+                pageResponse.setTotalItem(productService.countByProductSale());
+            } else if ("new".equals(categoryId)) {
+                lst = dataAccess.getListProductDTOByTypeNew(pageable, sortPrice).getContent();
+                pageResponse.setTotalItem(productService.count());
             } else {
-                lst = dataAccess.getListProductDTOByCategoryId(pageable, categoryId, sortPrice).getContent();
-                if (categoryId != null && !"".equals(categoryId)) {
-                    pageResponse.setTotalItem(productService.countByCategoryId(categoryId));
+                if (!"all".equals(search) && search != null) {
+                    lst = dataAccess.getListProductDTOByName(searchInput, pageable, sortPrice).getContent();
+                    pageResponse.setTotalItem(productService.countByNameLike(searchInput));
                 } else {
-                    pageResponse.setTotalItem(productService.count());
+                    lst = dataAccess.getListProductDTOByCategoryId(pageable, categoryId, sortPrice).getContent();
+                    if (categoryId != null && !"".equals(categoryId)) {
+                        pageResponse.setTotalItem(productService.countByCategoryId(categoryId));
+                    } else {
+                        pageResponse.setTotalItem(productService.count());
+                    }
                 }
             }
+
             pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
 
             model.addAttribute("sortPrice", sortPrice);
