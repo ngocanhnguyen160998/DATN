@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -453,6 +456,11 @@ public class DataAccess {
     public Page<StatisticProduct> getStatisticProductByCondition(Search search, Pageable pageable) {
         List<StatisticProduct> lst = null;
         String sql = "";
+
+        String fromDate = search.getFromDate() + " 00:00:00";
+        String toDate = search.getToDate() + " 23:59:59" ;
+
+
         try {
             if (!"".equals(search.getInput()) && "".equals(search.getFromDate())) {
                 sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
@@ -464,8 +472,8 @@ public class DataAccess {
                         )
                 );
             } else if ("".equals(search.getInput()) && !"".equals(search.getFromDate())) {
-                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
-                lst = jdbcTemplate.query(sql, new Object[]{search.getFromDate(), search.getToDate()}, (rs, rowNum) -> new StatisticProduct(
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date >= ? AND v.modefined_date <= ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{fromDate, toDate}, (rs, rowNum) -> new StatisticProduct(
                                 rs.getLong("id"),
                                 rs.getString("name"),
                                 rs.getLong("total_price"),
@@ -473,8 +481,8 @@ public class DataAccess {
                         )
                 );
             } else {
-                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
-                lst = jdbcTemplate.query(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, (rs, rowNum) -> new StatisticProduct(
+                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date >= ? AND v.modefined_date <= ? ORDER BY v.id ASC LIMIT " + pageable.getPageSize() + " OFFSET " + pageable.getOffset();
+                lst = jdbcTemplate.query(sql, new Object[]{"%" + search.getInput() + "%", fromDate, toDate}, (rs, rowNum) -> new StatisticProduct(
                                 rs.getLong("id"),
                                 rs.getString("name"),
                                 rs.getLong("total_price"),
@@ -495,13 +503,13 @@ public class DataAccess {
         String sql = "";
         try {
             if (!"".equals(search.getInput()) && "".equals(search.getFromDate())) {
-                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ?";
+                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ?";
                 tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%"}, Long.class);
             } else if ("".equals(search.getInput()) && !"".equals(search.getFromDate())) {
-                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ?";
+                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ?";
                 tmp = jdbcTemplate.queryForList(sql, new Object[]{search.getFromDate(), search.getToDate()}, Long.class);
             } else {
-                sql = "SELECT v.*  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ?";
+                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ?";
                 tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, Long.class);
             }
             if (tmp != null && tmp.size() == 1) {

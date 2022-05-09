@@ -42,9 +42,10 @@ public class AdminOrderController {
     private DataAccess dataAccess;
 
     public String searchInput = "";
+    public String page = "1";
 
     @GetMapping("/table")
-    public ModelAndView product(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search){
+    public ModelAndView product(Model model, @RequestParam("page") int page, @RequestParam(value = "search", required = false) String search) {
         PageResponse pageResponse = new PageResponse();
         pageResponse.setLimit(9);
         pageResponse.setPage(page);
@@ -59,6 +60,10 @@ public class AdminOrderController {
             pageResponse.setTotalItem(orderService.count());
         }
         pageResponse.setTotalPage((int) Math.ceil((double) pageResponse.getTotalItem() / pageResponse.getLimit()));
+
+        if (page != 0) {
+            this.page = String.valueOf(page);
+        }
         model.addAttribute("item", lst);
         model.addAttribute("page", pageResponse);
         model.addAttribute("input", search);
@@ -74,25 +79,25 @@ public class AdminOrderController {
     }
 
     @RequestMapping("/finish")
-    public ModelAndView finish(@RequestParam(value = "id") Long id){
+    public ModelAndView finish(@RequestParam(value = "id") Long id) {
         orderService.updateFinishById(id);
-        return new ModelAndView("redirect:/admin/order/table?page=1&search=all");
+        return new ModelAndView("redirect:/admin/order/table?page=" + page + "&search=all");
     }
 
     @RequestMapping("/confirm")
-    public ModelAndView confirm(@RequestParam(value = "id") Long id){
+    public ModelAndView confirm(@RequestParam(value = "id") Long id) {
         orderService.updateConfirmById(id);
-        return new ModelAndView("redirect:/admin/order/table?page=1&search=all");
+        return new ModelAndView("redirect:/admin/order/table?page=" + page + "&search=all");
     }
 
     @RequestMapping("/cancel")
-    public ModelAndView cancel(@RequestParam(value = "id") Long id){
+    public ModelAndView cancel(@RequestParam(value = "id") Long id) {
         List<OrdersDetails> lst = ordersDetailsService.getAllByOrderId(id);
         for (OrdersDetails od : lst) {
             warehouseService.addAmountByProductId(od.getProductId(), od.getAmount());
         }
         orderService.updateCancelById(id);
-        return new ModelAndView("redirect:/admin/order/table?page=1&search=all");
+        return new ModelAndView("redirect:/admin/order/table?page=" + page + "&search=all");
     }
 
     @RequestMapping("/details")
@@ -104,7 +109,7 @@ public class AdminOrderController {
     }
 
     @PostMapping("/export-excel")
-    public void exportExcel(HttpServletResponse response, @ModelAttribute("searchDate") SearchDate searchDate){
+    public void exportExcel(HttpServletResponse response, @ModelAttribute("searchDate") SearchDate searchDate) {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());

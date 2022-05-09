@@ -53,7 +53,7 @@
                                         <div class="panel panel-default aa-checkout-billaddress">
                                             <div class="panel-heading">
                                                 <h4 class="panel-title">
-                                                    <a>
+                                                    <a style="font-weight: bold">
                                                         Địa Chỉ Giao Hàng
                                                     </a>
                                                 </h4>
@@ -64,14 +64,14 @@
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="firstName" type="text"
-                                                                            placeholder="Họ Đệm *" required="true"/>
+                                                                            placeholder="Họ Đệm" required="true" cssStyle="color: black; font-weight: bold" />
 <%--                                                                <label id="nameValidate" style="color: red;">* Tên không được để trống</label>--%>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-6">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="lastName" type="text"
-                                                                            placeholder="Tên" required="true"/>
+                                                                            placeholder="Tên" required="true" cssStyle="color: black; font-weight: bold" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -79,7 +79,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="email" type="email"
-                                                                            placeholder="Email" required="true"/>
+                                                                            placeholder="Email" required="true" cssStyle="color: black; font-weight: bold" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -87,7 +87,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="phone" type="phone"
-                                                                            placeholder="SĐT" required="true"/>
+                                                                            placeholder="SĐT" required="true" cssStyle="color: black; font-weight: bold" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -95,7 +95,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:select path="provinceId" id="provinceId"
-                                                                             cssStyle="height: 50px"
+                                                                             cssStyle="height: 50px; font-weight: bold; color: black"
                                                                              onchange="changeProvince()">
                                                                     <option value="0" selected disabled hidden>-- Chọn
                                                                         Tỉnh/TP --
@@ -109,8 +109,8 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:select path="districtId" id="districtId"
-                                                                             cssStyle="height: 50px"
-                                                                             onchange="changeDistrict()">
+                                                                             cssStyle="height: 50px; font-weight: bold; color: black"
+                                                                             onchange="changeDistrict()" >
                                                                     <option value="0" selected disabled hidden>-- Chọn
                                                                         Quận/Huyện --
                                                                     </option>
@@ -123,7 +123,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:select path="communeId" id="communeId"
-                                                                             cssStyle="height: 50px">
+                                                                             cssStyle="height: 50px; font-weight: bold; color: black">
                                                                     <option value="0" selected disabled hidden>-- Chọn
                                                                         Phường/Xã --
                                                                     </option>
@@ -136,7 +136,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:input path="address" type="text"
-                                                                            placeholder="Địa Chỉ" required="true"/>
+                                                                            placeholder="Địa Chỉ" required="true" cssStyle="color: black; font-weight: bold" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,7 +144,7 @@
                                                         <div class="col-md-12">
                                                             <div class="aa-checkout-single-bill">
                                                                 <form:textarea path="note" cols="8" rows="3"
-                                                                               placeholder="Ghi Chú"/>
+                                                                               placeholder="Ghi Chú" cssStyle="color: black; font-weight: bold" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -192,7 +192,7 @@
                                                         name="optionsRadios" checked value="COD"> Thanh toán khi nhận hàng
                                         </label>
                                         <label for="paypal">
-                                            <input type="radio" id="paypal" name="optionsRadios" value="Paypal"> Paypal
+                                            <input type="radio" id="paypal" name="optionsRadios" value="Paypal" disabled> Paypal
                                         </label>
                                         <form:input path="paymentMethod" type="hidden"></form:input>
                                         <img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg"

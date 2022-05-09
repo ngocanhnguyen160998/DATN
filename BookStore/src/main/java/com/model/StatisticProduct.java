@@ -3,16 +3,20 @@ package com.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name ="v_statistic_product")
+@Table(name = "v_statistic_product")
 public class StatisticProduct {
     @Id
     private Long id;
     private String name;
     private Long totalPrice;
     private Date modefinedDate;
+
 
     public StatisticProduct() {
     }
@@ -52,7 +56,7 @@ public class StatisticProduct {
         return modefinedDate;
     }
 
-    public void setModefinedDate(Date modifinedDate) {
-        this.modefinedDate = modifinedDate;
+    public void setModefinedDate(Date modefinedDate) {
+        this.modefinedDate = modefinedDate;
     }
 }

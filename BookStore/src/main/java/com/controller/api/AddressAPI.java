@@ -29,10 +29,10 @@ public class AddressAPI {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String> stringMap = districtService.findById(utilResponse.getProvinceId());
         PrintWriter printWriter = response.getWriter();
-        printWriter.println("<option value=\"0\">-- Chọn Quận/Huyện--</option>");
+        printWriter.println("<option value=\"0\" style=\"font-weight:bold; color: black\">-- Chọn Quận/Huyện--</option>");
         for (Map.Entry<String, String> stringMap1 : stringMap.entrySet()
         ) {
-            printWriter.println("<option value=\""+stringMap1.getKey()+"\">"+stringMap1.getValue()+"</option>");
+            printWriter.println("<option value=\""+stringMap1.getKey()+"\" style=\"font-weight:bold; color: black\">"+stringMap1.getValue()+"</option>");
 
         }
     }
@@ -42,9 +42,9 @@ public class AddressAPI {
         response.setContentType("text/html;charset=UTF-8");
         Map<String, String> stringMap = wardService.findAllByDistrictId(utilResponse.getDistrictId());
         PrintWriter printWriter = response.getWriter();
-        printWriter.println("<option value=\"0\">-- Chọn Xã/Phường--</option>");
+        printWriter.println("<option value=\"0\" style=\"font-weight:bold; color: black\">-- Chọn Xã/Phường--</option>");
         for (Map.Entry<String, String> stringMap1 : stringMap.entrySet()) {
-            printWriter.println("<option value=\""+stringMap1.getKey()+"\">"+stringMap1.getValue()+"</option>");
+            printWriter.println("<option value=\""+stringMap1.getKey()+"\" style=\"font-weight:bold; color: black\">"+stringMap1.getValue()+"</option>");
 
         }
     }
