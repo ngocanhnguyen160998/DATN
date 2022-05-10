@@ -501,16 +501,18 @@ public class DataAccess {
         List<Long> tmp = null;
         Long count = 0l;
         String sql = "";
+        String fromDate = search.getFromDate() + " 00:00:00";
+        String toDate = search.getToDate() + " 23:59:59" ;
         try {
             if (!"".equals(search.getInput()) && "".equals(search.getFromDate())) {
                 sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ?";
                 tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%"}, Long.class);
             } else if ("".equals(search.getInput()) && !"".equals(search.getFromDate())) {
-                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date BETWEEN ? AND ?";
-                tmp = jdbcTemplate.queryForList(sql, new Object[]{search.getFromDate(), search.getToDate()}, Long.class);
+                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.modefined_date >= ? AND v.modefined_date <= ?";
+                tmp = jdbcTemplate.queryForList(sql, new Object[]{fromDate, toDate}, Long.class);
             } else {
-                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date BETWEEN ? AND ?";
-                tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%", search.getFromDate(), search.getToDate()}, Long.class);
+                sql = "SELECT COUNT(*)  FROM V_STATISTIC_PRODUCT v WHERE v.name LIKE ? AND v.modefined_date >= ? AND v.modefined_date <= ?";
+                tmp = jdbcTemplate.queryForList(sql, new Object[]{"%" + search.getInput() + "%", fromDate, toDate}, Long.class);
             }
             if (tmp != null && tmp.size() == 1) {
                 count = tmp.get(0);

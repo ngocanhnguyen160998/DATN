@@ -97,7 +97,7 @@
                                         <tr>
                                             <td>${item.id}</td>
                                             <td>${item.name}</td>
-                                            <td><fmt:formatDate value="${item.modefinedDate}" pattern="dd-MM-yyyy HH:mm:ss"></fmt:formatDate></td>
+                                            <td><fmt:formatDate value="${item.modefinedDate}" pattern="dd-MM-yyyy"></fmt:formatDate></td>
                                             <td><fmt:formatNumber value="${item.totalPrice}"
                                                                   type="number"></fmt:formatNumber>đ</td>
                                         </tr>

@@ -1,4 +1,4 @@
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -55,10 +55,13 @@
                                     <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
                                     <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
                                     <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
-                                    <li><a href="/login-modal" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                                    <li><a href="/login-modal" data-toggle="modal" data-target="#login-modal">Đăng
+                                        nhập</a></li>
                                 </c:if>
                                 <c:if test="${userSession != null}">
-<%--                                    <li><a href="/account">Đăng Ký</a></li>--%>
+                                    <c:if test="${userSession.roleId == 100001}">
+                                        <li><a href="/admin/home">Trang Quản Trị</a></li>
+                                    </c:if>
                                     <li class="hidden-xs"><a href="/wishlist">Yêu thích</a></li>
                                     <li class="hidden-xs"><a href="/cart">Giỏ hàng</a></li>
                                     <li class="hidden-xs"><a href="/checkout">Thanh toán</a></li>
