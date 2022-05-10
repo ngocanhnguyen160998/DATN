@@ -43,6 +43,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-8 col-md-push-3">
+                <c:if test="${empty item}">
+                    <h3 style="text-align: center" class="alert alert-danger">KHÔNG CÓ SẢN PHẨM NÀO ĐƯỢC TÌM THẤY!</h3>
+                </c:if>
                 <div class="aa-product-catg-content">
                     <form action="<c:url value='/product'/>" id="formSubmit" method="get">
                         <div class="aa-product-catg-body">
