@@ -129,6 +129,7 @@
                                 <li><a href="/product?page=1&category-id=${itemCategory.id}">${itemCategory.name}</a>
                                 </li>
                             </c:forEach>
+                            <li>&nbsp;</li>
                         </ul>
                     </div>
                 </aside>
