@@ -33,9 +33,11 @@ ALTER TABLE USER
     AUTO_INCREMENT = 100001;
 
 insert into USER(user_name, password, full_name, phone, email, role_id)
-values ('admin', 'admin', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 100001);
+values ('admin', 'jGl25bVBBBW96Qi9Te4V37Fnqchz/Eu4qB9vKrRIqRg=', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com',
+        100001);
 insert into USER(user_name, password, full_name, phone, email, role_id)
-values ('user', 'user', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com', 100002);
+values ('user', 'BPiZbadjt6lpsQKO4wB1aerzpjVIbdqyEdUSyFud+Ps=', 'Ngoc Anh', '0914663198', 'tyhuhu.nguyen@gmail.com',
+        100002);
 
 create table CATEGORY
 (
@@ -158,7 +160,59 @@ Chuyện của bút nhóm học trò, truyện nằm trong truyện, những cơ
         100000, 0, 100001, 'Nguyễn Nhật Ánh');
 insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
 values ('Truyện Kiều', '/image/truyen-kieu.png', '', 'Quyển Truyện  Thúy  Kiều  này  là  một  quyển  sách  kiệt tác làm bằng quốc âm ta. Người  trong nước từ kẻ ngu phu  ngu  phụ  cho  chí  người  có  văn  học,  ai  cũng  biết,  ai  cũng đọc, mà ai cũng chịu là hay. Một quyển sách có giá trị  như  thế,  mà  chỉ  hiềm  vì  các  bản  in  ra,  có  nhiều  bản  không giống nhau, rồi có người lại tự ý mình đem chữa đi, chữa lại, thành ra càng ngày càng sai lầm thêm ra. Mới đây những bản in bằng quốc ngữ, tuy có dễ đọc và dễ xem hơn trước,  nhưng  chưa  thấy  có  bản  in  nào  thật  chính  đáng,  những điều sai lầm vẫn còn như các bản chữ Nôm cũ, mà chữ quốc ngữ viết lại không được đúng, và những lời giải thích  cũng  không  kỹ  càng  lắm.  Chúng  tôi  thấy  vậy,  mới  nhặt nhạnh các bản cũ, rồi so sánh với các bản mới để hiệu chỉnh lại cho gần được như nguyên văn. Chúng tôi lại hết sức tìm tòi đủ các điển tích mà giải thích cho rõ ràng, để ai xem cũng hiểu, không phải ngờ điều gì nữa.Hiện  nay  tập  nguyên  văn  của  tác  giả  làm  ra  thì  không tìm thấy nữa, chỉ có hai bản khác nhau ít nhiều là: bản Phường in ở phố Hàng Gai, Hà Nội; và bản Kinh của vua Dực Tông bản triều đã chữa lại.Bản Phường là bản của ông Phạm Quý Thích đem khắc, in ra trước hết cả.<br/>
-Ông hiệu là Lập Trai, người làng Huê  Đường  (nay  đổi  là  làng  Lương  Đường)  phủ  Bình  Giang,  tỉnh  Hải  Dương,  đỗ  tiến  sĩ  về  cuối  đời  Lê,  cùng  với tác giả là bạn đồng thanh đồng khí, cho nên khi quyển truyện  này  làm  xong,  thì  tác  giả  đưa  cho  ông  xem.  Chắc  cũng có sửa đổi lại một vài câu, nhưng xem lời văn thì chỗ nào cũng một giọng cả. Vậy nên chúng tôi thiết tưởng rằng lấy  bản  Phường  làm  cốt,  thì  có  lẽ  không  sai  lầm  là  mấy.  Còn những chỗ mà bản Kinh đổi khác đi, hoặc những câu về sau người ta sửa lại, thì chúng tôi phụ lục cả ở dưới, để độc giả có thể xem mà cân nhắc hơn kém. Lại có một vài chữ người ta muốn đổi đi, nhưng không đúng với các bản Nôm  cũ,  thì  chúng  tôi  cũng  chú  thích  xuống  dưới,  chứ  không tự tiện mà đổi nguyên văn. Chủ ý của chúng tôi là muốn giữ cho đúng các bản cũ, chứ không phải muốn làm cho hay hơn.Truyện Thúy Kiều này nguyên lúc đầu tác giả nhan là Đoạn  trường  tân  thanh.  Sau  nghe  đâu  ông  Phạm  Quý  Thích đổi lại là Kim, Vân, Kiều tân truyện. Nhưng vì trong truyện  chỉ  có  Thúy  Kiều  là  vai  chính,  còn  Kim  Trọng  và  Thúy Vân là vai phụ cả. Nếu đề như vậy, thì e không hợp lẽ. Vả chăng tục thường gọi là Truyện Kiều, thì chi bằng ta cứ  theo  thói  thường  mà  nhan  là  Truyện  Thúy  Kiều,  rồi  ở  dưới đề thêm tên cũ: Đoạn trường tân thanh, gọi là để tỏ cái ý tồn cổ. Song đấy là nói về phần hình thức ở bề ngoài, còn về phần tinh thần và văn chương trong Truyện Thúy Kiều, thì sau này chúng tôi sẽ đem ý kiến riêng mà bày tỏ ra đây, họa may có bổ ích được điều gì chăng. Vậy trước hết xin lược thuật cái lịch sử của tác giả, để độc giả hiểu rõ tác giả là người thế nào.', 68000, 59000, 100001, 'Nguyễn Du');
+Ông hiệu là Lập Trai, người làng Huê  Đường  (nay  đổi  là  làng  Lương  Đường)  phủ  Bình  Giang,  tỉnh  Hải  Dương,  đỗ  tiến  sĩ  về  cuối  đời  Lê,  cùng  với tác giả là bạn đồng thanh đồng khí, cho nên khi quyển truyện  này  làm  xong,  thì  tác  giả  đưa  cho  ông  xem.  Chắc  cũng có sửa đổi lại một vài câu, nhưng xem lời văn thì chỗ nào cũng một giọng cả. Vậy nên chúng tôi thiết tưởng rằng lấy  bản  Phường  làm  cốt,  thì  có  lẽ  không  sai  lầm  là  mấy.  Còn những chỗ mà bản Kinh đổi khác đi, hoặc những câu về sau người ta sửa lại, thì chúng tôi phụ lục cả ở dưới, để độc giả có thể xem mà cân nhắc hơn kém. Lại có một vài chữ người ta muốn đổi đi, nhưng không đúng với các bản Nôm  cũ,  thì  chúng  tôi  cũng  chú  thích  xuống  dưới,  chứ  không tự tiện mà đổi nguyên văn. Chủ ý của chúng tôi là muốn giữ cho đúng các bản cũ, chứ không phải muốn làm cho hay hơn.Truyện Thúy Kiều này nguyên lúc đầu tác giả nhan là Đoạn  trường  tân  thanh.  Sau  nghe  đâu  ông  Phạm  Quý  Thích đổi lại là Kim, Vân, Kiều tân truyện. Nhưng vì trong truyện  chỉ  có  Thúy  Kiều  là  vai  chính,  còn  Kim  Trọng  và  Thúy Vân là vai phụ cả. Nếu đề như vậy, thì e không hợp lẽ. Vả chăng tục thường gọi là Truyện Kiều, thì chi bằng ta cứ  theo  thói  thường  mà  nhan  là  Truyện  Thúy  Kiều,  rồi  ở  dưới đề thêm tên cũ: Đoạn trường tân thanh, gọi là để tỏ cái ý tồn cổ. Song đấy là nói về phần hình thức ở bề ngoài, còn về phần tinh thần và văn chương trong Truyện Thúy Kiều, thì sau này chúng tôi sẽ đem ý kiến riêng mà bày tỏ ra đây, họa may có bổ ích được điều gì chăng. Vậy trước hết xin lược thuật cái lịch sử của tác giả, để độc giả hiểu rõ tác giả là người thế nào.',
+        68000, 59000, 100001, 'Nguyễn Du');
+
+# Kinh te
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Nhà Lãnh Đạo 360 Độ', '/image/nha-lanh-dao-360-do.png', '', '“Tôi sẽ làm theo hướng dẫn của ông nếu tôi không phải là lãnh đạo cấp cao?” là câu hỏi mà John C. Maxwell, chuyên gia, tác giả và diễn giả nổi tiếng thế giới về nghệ thuật lãnh đạo, nhận được nhiều nhất trong các cuộc hội thảo mà ông là diễn giả.<br/>
+Bạn có thể lãnh đạo và lãnh đạo tốt không, khi bạn không đứng đầu tổ chức hay khi bạn có một người lãnh đạo tồi? Đâu là vị trí tốt nhất để lãnh đạo? Câu trả lời sẽ khiến bạn ngạc nhiên. Khả năng trở thành lãnh đạo nằm trong tầm tay bạn, và vị trí giữa trong sơ đồ tổ chức là vị trí tối ưu để thực hành, luyện tập và mở rộng tầm ảnh hưởng.<br/>
+Trong cuốn Nhà Lãnh Đạo 360 Độ, John C. Maxwell chứng minh rằng quyền lực trong hầu hết các tổ chức chủ yếu thuộc về các nhà lãnh đạo cấp trung, những người có một vị thế nhất định, nhưng hiếm khi ý thức được ảnh hưởng và quyền lực của mình. Ông dẫn dắt chúng ta đi từ những ngộ nhận và thách thức phải vượt qua để đến với các nguyên tắc cốt tử của thuật lãnh đạo.<br/>
+Đúng như cái tên Nhà Lãnh Đạo 360 Độ gợi ra, nhà lãnh đạo cấp trung sẽ nằm ở trung tâm khối cầu quan hệ, xoay quanh là lãnh đạo cấp cao, lãnh đạo đồng cấp và cấp dưới. Ứng với mỗi mặt phẳng quan hệ, nhà lãnh đạo cấp trung sẽ có những nguyên tắc đối nhân xử thế riêng, đó là sự tận tâm với cấp trên, sáng suốt với cấp dưới và cởi mở, chân tình với đồng cấp. Có thể coi Nhà Lãnh Đạo 360 Độ là một khóa học mà nhà tư vấn lãnh đạo nổi tiếng nhất nước Mỹ dành cho những người có khát vọng vươn lên vị trí lãnh đạo theo nghĩa toàn vẹn nhất của nghệ thuật này.',
+        179000, 0, 100002, 'John C. Maxwell');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Đạo Đức Trong Kinh Doanh', '/image/dao-duc-trong-kinh-doanh.png', 'Sarah Duncan là một chuyên gia tư vấn kiêm huấn luyện viên về phát triển kinh doanh bền vững và marketing có đạo đức. Bà đã hoạt động trong lĩnh vực này được hơn 30 năm – trong thời gian đầu bà làm việc ở các khách sạn sang trọng, sau đó chuyển sang các câu lạc bộ tư nhân và phát triển spa ở châu Á, tới năm 2005 bà xây dựng hãng tư vấn riêng Sleeping Lion.<br/>
+Duncan là người chứng kiến hành trình gian nan của đề tài phát triển bền vững để chen chân được vào các nghị trình kinh doanh, hai lực lượng hậu thuẫn nòng cốt ở đây là đội ngũ nhân viên và khách hàng ngày càng có ý thức về mặt đạo đức tiêu dùng. Gần đây bà mới hoàn thành khóa học Quản trị Phát triển Bền vững Doanh nghiệp ở Viện Lãnh đạo Phát triển Bền vững thuộc Đại học Cambridge.<br/>
+Hiện nay bà đang hỗ trợ các doanh nghiệp tìm hiểu và áp dụng các nguyên tắc đạo đức trong kinh doanh và phát triển bền vững thông qua các hoạt động tư vấn, hỗ trợ, và thuyết trình tại các cuộc hội thảo.',
+        'Cuốn sách này là cánh cửa dẫn vào một đề tài đang biến động rất nhanh, vì thế bây giờ nó đã được cập nhật kỹ lưỡng bằng những thông tin mới. Nhiệm vụ của cuốn sách là trang bị kiến thức ban đầu cho độc giả về tất cả những khía cạnh quan trọng liên quan đến việc thực hành kinh doanh bền vững và có đạo đức, nhưng nó sẽ được trình bày hết sức cô đọng và súc tích.<br/>
+Trong những năm gần đây, dưới áp lực của chiếc bóng đen mang tên khủng hoảng khí hậu, các vấn đề liên quan đến môi trường đã và đang trở thành tâm điểm chú ý của thế giới. Cụm từ “phát triển bền vững” ngày càng được sử dụng nhiều hơn – khái niệm này chỉ sự dung hòa giữa khả năng tồn tại của Trái đất và khả năng tồn tại lâu dài của các doanh nghiệp. Chúng ta nhận ra được tầm quan trọng của việc không chỉ phải cứu lấy Trái đất, mà còn phải cứu lấy một thế giới an toàn và bình đẳng để chúng ta đều có thể tiếp tục phát triển.<br/>
+Tất cả chúng ta đều phải có trách nhiệm bảo vệ cho những người xung quanh mình, và bảo vệ cho hành tinh chung của chúng ta. Hy vọng rằng bạn sẽ chung tay thực hiện những sự thay đổi (dù lớn hay nhỏ) trong phạm vi khả năng của bạn, và như vậy chúng ta có thể cùng nhau góp phần tạo nên sự khác biệt.',
+        289000, 0, 100002, 'Sarah Duncan');
+
+# Ky nang song
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Cho Đi Và Nhận Lại', '/image/cho-di-va-nhan-lai.png', '', 'Mạng lưới quan hệ cá nhân phong phú là trang bị cần thiết của các cao thủ chốn công sở!<br/>
+Từ xưa đến nay, dường như chưa từng có tiền lệ một đội quân chỉ dựa vào sức mình mà có thể thắng trận. Trong môi trường công sở cũng như vậy, chúng ta không khó để nhận ra những người thành công luôn trang bị cho mình ít nhất ba yếu tố: vốn dồi dào, nguồn thông tin phong phú và mạng lưới các mối quan hệ hiệu quả.<br/>
+Theo thống kê liên quan, số người thành công nhờ vốn có sẵn hoặc nguồn thông tin phong phú chỉ chiếm từ 1% đến 5%, 94% số người đạt được thành tựu rực rỡ trong công việc đều là những người biết dựa vào sự trợ giúp của các mối quan hệ cá nhân.<br/>
+Kì thực lí do vô cùng đơn giản: Đối với những người mới khởi nghiệp, để có đủ vốn và nắm bắt nguồn thông tin kịp thời thực sự là một việc rất khó. Ngược lại, các mối quan hệ cá nhân có thể mở rộng và phát triển dựa vào sự nỗ lực của bản thân. Vốn và nguồn thông tin đều mang tính ngẫu nhiên và ngắn hạn, còn mạng lưới quan hệ thì ngược lại, càng là những mối quan hệ lâu năm sẽ càng có giá trị.<br/>
+Con người sống cần phải chia sẻ và liên tục thử những trải nghiệm mới để theo kịp thời đại. Việc kết giao với những người cách biệt về tuổi tác hay khác ngành nghề sẽ giúp bạn mở mang tri thức, rèn luyện khả năng nhìn nhận một lần bước ra khỏi vòng tròn an toàn của mình, nhất định bạn sẽ phát hiện thấy một bầu trời đầy sao.',
+        80000, 0, 100003, 'Instant Research Institude');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Nghĩ - Làm - Thay Đổi', '/image/nghi-lam-thay-doi.png', '',
+        'Chúng ta đang sống trong thời đại khó khăn, khổ sở trước những tình cảnh trong xã hội, công việc và gla đình. Thay vì bắt tay vào hành động, chúng ta cứ than phiền và chờ đợi người khác thực hiện Thay vì thay đổi bản thân, ta lại hy vọng người khác sẽ đảm đương trách nhiệm. Thay vì sống với giấc mơ của mình, ta lại chờ đợi thời khắc hoàn hảo xảy đến. Không may thay, khoảnh khắc đó sẽ không bao giờ đến. Trong NGHĨ - LÀM - THAY ĐỔI, Grzeskowitz đề ra kế hoạch vượt qua “nỗi sợ phải thay đổi”, ông cho độc giả thấy cách các động lực hoạt động ra sao, lý do tại sao nỗi sợ phải thay đổi lại thật sự có thể trở thành bạn của chúng ta, và những ngôn từ có tiềm năng sẽ thay đổi toàn bộ cuộc đời. Grzeskowitz tiết lộ những huyền thoại về động lực phổ biến nhất, tuyên bố về sự quay lại của các giá trị, và cho độc giả thấy được những đặc điểm quan trọng có thể giúp họ chủ động thực hiện các thay đổi cần thiết trong kinh doanh và trong cuộc sống. NGHĨ - LÀM - THAY ĐỔI sẽ giúp bạn sống một cuộc đời với vô vàn khả năng mới mẻ, thay vì phải sống trong giới hạn.',
+        138000, 0, 100003, 'Ilja Grzeskowitz');
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Những Kỹ Năng Cơ Bản Trong Cuộc Sống', '/image/nhung-ky-nang-co-ban-trong-cuoc-song.png', '', 'Hãy luôn nở một nụ cười mỗi khi gặp gỡ, nụ cười sẽ giúp mối quan hệ trở nên gần gũi hơn, thân thiện, giảm bớt sự căng thẳng và lan tỏa sự yêu thương. Những Kỹ Năng Cơ Bản Trong Cuộc Sống Hằng Ngày sẽ mang lại cho bạn một nguồn động lực, một sức mạnh, một vài giải pháp để cho tâm hồn, cuộc sống trở nên thoải mái, vui vẻ và hạnh phúc hơn.<br/>
+Sách được chia thành 4 phần: Xây dựng các mối quan hệ trong cuộc sống, Tình yêu và hôn nhân - cuộc sống gia đình, Phát triển bản thân và Ứng xử thân thiện. Những kỹ năng ứng xử trong cuộc sống, gia đình, học tập, tình yêu, bạn bè, môi trường công sở... sẽ giúp chúng ta ứng xử một cách trí tuệ, khôn khéo và thông minh, hiệu quả với những vấn đề mà chúng ta đang gặp phải trong cuộc sống hiện đại.',
+        100000, 0, 100003, 'Lê Huy Khoa Kanata');
+
+# Giao duc
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Tôi Tự Học', '/image/toi-tu-hoc.png',
+        'Tôi Tự Học  của tác giả Nguyễn Duy Cần đề cập đến khái niệm, mục đích của học vấn đối với con người đồng thời nêu lên một số phương pháp học tập đúng đắn và hiệu quả. Tác giả cho rằng giá trị của học vấn nằm ở sự lĩnh hội và mở mang tri thức của con người chứ không đơn thuần thể hiện trên bằng...',
+        'Tôi Tự Học của tác giả Nguyễn Duy Cần đề cập đến khái niệm, mục đích của học vấn đối với con người đồng thời nêu lên một số phương pháp học tập đúng đắn và hiệu quả. Tác giả cho rằng giá trị của học vấn nằm ở sự lĩnh hội và mở mang tri thức của con người chứ không đơn thuần thể hiện trên bằng cấp. Trong xã hội ngày nay, không ít người quên đi ý nghĩa đích thực của học vấn, biến việc học của mình thành công cụ để kiếm tiền nhưng thực ra nó chỉ là phương tiện để  đưa con người đến thành công mà thôi. Bởi vì học không phải để lấy bằng mà học còn để “biết mình” và để “đối nhân xử thế”.<br/>
+Cuốn sách này tuy đã được xuất bản từ rất lâu nhưng giá trị của sách vẫn còn nguyên vẹn. Những tư tưởng, chủ đề của sách vẫn phù hợp và có thể áp dụng trong đời sống hiện nay. Thiết nghĩ, cuốn sách này rất cần cho mọi đối tượng bạn đọc vì không có giới hạn nào cho việc truy tầm kiến thức, việc học là sự nghiệp lâu dài của mỗi con người. Đặc biệt, cuốn sách là một tài liệu quý để các bạn học sinh – sinh viên tham khảo, tổ chức lại việc học của mình một cách hợp lý và khoa học. Các bậc phụ huynh cũng cần tham khảo sách này để định hướng và tư vấn cho con em mình trong quá trình học tập. ',
+        120000, 0, 100004, 'Thu Giang Nguyễn Duy Cần');
+
+# Ngoai ngu
+insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
+values ('Billion Dollar Brand Club', '/image/billion-dollar-brand-club.png',
+        'Billion Dollar Brand Club: How Dollar Shave Club, Warby Parker, and Other Disruptors Are Remaking What We Buy   A leading business journalist takes us inside a business revolution: the upstart brands taking on the empires that long dominated the trillion-dollar consumer economy....',
+        'A leading business journalist takes us inside a business revolution: the upstart brands taking on the empires that long dominated the trillion-dollar consumer economy.<br/>
+Dollar Shave Club and its hilarious marketing. Casper mattresses popping out of a box. Third Love’s lingerie designed specifically for each woman’s body. Warby Parker mailing you five pairs of glasses to choose from. You’ve seen their ads. You (or someone you know) use their products. Each may appear, in isolation, as a rare David with the bravado to confront a Goliath, but taken together they represent a seismic shift in a business model that has lasted more than a century.<br/>
+As Lawrence Ingrassia--former business and economics editor and deputy managing editor at the New York Times--shows in this timely and eye-opening book, a growing number of digital entrepreneurs have found new and creative ways to crack the code on the bonanza of physical goods that move through our lives every day. They have discovered that manufacturing, marketing, logistics, and customer service have all been flattened―where there were once walls that protected big brands like Gillette, Sealy, Victoria’s Secret, or Lenscrafters, savvy and hungry innovators now can compete on price, value, quality, speed, convenience, and service.<br/>
+Billion Dollar Brand Club reveals the world of the entrepreneurs, venture capitalists, and corporate behemoths battling over this terrain. And what fun it is. It’s a massive, high-stakes business saga animated by the personalities, flashes of insight, and stories behind the stuff we use every day.',
+        349000, 261000, 100007, 'Lawrence Ingrassia');
 
 # insert into PRODUCT(name, image, info, descriptions, price, sale_price, category_id, author)
 # values ('Vượt Qua Sợ Hãi6', '/image/tup-leu-bac-tom.png', '', 'Truyện hay', 269000, 269000, 100001, 'Vũ Trọng Phụng');
@@ -179,15 +233,44 @@ ALTER TABLE WAREHOUSE
     AUTO_INCREMENT = 100001;
 
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100001, 50, 50, 10000, '');
+values (100001, 50, 50, 30000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
 values (100002, 50, 59, 15000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100003, 50, 50, 10000, '');
+values (100003, 50, 50, 20000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100004, 50, 50, 17000, '');
+values (100004, 50, 50, 35000, '');
 insert into warehouse(product_id, amount, input_amount, input_price, note)
-values (100005, 50, 50, 10000, '');
+values (100005, 50, 50, 17000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100006, 50, 50, 23000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100007, 50, 50, 50000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100008, 50, 50, 30000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100009, 50, 50, 22000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100010, 50, 50, 33000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100011, 50, 50, 30000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100012, 50, 50, 21000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100013, 50, 50, 55000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100014, 50, 50, 100000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100015, 50, 50, 22000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100016, 50, 50, 34000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100017, 50, 50, 29000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100018, 50, 50, 29000, '');
+insert into warehouse(product_id, amount, input_amount, input_price, note)
+values (100019, 50, 50, 80000, '');
+
 
 create table WISHLIST
 (
@@ -281,19 +364,19 @@ ORDER BY o.modefined_date DESC;
 
 create table provinces
 (
-    id           varchar(255) not null
+    id   varchar(255) not null
         primary key,
-    name         varchar(255) null,
-    type         varchar(255) null
+    name varchar(255) null,
+    type varchar(255) null
 );
 
 create table districts
 (
-    id           varchar(255) not null
+    id          varchar(255) not null
         primary key,
-    name         varchar(255) null,
-    type         varchar(255) null,
-    province_id  varchar(255) null,
+    name        varchar(255) null,
+    type        varchar(255) null,
+    province_id varchar(255) null,
     constraint FK_1aoqj8kevgxwuimsdkt1jwuhc
         foreign key (province_id) references provinces (id)
 );

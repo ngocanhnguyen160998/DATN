@@ -24,6 +24,6 @@ public class PasswordHasher {
     }
 
     public static void main(String[] args){
-        System.out.println(hash("admin"));
+        System.out.println(hash("user"));
     }
 }
